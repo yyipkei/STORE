@@ -1,6 +1,6 @@
 @echo off
 
-set root=C:\Source\DataBridge
+set root=C:\Kei-DataBridging\STORE
 
 cd %root%
 call mvn clean install
