@@ -29,7 +29,7 @@ public class Sagoaaction {
 		String regno = parts[2];
 		String txno = parts[3];
 		String seqno = parts[4];
-		String rowid = parts[5];
+		//String rowid = parts[5];
 
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
@@ -50,7 +50,7 @@ public class Sagoaaction {
 				+ "'"
 				+ "and seq_no ='"
 				+ seqno
-				+ "'" + "and ROW_ID ='" + rowid + "'"
+				+ "'"
 				+"Order BY LAST_UPD_DT";
 
 		// List<Sagoaaction> Sagoaactions = new ArrayList<Sagoaaction>();

@@ -1,5 +1,7 @@
 package com.bridge.main;
 
+import com.bridge.SQL.MSSQL;
+import com.bridge.SQL.ORACLE;
 import com.bridge.projo.Dataupdatelog;
 import org.apache.log4j.Logger;
 import org.quartz.DisallowConcurrentExecution;
@@ -48,7 +50,7 @@ public class MainDeposit implements Job {
                 logger.info(dataupdatelog);
 
             processLog("Merge");
-            runlogStoredProcedure("Oracle");
+            //runlogStoredProcedure("Oracle"); //Kei 20151109
             logger.info("Finished Merge -> Oracle");
 
         } catch (SQLException e) {
@@ -153,7 +155,8 @@ public class MainDeposit implements Job {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
         logger.info("Starting USP_DATA_UPDATE_LOG_POS_DP");
-        String spSQL = "{call USP_DATA_UPDATE_LOG_POS_DP}";
+       // String spSQL = "{call USP_DATA_UPDATE_LOG_POS_DP}";
+        String spSQL = null;
         try {
 
             if (Objects.equals(database, "Oracle")) {
@@ -161,10 +164,12 @@ public class MainDeposit implements Job {
                         .getInstance();
                 dbConnection = OrcaleFrompool.getConnection();
                 // dbConnection = OracleFrom.getDBConnection();
+                spSQL= ORACLE.DepositUpdate;
             } else {
                 HikariMerge Mergepool = HikariMerge.getInstance();
                 dbConnection = Mergepool.getConnection();
                 // dbConnection = Merge.getDBConnection();
+                spSQL= MSSQL.DepositUpdate;
             }
 
             preparedStatement = dbConnection.prepareStatement(spSQL);
@@ -188,7 +193,7 @@ public class MainDeposit implements Job {
 
     }
 
-    private static void runlogStoredProcedure(String database)
+  /*  private static void runlogStoredProcedure(String database)
             throws SQLException {
 
         Connection dbConnection = null;
@@ -226,7 +231,7 @@ public class MainDeposit implements Job {
 
         }
 
-    }
+    }*/
 
     public void execute(JobExecutionContext arg0) throws JobExecutionException {
         bridgeStart();

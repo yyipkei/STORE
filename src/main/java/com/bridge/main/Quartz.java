@@ -151,7 +151,7 @@ public class Quartz {
 			scheduler.scheduleJob(jobGdrtn, trigger4);// Goods return
 			scheduler.scheduleJob(jobMerge, trigger5);// Merge
 			scheduler.scheduleJob(jobGoasetting, trigger6);// GOA Setting
-			//scheduler.scheduleJob(jobStock, trigger7);// Stock
+			scheduler.scheduleJob(jobStock, trigger7);// Stock
 			scheduler.scheduleJob(jobDeposit, trigger8);// Deposit
 			//scheduler.scheduleJob(jobStockonhand, trigger9);// Onhand
             //scheduler.scheduleJob(jobVip, trigger10);// VIP
