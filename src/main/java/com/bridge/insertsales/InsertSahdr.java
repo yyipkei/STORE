@@ -61,6 +61,8 @@ public class InsertSahdr {
 			preparedStatement.setTimestamp(13, rslastupddt);
 
 			preparedStatement.executeUpdate();
+
+			//logger.info(preparedStatement);
 			return result;
 
 		} catch (SQLException e) {
@@ -132,6 +134,8 @@ public class InsertSahdr {
 			preparedStatement.setString(13, rstxno);
 
 			preparedStatement.executeUpdate();
+
+			//logger.info(preparedStatement);
 			return result;
 
 		} catch (SQLException e) {
