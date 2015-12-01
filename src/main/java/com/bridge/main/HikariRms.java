@@ -22,16 +22,15 @@ public class HikariRms {
 
     private HikariRms() {
         HikariConfig config = new HikariConfig();
-        config.setMaximumPoolSize(10);
+        config.setMaximumPoolSize(Integer.parseInt(Quartz.RmsMaximumPoolSize));
 
         config.setDataSourceClassName("net.sourceforge.jtds.jdbcx.JtdsDataSource");
         config.addDataSourceProperty("portNumber", 1433);
-        config.addDataSourceProperty("serverName", "hkgt20L");
-        config.addDataSourceProperty("user", "sa");
-        config.addDataSourceProperty("password", "%Q[Y2Tm/");
-        config.addDataSourceProperty("databaseName", "rmsdb_prd");
+        config.addDataSourceProperty("serverName", Quartz.RmsServerName);
+        config.addDataSourceProperty("user", Quartz.RmsDatabaseUser);
+        config.addDataSourceProperty("password", Quartz.RmsDatabasePassword);
+        config.addDataSourceProperty("databaseName", Quartz.RmsDatabaseName);
         config.setConnectionTestQuery("SELECT 1");
-
         ds = new HikariDataSource(config);
     }
 

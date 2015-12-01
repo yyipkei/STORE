@@ -1916,7 +1916,7 @@ public class MSSQL {
                 "\n" +
                 "COMMIT TRAN";
 
-        SaleLastUpdDate ="BEGIN TRAN\n" +
+        SaleLastUpdDate = "BEGIN TRAN\n" +
                 "\n" +
                 "DECLARE @tx_date VARCHAR(50)\n" +
                 "\t,@loc_code VARCHAR(50)\n" +
@@ -1934,7 +1934,7 @@ public class MSSQL {
                 "\t,reg_no\n" +
                 "\t,tx_no\n" +
                 "FROM sahdr\n" +
-                "WHERE tx_date = convert(VARCHAR(8), getdate(), 112)\n" +
+                "WHERE tx_date between convert(VARCHAR(8), getdate() -10, 112) and convert(VARCHAR(8), getdate(), 112)\n" +
                 "\tAND last_upd_dt IS NULL\n" +
                 "\tAND tx_type <> '09'\n" +
                 "\n" +
@@ -2417,7 +2417,7 @@ public class MSSQL {
                 "\t,reg_no\n" +
                 "\t,tx_no\n" +
                 "FROM sahdr\n" +
-                "WHERE tx_date = convert(VARCHAR(8), getdate(), 112)\n" +
+                "WHERE tx_date between convert(VARCHAR(8), getdate() -10, 112) and convert(VARCHAR(8), getdate(), 112)\n" +
                 "\tAND last_upd_dt IS NULL\n" +
                 "\tAND tx_type = '09'\n" +
                 "\n" +

@@ -5,13 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be89e70a-455d-4820-9888-ee5c3c9dd1bf" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bridge/SQL/MSSQL.java" afterPath="$PROJECT_DIR$/src/main/java/com/bridge/SQL/MSSQL.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bridge/SQL/ORACLE.java" afterPath="$PROJECT_DIR$/src/main/java/com/bridge/SQL/ORACLE.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bridge/insertsales/InsertSahdr.java" afterPath="$PROJECT_DIR$/src/main/java/com/bridge/insertsales/InsertSahdr.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bridge/insertdeposit/InsertDpdet.java" afterPath="$PROJECT_DIR$/src/main/java/com/bridge/insertdeposit/InsertDpdet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bridge/main/HikariMerge.java" afterPath="$PROJECT_DIR$/src/main/java/com/bridge/main/HikariMerge.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bridge/main/HikariMssql.java" afterPath="$PROJECT_DIR$/src/main/java/com/bridge/main/HikariMssql.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bridge/main/HikariQracleFrom.java" afterPath="$PROJECT_DIR$/src/main/java/com/bridge/main/HikariQracleFrom.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bridge/main/HikariQracleTo.java" afterPath="$PROJECT_DIR$/src/main/java/com/bridge/main/HikariQracleTo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bridge/main/HikariRms.java" afterPath="$PROJECT_DIR$/src/main/java/com/bridge/main/HikariRms.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bridge/main/MainDeposit.java" afterPath="$PROJECT_DIR$/src/main/java/com/bridge/main/MainDeposit.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bridge/main/MainGoodsreturn.java" afterPath="$PROJECT_DIR$/src/main/java/com/bridge/main/MainGoodsreturn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bridge/main/MainMerge.java" afterPath="$PROJECT_DIR$/src/main/java/com/bridge/main/MainMerge.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bridge/main/MainStock.java" afterPath="$PROJECT_DIR$/src/main/java/com/bridge/main/MainStock.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bridge/main/Quartz.java" afterPath="$PROJECT_DIR$/src/main/java/com/bridge/main/Quartz.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bridge/routedeposit/Dphdr.java" afterPath="$PROJECT_DIR$/src/main/java/com/bridge/routedeposit/Dphdr.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bridge/routesales/Sahdr.java" afterPath="$PROJECT_DIR$/src/main/java/com/bridge/routesales/Sahdr.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" />
     </list>
     <ignored path="BridgeLC.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,74 +66,22 @@
     <favorites_list name="BridgeLC" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainPatch.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainPatch.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4359375">
-              <caret line="28" column="35" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Quartz.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/Quartz.java">
+    <leaf>
+      <file leaf-file-name="MainGoasetting.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainGoasetting.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="161" column="59" selection-start-line="161" selection-start-column="59" selection-end-line="161" selection-end-column="59" />
+              <caret line="105" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainSales.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainSales.java">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="362" column="9" selection-start-line="362" selection-start-column="9" selection-end-line="362" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Cafecoupondet.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/routemerge/Cafecoupondet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="44" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MSSQL.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/SQL/MSSQL.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="6249" column="43" selection-start-line="6249" selection-start-column="43" selection-end-line="6249" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InsertPrvipmas.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/insertvip/InsertPrvipmas.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="424" column="53" selection-start-line="424" selection-start-column="53" selection-end-line="424" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ORACLE.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/SQL/ORACLE.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="1821" column="33" selection-start-line="1821" selection-start-column="33" selection-end-line="1821" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.8877888">
+              <caret line="171" column="10" selection-start-line="171" selection-start-column="10" selection-end-line="171" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -149,35 +107,35 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/insertsales/InsertEdcsettlement.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainPatch.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/HikariMerge.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/insertsales/InsertSagoastaff.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/insertsales/InsertSagoaaction.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/HikariQracleFrom.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainSales.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainStaffpurchase.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/routedeposit/Dphdr.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/routesales/Edcsettlement.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/insertdeposit/InsertDphdr.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/SQL/ORACLE.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/insertdeposit/InsertDpdet.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainPatch.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/SQL/MSSQL.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainGoasetting.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/insertsales/InsertDktprtdet.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/insertvip/InsertPrvipmas.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainSales.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/resources/config.properties" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainStockonhand.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainStaffpurchase.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainVip.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainItem.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainDeposit.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainMerge.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/routedeposit/Dphdr.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/routesales/Edcsettlement.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/insertdeposit/InsertDphdr.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainStock.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/insertsales/InsertSahdr.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainGoodsreturn.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/com/bridge/SQL/ORACLE.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/bridge/insertstaffpurchase/InsertSastaffdiscexcept.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bridge/insertstaffpurchase/InsertSastaffdiscexceptcl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bridge/insertstaffpurchase/InsertSastaffdischdr.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bridge/insertstaffpurchase/InsertSastaffdischdrcl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/insertstaffpurchase/InsertStaffpurchase.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/insertstaffpurchase/InsertStaffpurchasecl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/routestaffpurchase/Sastaffdiscdtlcl.java" />
@@ -188,11 +146,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/routestaffpurchase/Sastaffdischdr.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/routestaffpurchase/Sastaffdiscexcept.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/routestaffpurchase/Sastaffdiscdtl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/HikariMerge.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/HikariMssql.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/HikariQracleFrom.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/HikariQracleTo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/HikariRms.java" />
         <option value="/Oracle Fragment (Dktprtdet.java:931).sql" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/routesales/Dktprtdet.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/insertsales/InsertDktprtdet.java" />
@@ -204,15 +157,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/insertsales/InsertSalesDiscmas.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/insertsales/InsertSagoaaction.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/routesales/Sagoaaction.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/log4j.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/MainSales.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/MainDeposit.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/MainGoasetting.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/MainGoodsreturn.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/MainItem.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/MainMerge.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/MainStaffpurchase.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/MainStock.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/MainStockonhand.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/MainVip.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/routesales/Edcsettlement.java" />
@@ -220,11 +168,25 @@
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/insertsales/InsertSahdr.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/routesales/Sahdr.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/routedeposit/Dphdr.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bridge/SQL/MSSQL.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/MainPatchMssql.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/MainPatch.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/Quartz.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bridge/SQL/ORACLE.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bridge/routedeposit/Brdpdet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bridge/SQL/MSSQL.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bridge/insertdeposit/InsertDpdet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/HikariMerge.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/HikariMssql.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/HikariRms.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/HikariQracleFrom.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/HikariQracleTo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/MainDeposit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/MainGoodsreturn.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/MainStock.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/MainMerge.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/bridge/main/Quartz.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/config.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/log4j.properties" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -295,10 +257,16 @@
           <State>
             <id />
           </State>
+          <State>
+            <id>Java</id>
+          </State>
+          <State>
+            <id>Logging issuesJava</id>
+          </State>
         </expanded-state>
         <selected-state>
           <State>
-            <id>Spelling</id>
+            <id>Logging issuesJava</id>
           </State>
         </selected-state>
       </profile-state>
@@ -329,7 +297,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -348,58 +318,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BridgeLC" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="STORE" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BridgeLC" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="STORE" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bridge" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -408,7 +332,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="SearchEverywhereHistoryKey" value="MSSQ&#9;FILE&#9;file://C:/Kei-DataBridging/STORE/src/main/java/com/bridge/SQL/MSSQL.java&#10;dphdr&#9;PSI&#9;JAVA://com.bridge.routedeposit.Dphdr&#10;sahdr&#9;FILE&#9;file://C:/Kei-DataBridging/STORE/src/main/java/com/bridge/routesales/Sahdr.java&#10;insertdp&#9;PSI&#9;JAVA://com.bridge.insertdeposit.InsertDphdr&#10;java.sql.PreparedStatement&#9;PSI&#9;JAVA://java.sql.PreparedStatement&#10;PreparedStatement &#9;PSI&#9;JAVA://java.sql.PreparedStatement&#10;insertsa&#9;FILE&#9;file://C:/Kei-DataBridging/STORE/src/main/java/com/bridge/insertsales/InsertSahdr.java&#10;rms&#9;PSI&#9;JAVA://com.bridge.main.HikariRms&#10;inserted&#9;FILE&#9;file://C:/Kei-DataBridging/STORE/src/main/java/com/bridge/insertsales/InsertEdcsettlement.java&#10;or&#9;FILE&#9;file://C:/Kei-DataBridging/STORE/src/main/java/com/bridge/SQL/ORACLE.java&#10;Edc&#9;PSI&#9;JAVA://com.bridge.routesales.Edcsettlement&#10;insertedc&#9;PSI&#9;JAVA://com.bridge.insertsales.InsertEdcsettlement&#10;show line&#9;null&#9;null&#10;Line&#9;ACTION&#9;EditorToggleShowLineNumbers&#10;Mainsal&#9;FILE&#9;file://C:/Kei-DataBridging/STORE/src/main/java/com/bridge/main/MainSales.java&#10;mainsa&#9;FILE&#9;file://C:/Kei-DataBridging/STORE/src/main/java/com/bridge/main/MainSales.java&#10;insertsagoaa&#9;PSI&#9;JAVA://com.bridge.insertsales.InsertSagoaaction&#10;sagoaa&#9;PSI&#9;JAVA://com.bridge.routesales.Sagoaaction&#10;st&#9;FILE&#9;file://C:/Kei-DataBridging/STORE/src/main/java/com/bridge/main/RouteStock.java&#10;sagoatx&#9;PSI&#9;JAVA://com.bridge.routemerge.Sagoatxn&#10;sagoatxn&#9;PSI&#9;JAVA://com.bridge.insertmerge.InsertSagoatxn&#10;Route&#9;FILE&#9;file://C:/Source/DataBridge/src/main/java/com/bridge/main/RouteItem.java&#10;discmas&#9;PSI&#9;JAVA://com.bridge.routeitem.Discmas&#10;ui-guid&#9;null&#9;null&#10;stock&#9;FILE&#9;file://C:/Source/DataBridge/src/main/java/com/bridge/routestockres/Stockresdet.java&#10;park&#9;PSI&#9;JAVA://com.bridge.routemerge.Parkpmt&#10;cafe&#9;PSI&#9;JAVA://com.bridge.routemerge.Cafecouponhdr&#10;posuser&#9;PSI&#9;JAVA://com.bridge.routemerge.Posuser&#10;sastafftx&#9;PSI&#9;JAVA://com.bridge.routemerge.Sastafftxn&#10;goto line&#9;null&#9;null&#10;line&#9;ACTION&#9;EditorToggleShowLineNumbers&#10;plug&#9;ACTION&#9;WelcomeScreen.Plugins&#10;itemmas&#9;FILE&#9;file://C:/Source/DataBridge/src/main/java/com/bridge/routeitem/Itemmas.java&#10;mnve&#9;PSI&#9;JAVA://com.bridge.routeitem.Mnvendorupc&#10;mnvendor&#9;null&#9;null&#10;mnven&#9;PSI&#9;JAVA://com.bridge.insertitem.InsertMnvendorupc&#10;sastafftxn&#9;PSI&#9;JAVA://com.bridge.routemerge.Sastafftxn&#10;plugin&#9;ACTION&#9;StartupWizard&#10;saserial&#9;PSI&#9;JAVA://com.bridge.routesales.Saserial&#10;mnsea&#9;FILE&#9;file://C:/Source/DataBridge/src/main/java/com/bridge/routeitem/Mnseason.java&#10;prob&#9;PSI&#9;JAVA://com.sun.tracing.Probe&#10;maven&#9;ACTION&#9;ActivateMavenProjectsToolWindow&#10;q&#9;FILE&#9;file://C:/Source/BridgeLC/src/main/java/com/bridge/main/HikariQracleTo.java&#10;cose&#9;PSI&#9;JAVA://com.bridge.routemerge.Cosegchdr&#10;cos_egc_hd&#9;null&#9;null&#10;hi&#9;FILE&#9;file://C:/Source/BridgeLC/src/main/java/com/bridge/main/HikariQracleFrom.java&#10;JPA&#9;PSI&#9;JAVA://org.apache.logging.log4j.core.appender.db.jpa.JpaDatabaseManager.JPADatabaseManagerFactory&#10;insertca&#9;PSI&#9;JAVA://com.bridge.insertmerge.InsertCafecouponhdr&#10;insertc&#9;PSI&#9;JAVA://com.bridge.insertmerge.InsertCafecoupondet&#10;caf&#9;PSI&#9;JAVA://com.bridge.routemerge.Cafecouponhdr" />
+    <property name="SearchEverywhereHistoryKey" value="rms&#9;FILE&#9;file://C:/Kei-DataBridging/STORE/src/main/java/com/bridge/main/HikariRms.java&#10;inse&#9;FILE&#9;file://C:/Kei-DataBridging/STORE/src/main/java/com/bridge/insertdeposit/InsertDpdet.java&#10;dpd&#9;PSI&#9;JAVA://com.bridge.insertdeposit.InsertDpdet&#10;dpdet&#9;FILE&#9;file://C:/Kei-DataBridging/STORE/src/main/java/com/bridge/routedeposit/Brdpdet.java&#10;mains&#9;FILE&#9;file://C:/Kei-DataBridging/STORE/src/main/java/com/bridge/main/MainSales.java&#10;hkgt20L&#9;null&#9;null&#10;MSSQ&#9;FILE&#9;file://C:/Kei-DataBridging/STORE/src/main/java/com/bridge/SQL/MSSQL.java&#10;dphdr&#9;PSI&#9;JAVA://com.bridge.routedeposit.Dphdr&#10;sahdr&#9;FILE&#9;file://C:/Kei-DataBridging/STORE/src/main/java/com/bridge/routesales/Sahdr.java&#10;insertdp&#9;PSI&#9;JAVA://com.bridge.insertdeposit.InsertDphdr&#10;java.sql.PreparedStatement&#9;PSI&#9;JAVA://java.sql.PreparedStatement&#10;PreparedStatement &#9;PSI&#9;JAVA://java.sql.PreparedStatement&#10;insertsa&#9;FILE&#9;file://C:/Kei-DataBridging/STORE/src/main/java/com/bridge/insertsales/InsertSahdr.java&#10;inserted&#9;FILE&#9;file://C:/Kei-DataBridging/STORE/src/main/java/com/bridge/insertsales/InsertEdcsettlement.java&#10;or&#9;FILE&#9;file://C:/Kei-DataBridging/STORE/src/main/java/com/bridge/SQL/ORACLE.java&#10;Edc&#9;PSI&#9;JAVA://com.bridge.routesales.Edcsettlement&#10;insertedc&#9;PSI&#9;JAVA://com.bridge.insertsales.InsertEdcsettlement&#10;show line&#9;null&#9;null&#10;Line&#9;ACTION&#9;EditorToggleShowLineNumbers&#10;Mainsal&#9;FILE&#9;file://C:/Kei-DataBridging/STORE/src/main/java/com/bridge/main/MainSales.java&#10;mainsa&#9;FILE&#9;file://C:/Kei-DataBridging/STORE/src/main/java/com/bridge/main/MainSales.java&#10;insertsagoaa&#9;PSI&#9;JAVA://com.bridge.insertsales.InsertSagoaaction&#10;sagoaa&#9;PSI&#9;JAVA://com.bridge.routesales.Sagoaaction&#10;st&#9;FILE&#9;file://C:/Kei-DataBridging/STORE/src/main/java/com/bridge/main/RouteStock.java&#10;sagoatx&#9;PSI&#9;JAVA://com.bridge.routemerge.Sagoatxn&#10;sagoatxn&#9;PSI&#9;JAVA://com.bridge.insertmerge.InsertSagoatxn&#10;Route&#9;FILE&#9;file://C:/Source/DataBridge/src/main/java/com/bridge/main/RouteItem.java&#10;discmas&#9;PSI&#9;JAVA://com.bridge.routeitem.Discmas&#10;ui-guid&#9;null&#9;null&#10;stock&#9;FILE&#9;file://C:/Source/DataBridge/src/main/java/com/bridge/routestockres/Stockresdet.java&#10;park&#9;PSI&#9;JAVA://com.bridge.routemerge.Parkpmt&#10;cafe&#9;PSI&#9;JAVA://com.bridge.routemerge.Cafecouponhdr&#10;posuser&#9;PSI&#9;JAVA://com.bridge.routemerge.Posuser&#10;sastafftx&#9;PSI&#9;JAVA://com.bridge.routemerge.Sastafftxn&#10;goto line&#9;null&#9;null&#10;line&#9;ACTION&#9;EditorToggleShowLineNumbers&#10;plug&#9;ACTION&#9;WelcomeScreen.Plugins&#10;itemmas&#9;FILE&#9;file://C:/Source/DataBridge/src/main/java/com/bridge/routeitem/Itemmas.java&#10;mnve&#9;PSI&#9;JAVA://com.bridge.routeitem.Mnvendorupc&#10;mnvendor&#9;null&#9;null&#10;mnven&#9;PSI&#9;JAVA://com.bridge.insertitem.InsertMnvendorupc&#10;sastafftxn&#9;PSI&#9;JAVA://com.bridge.routemerge.Sastafftxn&#10;plugin&#9;ACTION&#9;StartupWizard&#10;saserial&#9;PSI&#9;JAVA://com.bridge.routesales.Saserial&#10;mnsea&#9;FILE&#9;file://C:/Source/DataBridge/src/main/java/com/bridge/routeitem/Mnseason.java&#10;prob&#9;PSI&#9;JAVA://com.sun.tracing.Probe&#10;maven&#9;ACTION&#9;ActivateMavenProjectsToolWindow&#10;q&#9;FILE&#9;file://C:/Source/BridgeLC/src/main/java/com/bridge/main/HikariQracleTo.java&#10;cose&#9;PSI&#9;JAVA://com.bridge.routemerge.Cosegchdr&#10;cos_egc_hd&#9;null&#9;null" />
     <property name="Console.TableResult.DefaultCopyAction" value="SQL Update Statements" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="full.screen.before.presentation.mode" value="false" />
@@ -430,6 +354,11 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Kei-DataBridging\STORE\src\main\resources" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.Quartz">
     <configuration default="false" name="Quartz" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
@@ -439,9 +368,9 @@
         </pattern>
       </extension>
       <option name="MAIN_CLASS_NAME" value="com.bridge.main.Quartz" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
@@ -694,15 +623,15 @@
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="C:\Program Files\Java\jdk1.7.0_79\jre" />
+      <option name="PACKAGE_NAME" value="com.bridge.main" />
+      <option name="MAIN_CLASS_NAME" value="com.bridge.main.Quartz" />
+      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
@@ -1056,12 +985,18 @@
       <workItem from="1447815828120" duration="53000" />
       <workItem from="1447916408434" duration="1462000" />
       <workItem from="1448241587065" duration="5661000" />
-      <workItem from="1448261376935" duration="23000" />
+      <workItem from="1448261376935" duration="4142000" />
+      <workItem from="1448332431781" duration="9800000" />
+      <workItem from="1448503391169" duration="121000" />
+      <workItem from="1448873583688" duration="5638000" />
+      <workItem from="1448935816714" duration="39000" />
+      <workItem from="1448935930523" duration="108000" />
+      <workItem from="1448936137764" duration="6504000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="333329000" />
+    <option name="totallyTimeSpent" value="359658000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -1073,22 +1008,24 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1096" extended-state="7" />
-    <editor active="false" />
+    <frame x="1912" y="-8" width="1936" height="1096" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32834226" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.49555555" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32762313" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33654878" sideWeight="0.5074627" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1337953" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1337953" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3262032" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30705395" sideWeight="0.4888889" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33618844" sideWeight="0.49253732" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35691318" sideWeight="0.4888889" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3351178" sideWeight="0.49253732" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18336888" sideWeight="0.48931623" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16791044" sideWeight="0.48931623" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16364606" sideWeight="0.5106838" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14712153" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32883817" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18976545" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14978679" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1099,11 +1036,9 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.49555555" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39037433" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45717233" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32883817" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1161,48 +1096,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/RouteDeposit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="19" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/insertitem/InsertDiscmas.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="282" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/routeitem/Discmas.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="3" selection-start-line="0" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/RouteItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="158" column="0" selection-start-line="158" selection-start-column="0" selection-end-line="165" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/insertsales/InsertSalesDiscmas.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="247" column="38" selection-start-line="0" selection-start-column="0" selection-end-line="282" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/routesales/SalesDiscmas.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="58" selection-start-line="0" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/RouteStockonhand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1252,62 +1145,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/quartz.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainDeposit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="210" column="57" selection-start-line="210" selection-start-column="57" selection-end-line="210" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainGoasetting.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="193" column="39" selection-start-line="193" selection-start-column="39" selection-end-line="193" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainGoodsreturn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="224" column="34" selection-start-line="224" selection-start-column="34" selection-end-line="224" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainMerge.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="305" column="0" selection-start-line="305" selection-start-column="0" selection-end-line="305" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainStaffpurchase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="231" column="0" selection-start-line="231" selection-start-column="0" selection-end-line="231" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainStockonhand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="223" column="13" selection-start-line="223" selection-start-column="13" selection-end-line="223" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainStock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.018763797">
-          <caret line="85" column="33" selection-start-line="85" selection-start-column="33" selection-end-line="85" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/routesales/Edcsettlement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.018763797">
@@ -1322,60 +1159,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainVip.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8874172">
-          <caret line="245" column="0" selection-start-line="245" selection-start-column="0" selection-end-line="245" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.7.0_79/src.zip!/java/sql/PreparedStatement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="94" column="8" selection-start-line="94" selection-start-column="8" selection-end-line="94" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3090909">
-          <caret line="22" column="37" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/RouteSales.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43589744">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/HikariQracleFrom.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38247862">
-          <caret line="43" column="14" selection-start-line="43" selection-start-column="14" selection-end-line="43" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/HikariMerge.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5811966">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32692307">
-          <caret line="18" column="37" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/HikariMssql.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4722222">
-          <caret line="30" column="59" selection-start-line="30" selection-start-column="59" selection-end-line="30" selection-end-column="59" />
         </state>
       </provider>
     </entry>
@@ -1428,31 +1215,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/routesales/Sahdr.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.018763797">
-          <caret line="44" column="7" selection-start-line="44" selection-start-column="7" selection-end-line="44" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/routedeposit/Brdpdet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.7825607">
-          <caret line="38" column="61" selection-start-line="38" selection-start-column="61" selection-end-line="38" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/routeitem/Brand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.26269317">
           <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="98" column="16" selection-start-line="98" selection-start-column="16" selection-end-line="99" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -1466,31 +1232,14 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/routemerge/Cafecoupondet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="44" selection-end-column="57" />
-          <folding />
+          <caret line="98" column="73" selection-start-line="98" selection-start-column="73" selection-end-line="98" selection-end-column="73" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainSales.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/zaxxer/HikariCP-java6/2.3.8/HikariCP-java6-2.3.8-sources.jar!/com/zaxxer/hikari/HikariDataSource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="362" column="9" selection-start-line="362" selection-start-column="9" selection-end-line="362" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/HikariRms.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4878587">
-          <caret line="30" column="58" selection-start-line="30" selection-start-column="50" selection-end-line="30" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/SQL/ORACLE.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1821" column="33" selection-start-line="1821" selection-start-column="33" selection-end-line="1821" selection-end-column="33" />
-          <folding />
+        <state vertical-scroll-proportion="-3.4845474">
+          <caret line="42" column="13" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1498,6 +1247,149 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="424" column="53" selection-start-line="424" selection-start-column="53" selection-end-line="424" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/routesales/Sahdr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="95" column="52" selection-start-line="95" selection-start-column="52" selection-end-line="95" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/insertdeposit/InsertDpdet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.77016574">
+          <caret line="138" column="53" selection-start-line="138" selection-start-column="53" selection-end-line="138" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/SQL/ORACLE.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="33.99779">
+          <caret line="1821" column="33" selection-start-line="1821" selection-start-column="33" selection-end-line="1821" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/routedeposit/Brdpdet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="68" column="59" selection-start-line="68" selection-start-column="59" selection-end-line="68" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/RouteItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7933702">
+          <caret line="176" column="0" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/RouteSales.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.18342541">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/RouteStaffpurchase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07513812">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/SQL/MSSQL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7818182">
+          <caret line="6252" column="0" selection-start-line="6252" selection-start-column="0" selection-end-line="6252" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/HikariMssql.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.67624307">
+          <caret line="42" column="59" selection-start-line="42" selection-start-column="59" selection-end-line="42" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/HikariRms.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65745854">
+          <caret line="41" column="34" selection-start-line="41" selection-start-column="34" selection-end-line="41" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/HikariQracleFrom.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.69502765">
+          <caret line="41" column="23" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/HikariQracleTo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.601105">
+          <caret line="36" column="59" selection-start-line="36" selection-start-column="59" selection-end-line="36" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/HikariMerge.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.58232045">
+          <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainDeposit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="7" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="98" column="16" selection-start-line="98" selection-start-column="16" selection-end-line="99" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainPatch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="57" selection-start-line="46" selection-start-column="37" selection-end-line="46" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainSales.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="51" column="52" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainStaffpurchase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="231" column="0" selection-start-line="231" selection-start-column="0" selection-end-line="231" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainMerge.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="59" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="59" />
           <folding />
         </state>
       </provider>
@@ -1505,26 +1397,82 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/Quartz.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="161" column="59" selection-start-line="161" selection-start-column="59" selection-end-line="161" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/SQL/MSSQL.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6249" column="43" selection-start-line="6249" selection-start-column="43" selection-end-line="6249" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainPatch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4359375">
-          <caret line="28" column="35" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
+          <caret line="177" column="39" selection-start-line="177" selection-start-column="39" selection-end-line="177" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainStock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.601105">
+          <caret line="54" column="61" selection-start-line="54" selection-start-column="61" selection-end-line="54" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainStockonhand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.9016573">
+          <caret line="223" column="13" selection-start-line="223" selection-start-column="13" selection-end-line="223" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainVip.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3756906">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainGoodsreturn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28176796">
+          <caret line="31" column="1" selection-start-line="31" selection-start-column="1" selection-end-line="31" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33812153">
+          <caret line="18" column="37" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1922652">
+          <caret line="59" column="16" selection-start-line="59" selection-start-column="16" selection-end-line="59" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/quartz.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bridge/main/MainGoasetting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="105" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8877888">
+          <caret line="171" column="10" selection-start-line="171" selection-start-column="10" selection-end-line="171" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1534,6 +1482,17 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="Copyright.UI">
+        <settings>
           <splitter-proportions>
             <option name="proportions">
               <list>

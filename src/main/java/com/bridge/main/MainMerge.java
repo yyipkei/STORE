@@ -21,305 +21,302 @@ import com.bridge.projo.Dataupdatelog;
 @DisallowConcurrentExecution
 public class MainMerge implements Job {
 
-	public void execute(JobExecutionContext arg0) throws JobExecutionException {
-		bridgeStart();
-	}
+    public void execute(JobExecutionContext arg0) throws JobExecutionException {
+        bridgeStart();
+    }
+
+    private static final Logger logger = Logger.getLogger(MainMerge.class);
+
+    public static void bridgeStart() {
+        // BasicConfigurator.configure();
+
+        if (Integer.parseInt(Quartz.RouteMergeOracletoMerge) == 1) {
+            try {
+
+                runStoredProcedure("Oracle");
+                selectRecordsFromTable("Oracle");
+                for (Dataupdatelog dataupdatelog : dataupdatelogs) logger.info(dataupdatelog);
+                processLog("Oracle");
+                logger.info("Finished Oracle -> Merge");
+            } catch (SQLException e) {
+                logger.info(e.getMessage());
+            }
+            dataupdatelogs.clear();
+        }
+
+        if (Integer.parseInt(Quartz.RouteMergeMergetoOracle) == 1) {
+            try {
+
+                runStoredProcedureMergelastupddt("MSSQL");
+                runStoredProcedure("Merge");
+                selectRecordsFromTable("Merge");
+                for (Dataupdatelog dataupdatelog : dataupdatelogs)
+                    logger.info(dataupdatelog);
+
+                processLog("Merge");
+                runlogStoredProcedure("Oracle");
+                runpstxcountStoredProcedure("Oracle");
+                logger.info("Finished Merge -> Oracle");
+            } catch (SQLException e) {
+                logger.info(e.getMessage());
+            }
+            dataupdatelogs.clear();
+        }
+    }
+
+    public static void processLog(String database) {
+        for (Dataupdatelog d : MainMerge.dataupdatelogs) {
+            RouteMerge.Routeing(d.getDatalogid(), d.getEntityname(),
+                    d.getEntitykey(), database);
+        }
+    }
+
+    public static final List<Dataupdatelog> dataupdatelogs = new ArrayList<Dataupdatelog>();
+
+
+    private static void selectRecordsFromTable(String database)
+            throws SQLException {
+
+        Connection dbConnection = null;
+        PreparedStatement preparedStatement = null;
+
+        String selectSQL = "SELECT DATA_UPDATE_LOG_ID ,ENTITY_NAME, ENTITY_KEY,ENTITY_UPD_DT,"
+                + " LOG_DT,BATCH_NO,IS_COMP,REMARK FROM DATA_UPDATE_LOG_POS where IS_COMP ='P' and REMARK ='Merge'";
+
+        try {
+
+            if (Objects.equals(database, "Oracle")) {
+                HikariQracleFrom OrcaleFrompool = HikariQracleFrom.getInstance();
+                dbConnection = OrcaleFrompool.getConnection();
+                //dbConnection = OracleFrom.getDBConnection();
+            } else {
+                HikariMerge Mergepool = HikariMerge.getInstance();
+                dbConnection = Mergepool.getConnection();
+                //dbConnection = Merge.getDBConnection();
+            }
+
+            preparedStatement = dbConnection.prepareStatement(selectSQL);
+            // preparedStatement.setInt(1, 1001);
+
+            // execute select SQL statement
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+
+                Dataupdatelog dataupdatelog = new Dataupdatelog();
+
+                // String datalogid = rs.getString("DATA_UPDATE_LOG_ID");
+                // String entityname = rs.getString("ENTITY_NAME");
+                // String entitykey = rs.getString("ENTITY_KEY");
+                // String entityupddt = rs.getString("ENTITY_UPD_DT");
+                // String logdt = rs.getString("LOG_DT");
+                // String batchno = rs.getString("BATCH_NO");
+                // String iscomp = rs.getString("IS_COMP");
+                // String remark = rs.getString("REMARK");
+                //
+                // System.out.println("Data : " + datalogid);
+                // System.out.println("Data : " + entityname);
+                // System.out.println("Data : " + entitykey);
+                // System.out.println("Data : " + entityupddt);
+                // System.out.println("Data : " + logdt);
+                // System.out.println("Data : " + batchno);
+                // System.out.println("Data : " + iscomp);
+                // System.out.println("Data : " + remark);
 
-	private static final Logger logger = Logger.getLogger(MainMerge.class);
+                dataupdatelog.setDatalogid(rs.getString("DATA_UPDATE_LOG_ID"));
+                dataupdatelog.setEntityname(rs.getString("ENTITY_NAME"));
+                dataupdatelog.setEntitykey(rs.getString("ENTITY_KEY"));
+                dataupdatelog.setEntityupddt(rs.getString("ENTITY_UPD_DT"));
+                dataupdatelog.setLogdt(rs.getString("LOG_DT"));
+                dataupdatelog.setBatchno(rs.getString("BATCH_NO"));
+                dataupdatelog.setIscomp(rs.getString("IS_COMP"));
+                dataupdatelog.setRemark(rs.getString("REMARK"));
 
-	public static void bridgeStart() {
-		// BasicConfigurator.configure();
-		/*try {
+                dataupdatelogs.add(dataupdatelog);
 
-			runStoredProcedure("Oracle");
-			selectRecordsFromTable("Oracle");
-			for (Dataupdatelog dataupdatelog : dataupdatelogs) logger.info(dataupdatelog);
+            }
 
-			processLog("Oracle");
+        } catch (SQLException e) {
 
-			logger.info("Finished Oracle -> Merge");
+            logger.info(e.getMessage());
 
-		} catch (SQLException e) {
+        } finally {
 
-			logger.info(e.getMessage());
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
 
-		}
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
 
-		dataupdatelogs.clear();*/
+        }
 
-		try {
+    }
 
-			runStoredProcedureMergelastupddt("MSSQL");
-			runStoredProcedure("Merge");
-			selectRecordsFromTable("Merge");
-			for (Dataupdatelog dataupdatelog : dataupdatelogs)
-				logger.info(dataupdatelog);
+    private static void runStoredProcedure(String database) throws SQLException {
 
-			processLog("Merge");
-			runlogStoredProcedure("Oracle");
-			runpstxcountStoredProcedure("Oracle");
-			logger.info("Finished Merge -> Oracle");
+        Connection dbConnection = null;
+        PreparedStatement preparedStatement = null;
+        logger.info("Starting USP_DATA_UPDATE_LOG_POS_MERGE");
+        //String spSQL = "{call USP_DATA_UPDATE_LOG_POS_MERGE}";
+        String spSQL = null;
+        try {
 
-		} catch (SQLException e) {
+            if (Objects.equals(database, "Oracle")) {
+                HikariQracleFrom OrcaleFrompool = HikariQracleFrom.getInstance();
+                dbConnection = OrcaleFrompool.getConnection();
+                //dbConnection = OracleFrom.getDBConnection();
+                spSQL = ORACLE.MergeUpdate;
+            } else {
+                HikariMerge Mergepool = HikariMerge.getInstance();
+                dbConnection = Mergepool.getConnection();
+                //dbConnection = Merge.getDBConnection();
+                spSQL = MSSQL.MergeUpdate;
+            }
 
-			logger.info(e.getMessage());
+            preparedStatement = dbConnection.prepareStatement(spSQL);
+            preparedStatement.executeUpdate();
 
-		}
-		dataupdatelogs.clear();
+        } catch (SQLException e) {
 
-	}
+            logger.info(e.getMessage());
 
-	public static void processLog(String database) {
-		for (Dataupdatelog d : MainMerge.dataupdatelogs) {
-			RouteMerge.Routeing(d.getDatalogid(), d.getEntityname(),
-					d.getEntitykey(), database);
-		}
-	}
+        } finally {
 
-	public static final List<Dataupdatelog> dataupdatelogs = new ArrayList<Dataupdatelog>();
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
 
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
 
-	private static void selectRecordsFromTable(String database)
-			throws SQLException {
+        }
 
-		Connection dbConnection = null;
-		PreparedStatement preparedStatement = null;
+    }
 
-		String selectSQL = "SELECT DATA_UPDATE_LOG_ID ,ENTITY_NAME, ENTITY_KEY,ENTITY_UPD_DT,"
-				+ " LOG_DT,BATCH_NO,IS_COMP,REMARK FROM DATA_UPDATE_LOG_POS where IS_COMP ='P' and REMARK ='Merge'";
+    private static void runlogStoredProcedure(String database)
+            throws SQLException {
 
-		try {
+        Connection dbConnection = null;
+        PreparedStatement preparedStatement = null;
+        logger.info("Starting usp_data_update_log_merge");
+        //String spSQL = "{call usp_data_update_log_merge}";
+        String spSQL = ORACLE.InsertMergeDataLog;
+        try {
 
-			if (Objects.equals(database, "Oracle")) {
-				 HikariQracleFrom OrcaleFrompool = HikariQracleFrom.getInstance(); 
-				dbConnection = OrcaleFrompool.getConnection();
-				//dbConnection = OracleFrom.getDBConnection();
-			} else {
-				 HikariMerge Mergepool = HikariMerge.getInstance();  
-				dbConnection = Mergepool.getConnection();  
-				//dbConnection = Merge.getDBConnection();
-			}
+            if (Objects.equals(database, "Oracle")) {
+                HikariQracleTo OrcaleTopool = HikariQracleTo.getInstance();
+                dbConnection = OrcaleTopool.getConnection();
+                //dbConnection = OracleFrom.getDBConnection();
+            } else {
+                HikariMerge Mergepool = HikariMerge.getInstance();
+                dbConnection = Mergepool.getConnection();
+                //dbConnection = Merge.getDBConnection();
+            }
 
-			preparedStatement = dbConnection.prepareStatement(selectSQL);
-			// preparedStatement.setInt(1, 1001);
+            preparedStatement = dbConnection.prepareStatement(spSQL);
+            preparedStatement.executeUpdate();
 
-			// execute select SQL statement
-			ResultSet rs = preparedStatement.executeQuery();
+        } catch (SQLException e) {
 
-			while (rs.next()) {
+            logger.info(e.getMessage());
 
-				Dataupdatelog dataupdatelog = new Dataupdatelog();
+        } finally {
 
-				// String datalogid = rs.getString("DATA_UPDATE_LOG_ID");
-				// String entityname = rs.getString("ENTITY_NAME");
-				// String entitykey = rs.getString("ENTITY_KEY");
-				// String entityupddt = rs.getString("ENTITY_UPD_DT");
-				// String logdt = rs.getString("LOG_DT");
-				// String batchno = rs.getString("BATCH_NO");
-				// String iscomp = rs.getString("IS_COMP");
-				// String remark = rs.getString("REMARK");
-				//
-				// System.out.println("Data : " + datalogid);
-				// System.out.println("Data : " + entityname);
-				// System.out.println("Data : " + entitykey);
-				// System.out.println("Data : " + entityupddt);
-				// System.out.println("Data : " + logdt);
-				// System.out.println("Data : " + batchno);
-				// System.out.println("Data : " + iscomp);
-				// System.out.println("Data : " + remark);
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
 
-				dataupdatelog.setDatalogid(rs.getString("DATA_UPDATE_LOG_ID"));
-				dataupdatelog.setEntityname(rs.getString("ENTITY_NAME"));
-				dataupdatelog.setEntitykey(rs.getString("ENTITY_KEY"));
-				dataupdatelog.setEntityupddt(rs.getString("ENTITY_UPD_DT"));
-				dataupdatelog.setLogdt(rs.getString("LOG_DT"));
-				dataupdatelog.setBatchno(rs.getString("BATCH_NO"));
-				dataupdatelog.setIscomp(rs.getString("IS_COMP"));
-				dataupdatelog.setRemark(rs.getString("REMARK"));
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
 
-				dataupdatelogs.add(dataupdatelog);
+        }
 
-			}
+    }
 
-		} catch (SQLException e) {
+    private static void runpstxcountStoredProcedure(String database)
+            throws SQLException {
 
-			logger.info(e.getMessage());
+        Connection dbConnection = null;
+        PreparedStatement preparedStatement = null;
+        logger.info("Starting USP_PS_TX_COUNT_COUPON ");
+        //String spSQL = "{call USP_PS_TX_COUNT_COUPON}";
+        String spSQL = ORACLE.CouponPsTxCount;
+        try {
 
-		} finally {
+            if (Objects.equals(database, "Oracle")) {
+                HikariQracleTo OrcaleTopool = HikariQracleTo.getInstance();
+                dbConnection = OrcaleTopool.getConnection();
+                // dbConnection = OracleFrom.getDBConnection();
+            } else {
+                HikariMssql Mssqlpool = HikariMssql.getInstance();
+                dbConnection = Mssqlpool.getConnection();
+                // dbConnection = Mssql.getDBConnection();
+            }
 
-			if (preparedStatement != null) {
-				preparedStatement.close();
-			}
+            preparedStatement = dbConnection.prepareStatement(spSQL);
+            preparedStatement.executeUpdate();
 
-			if (dbConnection != null) {
-				dbConnection.close();
-			}
+        } catch (SQLException e) {
 
-		}
+            logger.info(e.getMessage());
 
-	}
-
-	private static void runStoredProcedure(String database) throws SQLException {
-
-		Connection dbConnection = null;
-		PreparedStatement preparedStatement = null;
-		logger.info("Starting USP_DATA_UPDATE_LOG_POS_MERGE");
-		//String spSQL = "{call USP_DATA_UPDATE_LOG_POS_MERGE}";
-		String spSQL = null;
-		try {
+        } finally {
 
-			if (Objects.equals(database, "Oracle")) {
-				 HikariQracleFrom OrcaleFrompool = HikariQracleFrom.getInstance(); 
-				dbConnection = OrcaleFrompool.getConnection();
-				//dbConnection = OracleFrom.getDBConnection();
-				spSQL = ORACLE.MergeUpdate;
-			} else {
-				 HikariMerge Mergepool = HikariMerge.getInstance();  
-				dbConnection = Mergepool.getConnection();  
-				//dbConnection = Merge.getDBConnection();
-				spSQL = MSSQL.MergeUpdate;
-			}
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
 
-			preparedStatement = dbConnection.prepareStatement(spSQL);
-			preparedStatement.executeUpdate();
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
 
-		} catch (SQLException e) {
+        }
 
-			logger.info(e.getMessage());
+    }
 
-		} finally {
+    private static void runStoredProcedureMergelastupddt(String database) throws SQLException {
 
-			if (preparedStatement != null) {
-				preparedStatement.close();
-			}
+        Connection dbConnection = null;
+        PreparedStatement preparedStatement = null;
+        logger.info("Starting usp_merge_txn_last_upd_dt_batch");
+        //String spSQL = "{call usp_merge_txn_last_upd_dt_batch}";
+        String spSQL = MSSQL.CafeLastUpdDate;
+        try {
 
-			if (dbConnection != null) {
-				dbConnection.close();
-			}
+            if (Objects.equals(database, "Oracle")) {
+                HikariQracleFrom OrcaleFrompool = HikariQracleFrom
+                        .getInstance();
+                dbConnection = OrcaleFrompool.getConnection();
+                // dbConnection = OracleFrom.getDBConnection();
+            } else {
+                HikariMssql Mssqlpool = HikariMssql.getInstance();
+                dbConnection = Mssqlpool.getConnection();
+                // dbConnection = Mssql.getDBConnection();
+            }
 
-		}
-
-	}
-
-	private static void runlogStoredProcedure(String database)
-			throws SQLException {
-
-		Connection dbConnection = null;
-		PreparedStatement preparedStatement = null;
-		logger.info("Starting usp_data_update_log_merge");
-		//String spSQL = "{call usp_data_update_log_merge}";
-		String spSQL = ORACLE.InsertMergeDataLog;
-		try {
+            preparedStatement = dbConnection.prepareStatement(spSQL);
+            preparedStatement.executeUpdate();
 
-			if (Objects.equals(database, "Oracle")) {
-				HikariQracleTo OrcaleTopool = HikariQracleTo.getInstance();
-				dbConnection = OrcaleTopool.getConnection();
-				//dbConnection = OracleFrom.getDBConnection();
-			} else {
-				 HikariMerge Mergepool = HikariMerge.getInstance();  
-				dbConnection = Mergepool.getConnection();  
-				//dbConnection = Merge.getDBConnection();
-			}
+        } catch (SQLException e) {
 
-			preparedStatement = dbConnection.prepareStatement(spSQL);
-			preparedStatement.executeUpdate();
+            logger.info(e.getMessage());
 
-		} catch (SQLException e) {
+        } finally {
 
-			logger.info(e.getMessage());
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
 
-		} finally {
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
 
-			if (preparedStatement != null) {
-				preparedStatement.close();
-			}
+        }
 
-			if (dbConnection != null) {
-				dbConnection.close();
-			}
-
-		}
-
-	}
-	private static void runpstxcountStoredProcedure(String database)
-			throws SQLException {
-
-		Connection dbConnection = null;
-		PreparedStatement preparedStatement = null;
-		logger.info("Starting USP_PS_TX_COUNT_COUPON ");
-		//String spSQL = "{call USP_PS_TX_COUNT_COUPON}";
-		String spSQL = ORACLE.CouponPsTxCount;
-		try {
-
-			if (Objects.equals(database, "Oracle")) {
-				HikariQracleTo OrcaleTopool = HikariQracleTo.getInstance();
-				dbConnection = OrcaleTopool.getConnection();
-				// dbConnection = OracleFrom.getDBConnection();
-			} else {
-				HikariMssql Mssqlpool = HikariMssql.getInstance();
-				dbConnection = Mssqlpool.getConnection();
-				// dbConnection = Mssql.getDBConnection();
-			}
-
-			preparedStatement = dbConnection.prepareStatement(spSQL);
-			preparedStatement.executeUpdate();
-
-		} catch (SQLException e) {
-
-			logger.info(e.getMessage());
-
-		} finally {
-
-			if (preparedStatement != null) {
-				preparedStatement.close();
-			}
-
-			if (dbConnection != null) {
-				dbConnection.close();
-			}
-
-		}
-
-	}
-	private static void runStoredProcedureMergelastupddt(String database) throws SQLException {
-
-		Connection dbConnection = null;
-		PreparedStatement preparedStatement = null;
-		logger.info("Starting usp_merge_txn_last_upd_dt_batch");
-		//String spSQL = "{call usp_merge_txn_last_upd_dt_batch}";
-		String spSQL = MSSQL.CafeLastUpdDate;
-		try {
-
-			if (Objects.equals(database, "Oracle")) {
-				HikariQracleFrom OrcaleFrompool = HikariQracleFrom
-						.getInstance();
-				dbConnection = OrcaleFrompool.getConnection();
-				// dbConnection = OracleFrom.getDBConnection();
-			} else {
-				HikariMssql Mssqlpool = HikariMssql.getInstance();
-				dbConnection = Mssqlpool.getConnection();
-				// dbConnection = Mssql.getDBConnection();
-			}
-
-			preparedStatement = dbConnection.prepareStatement(spSQL);
-			preparedStatement.executeUpdate();
-
-		} catch (SQLException e) {
-
-			logger.info(e.getMessage());
-
-		} finally {
-
-			if (preparedStatement != null) {
-				preparedStatement.close();
-			}
-
-			if (dbConnection != null) {
-				dbConnection.close();
-			}
-
-		}
-
-	}
+    }
 
 }

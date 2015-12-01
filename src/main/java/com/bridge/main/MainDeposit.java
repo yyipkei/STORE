@@ -25,7 +25,8 @@ public class MainDeposit implements Job {
 
     public static void bridgeStart() {
         // BasicConfigurator.configure();
-       /* try {
+        if (Integer.parseInt(Quartz.RouteDepositOracletoMerge) == 1) {
+        try {
 
             runStoredProcedure("Oracle");
             selectRecordsFromTable("Oracle");
@@ -37,29 +38,28 @@ public class MainDeposit implements Job {
         } catch (SQLException e) {
 
             logger.info(e.getMessage());
-
-        }
-
-        dataupdatelogs.clear();
-*/
-        try {
-
-            runStoredProcedure("Merge");
-            selectRecordsFromTable("Merge");
-            for (Dataupdatelog dataupdatelog : dataupdatelogs)
-                logger.info(dataupdatelog);
-
-            processLog("Merge");
-            //runlogStoredProcedure("Oracle"); //Kei 20151109
-            logger.info("Finished Merge -> Oracle");
-
-        } catch (SQLException e) {
-
-            logger.info(e.getMessage());
-
         }
         dataupdatelogs.clear();
+        }
 
+        if (Integer.parseInt(Quartz.RouteDepositMergetoOracle) == 1) {
+            try {
+
+                runStoredProcedure("Merge");
+                selectRecordsFromTable("Merge");
+                for (Dataupdatelog dataupdatelog : dataupdatelogs)
+                    logger.info(dataupdatelog);
+
+                processLog("Merge");
+                //runlogStoredProcedure("Oracle"); //Kei 20151109
+                logger.info("Finished Merge -> Oracle");
+
+            } catch (SQLException e) {
+
+                logger.info(e.getMessage());
+            }
+            dataupdatelogs.clear();
+        }
     }
 
     public static void processLog(String database) {
@@ -155,7 +155,7 @@ public class MainDeposit implements Job {
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
         logger.info("Starting USP_DATA_UPDATE_LOG_POS_DP");
-       // String spSQL = "{call USP_DATA_UPDATE_LOG_POS_DP}";
+        // String spSQL = "{call USP_DATA_UPDATE_LOG_POS_DP}";
         String spSQL = null;
         try {
 
@@ -164,12 +164,12 @@ public class MainDeposit implements Job {
                         .getInstance();
                 dbConnection = OrcaleFrompool.getConnection();
                 // dbConnection = OracleFrom.getDBConnection();
-                spSQL= ORACLE.DepositUpdate;
+                spSQL = ORACLE.DepositUpdate;
             } else {
                 HikariMerge Mergepool = HikariMerge.getInstance();
                 dbConnection = Mergepool.getConnection();
                 // dbConnection = Merge.getDBConnection();
-                spSQL= MSSQL.DepositUpdate;
+                spSQL = MSSQL.DepositUpdate;
             }
 
             preparedStatement = dbConnection.prepareStatement(spSQL);

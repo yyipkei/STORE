@@ -22,14 +22,14 @@ public class HikariMerge {
 
     private HikariMerge() {
         HikariConfig config = new HikariConfig();
-        config.setMaximumPoolSize(10);
+        config.setMaximumPoolSize(Integer.parseInt(Quartz.MergeMaximumPoolSize));
 
         config.setDataSourceClassName("net.sourceforge.jtds.jdbcx.JtdsDataSource");
         config.addDataSourceProperty("portNumber", 1433);
-        config.addDataSourceProperty("serverName", "hkct5L");
-        config.addDataSourceProperty("user", "sysadmin");
-        config.addDataSourceProperty("password", "chocoa");
-        config.addDataSourceProperty("databaseName", "merge_pos_revamp");
+        config.addDataSourceProperty("serverName", Quartz.MergeServerName);
+        config.addDataSourceProperty("user", Quartz.MergeDatabaseUser);
+        config.addDataSourceProperty("password", Quartz.MergeDatabasePassword);
+        config.addDataSourceProperty("databaseName",Quartz.MergeDatabaseName);
         config.setConnectionTestQuery("SELECT 1");
 
         ds = new HikariDataSource(config);

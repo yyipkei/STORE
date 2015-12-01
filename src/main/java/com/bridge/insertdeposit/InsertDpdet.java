@@ -37,7 +37,7 @@ public class InsertDpdet {
 
 				insertTableSQL = "INSERT INTO Dpdet"
 						+ "(TX_DATE,LOC_CODE,REG_NO,TX_NO,DP_NO,ACTION,SETTLE_AMT,ISSUE_LOC_CODE,MODIFIED_BY,MODIFIED_DATE,LAST_UPD_DT) "
-						+ "VALUES" + "(?,?,?,?,?,?,?,?,?,?,?,?)";
+						+ "VALUES" + "(?,?,?,?,?,?,?,?,?,?,?)";
 
 				preparedStatement = dbConnection
 						.prepareStatement(insertTableSQL);

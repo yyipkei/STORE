@@ -22,17 +22,16 @@ public class HikariQracleTo {
 
 	private HikariQracleTo() {
 		HikariConfig config = new HikariConfig();
-		config.setMaximumPoolSize(10);
-		
-		String serverName = "10.1.7.42";
-		String serverPort = "1521";
-		String sid = "ORCL";
-		String url = "jdbc:oracle:thin:@" + serverName + ":" + serverPort
-				+ ":" + sid;
+		config.setMaximumPoolSize(Integer.parseInt(Quartz.OracleToMaximumPoolSize));
+
+		String serverName = Quartz.OracleToServerName;
+		String serverPort = Quartz.OracleToServerPort;
+		String sid = Quartz.OracleToSid;
+		String url = Quartz.OracleToUrl;
 
 		config.setJdbcUrl(url);
-		config.setUsername("BRIDGE");
-		config.setPassword("BRIDGElc");
+		config.setUsername(Quartz.OracleToUsername);
+		config.setPassword(Quartz.OracleToPassword);
 
 		//config.setDataSourceClassName("oracle.jdbc.pool.OracleDataSource");
 		//config.addDataSourceProperty("portNumber", 1521);

@@ -22,15 +22,16 @@ public class HikariMssql {
 
 	private HikariMssql() {
 		HikariConfig config = new HikariConfig();
-		config.setMaximumPoolSize(10);
+		config.setMaximumPoolSize(Integer.parseInt(Quartz.MssqlMaximumPoolSize));
 
 		config.setDataSourceClassName("net.sourceforge.jtds.jdbcx.JtdsDataSource");
 		config.addDataSourceProperty("portNumber", 1433);
-		config.addDataSourceProperty("serverName", "hkct5L");
-		config.addDataSourceProperty("user", "sysadmin");
-		config.addDataSourceProperty("password", "chocoa");
-		config.addDataSourceProperty("databaseName", "posdb");
+		config.addDataSourceProperty("serverName", Quartz.MssqlServerName);
+		config.addDataSourceProperty("user", Quartz.MssqlDatabaseUser);
+		config.addDataSourceProperty("password", Quartz.MssqlDatabasePassword);
+		config.addDataSourceProperty("databaseName", Quartz.MssqlDatabaseName);
 		config.setConnectionTestQuery("SELECT 1");
+
 
 		ds = new HikariDataSource(config);
 	}
