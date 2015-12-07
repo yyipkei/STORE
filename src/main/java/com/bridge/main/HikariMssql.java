@@ -23,6 +23,7 @@ public class HikariMssql {
 	private HikariMssql() {
 		HikariConfig config = new HikariConfig();
 		config.setMaximumPoolSize(Integer.parseInt(Quartz.MssqlMaximumPoolSize));
+		config.setConnectionTimeout(Integer.MAX_VALUE);
 
 		config.setDataSourceClassName("net.sourceforge.jtds.jdbcx.JtdsDataSource");
 		config.addDataSourceProperty("portNumber", 1433);
@@ -31,6 +32,7 @@ public class HikariMssql {
 		config.addDataSourceProperty("password", Quartz.MssqlDatabasePassword);
 		config.addDataSourceProperty("databaseName", Quartz.MssqlDatabaseName);
 		config.setConnectionTestQuery("SELECT 1");
+		config.setInitializationFailFast(true);
 
 
 		ds = new HikariDataSource(config);

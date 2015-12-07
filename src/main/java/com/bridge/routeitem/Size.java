@@ -27,6 +27,11 @@ public class Size {
 		 * String loccode = parts[1]; String regno = parts[2]; String txno =
 		 * parts[3]; String seqno = parts[4];
 		 */
+
+		String[] parts = entitykey.split(",");
+		String size_set = parts[0];
+		String size_code = parts[1];
+
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
 		String selectSQL;
@@ -43,8 +48,11 @@ public class Size {
 
 				selectSQL = "SELECT SIZE_SET,SIZE_CODE,SIZE_DESC,LAST_UPD_DT,ENTITY_KEY "
 						+ "FROM SIZE_ "
-						+ "where entity_key ='"
-						+ entitykey
+						+ "where size_set ='"
+						+ size_set
+						+ "'"
+						+ "and size_code ='"
+						+ size_code
 						+ "'"
 						+"Order BY LAST_UPD_DT";
 			} else {
@@ -55,8 +63,11 @@ public class Size {
 				
 				selectSQL = "SELECT SIZE_SET,SIZE_CODE,SIZE_DESC,LAST_UPD_DT,ENTITY_KEY "
 						+ "FROM Size "
-						+ "where entity_key ='"
-						+ entitykey
+						+ "where size_set ='"
+						+ size_set
+						+ "'"
+						+ "and size_code ='"
+						+ size_code
 						+ "'"
 						+"Order BY LAST_UPD_DT";
 			}

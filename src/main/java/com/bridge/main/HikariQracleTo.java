@@ -23,6 +23,8 @@ public class HikariQracleTo {
 	private HikariQracleTo() {
 		HikariConfig config = new HikariConfig();
 		config.setMaximumPoolSize(Integer.parseInt(Quartz.OracleToMaximumPoolSize));
+		config.setInitializationFailFast(true);
+		config.setConnectionTimeout(Integer.MAX_VALUE);
 
 		String serverName = Quartz.OracleToServerName;
 		String serverPort = Quartz.OracleToServerPort;

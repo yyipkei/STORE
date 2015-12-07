@@ -23,6 +23,7 @@ public class HikariMerge {
     private HikariMerge() {
         HikariConfig config = new HikariConfig();
         config.setMaximumPoolSize(Integer.parseInt(Quartz.MergeMaximumPoolSize));
+        config.setConnectionTimeout(Integer.MAX_VALUE);
 
         config.setDataSourceClassName("net.sourceforge.jtds.jdbcx.JtdsDataSource");
         config.addDataSourceProperty("portNumber", 1433);
@@ -31,6 +32,7 @@ public class HikariMerge {
         config.addDataSourceProperty("password", Quartz.MergeDatabasePassword);
         config.addDataSourceProperty("databaseName",Quartz.MergeDatabaseName);
         config.setConnectionTestQuery("SELECT 1");
+        config.setInitializationFailFast(true);
 
         ds = new HikariDataSource(config);
     }

@@ -23,6 +23,8 @@ public class HikariRms {
     private HikariRms() {
         HikariConfig config = new HikariConfig();
         config.setMaximumPoolSize(Integer.parseInt(Quartz.RmsMaximumPoolSize));
+        config.setInitializationFailFast(true);
+        config.setConnectionTimeout(Integer.MAX_VALUE);
 
         config.setDataSourceClassName("net.sourceforge.jtds.jdbcx.JtdsDataSource");
         config.addDataSourceProperty("portNumber", 1433);
