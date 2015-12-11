@@ -47,8 +47,7 @@ public class MainStockonhand implements Job {
 
             runStoredProcedure("RMS");
             selectRecordsFromTable("RMS");
-            for (Dataupdatelog dataupdatelog : dataupdatelogs)
-                logger.info(dataupdatelog);
+            //for (Dataupdatelog dataupdatelog : dataupdatelogs) logger.info(dataupdatelog);
 
             processLog("RMS");
 

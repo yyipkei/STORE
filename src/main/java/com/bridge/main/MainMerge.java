@@ -35,7 +35,7 @@ public class MainMerge implements Job {
 
                 runStoredProcedure("Oracle");
                 selectRecordsFromTable("Oracle");
-                for (Dataupdatelog dataupdatelog : dataupdatelogs) logger.info(dataupdatelog);
+                //for (Dataupdatelog dataupdatelog : dataupdatelogs) logger.info(dataupdatelog);
                 processLog("Oracle");
                 logger.info("Finished Oracle -> Merge");
             } catch (SQLException e) {
@@ -50,8 +50,8 @@ public class MainMerge implements Job {
                 runStoredProcedureMergelastupddt("MSSQL");
                 runStoredProcedure("Merge");
                 selectRecordsFromTable("Merge");
-                for (Dataupdatelog dataupdatelog : dataupdatelogs)
-                    logger.info(dataupdatelog);
+               /* for (Dataupdatelog dataupdatelog : dataupdatelogs)
+                    logger.info(dataupdatelog);*/
 
                 processLog("Merge");
                 runlogStoredProcedure("Oracle");

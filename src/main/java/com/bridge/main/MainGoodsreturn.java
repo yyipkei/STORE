@@ -34,7 +34,7 @@ public class MainGoodsreturn implements Job {
 
                 runStoredProcedure("Oracle");
                 selectRecordsFromTable("Oracle");
-                for (Dataupdatelog dataupdatelog : dataupdatelogs) logger.info(dataupdatelog);
+             //   for (Dataupdatelog dataupdatelog : dataupdatelogs) logger.info(dataupdatelog);
                 processLog("Oracle");
                 logger.info("Finished Oracle -> Merge");
 
@@ -49,8 +49,7 @@ public class MainGoodsreturn implements Job {
 
             runStoredProcedure("Merge");
             selectRecordsFromTable("Merge");
-            for (Dataupdatelog dataupdatelog : dataupdatelogs)
-                logger.info(dataupdatelog);
+           // for (Dataupdatelog dataupdatelog : dataupdatelogs) logger.info(dataupdatelog);
 
             processLog("Merge");
             //runlogStoredProcedure("Oracle"); --Kei 20151109

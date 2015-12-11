@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.frontierssys.infrastructure.core:ehcache-core-osgi:2.5.7-PATCH2">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/frontierssys/infrastructure/core/ehcache-core-osgi/2.5.7-PATCH2/ehcache-core-osgi-2.5.7-PATCH2.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/frontierssys/infrastructure/core/ehcache-core-osgi/2.5.7-PATCH2/ehcache-core-osgi-2.5.7-PATCH2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/frontierssys/infrastructure/core/ehcache-core-osgi/2.5.7-PATCH2/ehcache-core-osgi-2.5.7-PATCH2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -51,8 +51,7 @@ public class MainStaffpurchase implements Job {
 
 			runStoredProcedure("RMS");
 			selectRecordsFromTable("RMS");
-			for (Dataupdatelog dataupdatelog : dataupdatelogs)
-				logger.info(dataupdatelog);
+			//for (Dataupdatelog dataupdatelog : dataupdatelogs) logger.info(dataupdatelog);
 
 			processLog("RMS");
 			//runlogStoredProcedure("Oracle");

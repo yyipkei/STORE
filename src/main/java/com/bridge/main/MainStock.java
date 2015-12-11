@@ -33,8 +33,7 @@ public class MainStock implements Job {
 
                 runStoredProcedure("Oracle");
                 selectRecordsFromTable("Oracle");
-                for (Dataupdatelog dataupdatelog : dataupdatelogs)
-                    logger.info(dataupdatelog);
+                //for (Dataupdatelog dataupdatelog : dataupdatelogs) logger.info(dataupdatelog);
 
                 processLog("Oracle");
 
@@ -55,8 +54,7 @@ public class MainStock implements Job {
                 runStoredProcedureStockreslastupddt("MSSQL");
                 runStoredProcedure("Merge");
                 selectRecordsFromTable("Merge");
-                for (Dataupdatelog dataupdatelog : dataupdatelogs)
-                    logger.info(dataupdatelog);
+                //for (Dataupdatelog dataupdatelog : dataupdatelogs) logger.info(dataupdatelog);
 
                 processLog("Merge");
 

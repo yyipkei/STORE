@@ -50,8 +50,8 @@ public class MainGoasetting implements Job {
 
 			runStoredProcedure("MSSQL");
 			selectRecordsFromTable("MSSQL");
-			for (Dataupdatelog dataupdatelog : dataupdatelogs)
-				logger.info(dataupdatelog);
+			/*for (Dataupdatelog dataupdatelog : dataupdatelogs)
+				logger.info(dataupdatelog);*/
 
 			processLog("MSSQL");
 

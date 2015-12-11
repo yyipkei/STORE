@@ -947,7 +947,7 @@ public class MSSQL {
                 "\t\t,@log_dt\n" +
                 "END";
 
-        GoaLastUpdDate = "BEGIN TRAN\n" +
+        GoaLastUpdDate ="BEGIN TRAN\n" +
                 "\n" +
                 "DECLARE @tx_date VARCHAR(50)\n" +
                 "\t,@loc_code VARCHAR(50)\n" +
@@ -967,6 +967,7 @@ public class MSSQL {
                 "WHERE tx_date BETWEEN CONVERT(VARCHAR(8), getdate() - 2, 112)\n" +
                 "\t\tAND CONVERT(VARCHAR(8), getdate(), 112)\n" +
                 "\tAND last_upd_dt IS NULL\n" +
+                "\tand loc_code in (select distinct loc_code FROM DATA_UPDATE_LOG_POS_location ) \n" +
                 "\n" +
                 "OPEN priceCursor\n" +
                 "\n" +
@@ -1448,6 +1449,7 @@ public class MSSQL {
                 "WHERE tx_date BETWEEN CONVERT(VARCHAR(8), getdate() - 2, 112)\n" +
                 "\t\tAND CONVERT(VARCHAR(8), getdate(), 112)\n" +
                 "\tAND last_upd_dt IS NULL\n" +
+                "\t\tand loc_code in (select distinct loc_code FROM DATA_UPDATE_LOG_POS_location ) \n" +
                 "\n" +
                 "OPEN priceCursor\n" +
                 "\n" +
@@ -1937,6 +1939,7 @@ public class MSSQL {
                 "WHERE tx_date between convert(VARCHAR(8), getdate() -10, 112) and convert(VARCHAR(8), getdate(), 112)\n" +
                 "\tAND last_upd_dt IS NULL\n" +
                 "\tAND tx_type <> '09'\n" +
+                "\tand loc_code in (select distinct loc_code FROM DATA_UPDATE_LOG_POS_location )  \n" +
                 "\n" +
                 "OPEN priceCursor\n" +
                 "\n" +
@@ -2420,6 +2423,7 @@ public class MSSQL {
                 "WHERE tx_date between convert(VARCHAR(8), getdate() -10, 112) and convert(VARCHAR(8), getdate(), 112)\n" +
                 "\tAND last_upd_dt IS NULL\n" +
                 "\tAND tx_type = '09'\n" +
+                "\tand loc_code in (select distinct loc_code FROM DATA_UPDATE_LOG_POS_location )  \n" +
                 "\n" +
                 "OPEN priceCursor\n" +
                 "\n" +
