@@ -4987,7 +4987,7 @@ public class MSSQL {
                 "\t\t,@log_dt\n" +
                 "END\n";
 
-        ItemUpdate ="DECLARE @log_dt DATETIME\n" +
+        ItemUpdate = "DECLARE @log_dt DATETIME\n" +
                 "\t,@LAST_SYNC_TIME DATETIME\n" +
                 "\t,@MAX_BATCH VARCHAR(100)\n" +
                 "\t,@remark VARCHAR(100)\n" +
@@ -5382,7 +5382,7 @@ public class MSSQL {
                 "\tSELECT 'styl_mas_service'\n" +
                 "\t\t,@log_dt\n" +
                 "END\n" +
-                "\n" +
+                "/*\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
                 "\t\tFROM DATA_UPDATE_LOG_POS_SYNC\n" +
@@ -5417,7 +5417,7 @@ public class MSSQL {
                 "\tSELECT 'mn_staffcard'\n" +
                 "\t\t,@log_dt\n" +
                 "END\n" +
-                "\n" +
+                "*/\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
                 "\t\tFROM DATA_UPDATE_LOG_POS_SYNC\n" +
@@ -5563,7 +5563,8 @@ public class MSSQL {
                 "\t\tFROM DATA_UPDATE_LOG_POS_SYNC\n" +
                 "\t\tWHERE remark = 'discmas'\n" +
                 "\t\t)\n" +
-                "SET @log_dt = (\n" +
+                "SET @log_dt" +
+                " = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
                 "\t\tFROM discmas\n" +
                 "\t\t)\n" +
