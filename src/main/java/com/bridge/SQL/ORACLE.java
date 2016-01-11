@@ -1118,7 +1118,8 @@ public class ORACLE {
                 "select entity_key \n" +
                 "from data_update_log a\n" +
                 "where a.entity_name ='sahdr'  \n" +
-                "and is_comp ='A';\n" +
+                "and is_comp ='A'\n" +
+                "and (remark <> 'Fail void' or remark is null) ;\n" +
                 "\n" +
                 "begin\n" +
                 "OPEN c1;\n" +
@@ -1207,11 +1208,12 @@ public class ORACLE {
                 "  where a.entity_key = v_entity_key\n" +
                 "  and a.disc_id in('LC99','LC82','LC81','LC80','11','12','13','14','15','16','17','18')\n" +
                 "  and a.entity_key = b.entity_key\n" +
-                "  and b.gex = 'N';\n" +
+                "  and b.gex = 'N'\n" +
+                "  and a.tx_date = TO_CHAR(systimestamp,'YYYYMMDD');\n" +
                 "  \n" +
                 "  if v_cnthvrtn > 0 then \n" +
                 "  select count(*) into v_chkrtn from SASTAFFTXN a\n" +
-                "  where a.entity_key = v_entity_key;\n" +
+                "  where a.entity_key = v_entity_key ;\n" +
                 "   if v_chkrtn = 0 then \n" +
                 "      v_chk := 1;\n" +
                 "      update data_update_log set remark ='Fail Sastafftxn'\n" +
