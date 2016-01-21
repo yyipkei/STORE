@@ -87,7 +87,7 @@ public class MainItem implements Job {
 		PreparedStatement preparedStatement = null;
 
 		String selectSQL = "SELECT DATA_UPDATE_LOG_ID ,ENTITY_NAME, ENTITY_KEY,ENTITY_UPD_DT,"
-				+ " LOG_DT,BATCH_NO,IS_COMP,REMARK FROM DATA_UPDATE_LOG_POS where IS_COMP ='P' and REMARK ='Item'";
+				+ " LOG_DT,BATCH_NO,IS_COMP,REMARK FROM DATA_UPDATE_LOG_POS where IS_COMP ='P' and REMARK ='Item' and entity_key is not null";
 
 		try {
 			if (Objects.equals(database, "Oracle")) {
@@ -163,7 +163,7 @@ public class MainItem implements Job {
 
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
-		logger.info("Starting ");
+		logger.info("Starting ItemUpdate ");
 		//String spSQL = "{call USP_DATA_UPDATE_LOG_POS_ITEM}";
 		String spSQL = null;
 		try {

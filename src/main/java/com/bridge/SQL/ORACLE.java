@@ -17,6 +17,7 @@ public class ORACLE {
     public static String InsertStockResDataLog;
     public static String StockResPsTxCount;
     public static String DepositUpdate;
+    public static String StockOnHandToView;
 
 
     static {
@@ -3769,6 +3770,448 @@ public class ORACLE {
                 " end if ;\n" +
                 "  \n" +
                 "      COMMIT WORK;\n" +
+                "END;";
+
+        StockOnHandToView="Declare\n" +
+                "  v_log_dt         TIMESTAMP(3);\n" +
+                "  v_LAST_SYNC_TIME TIMESTAMP(3);\n" +
+                "  v_MAX_BATCH      VARCHAR2(100);\n" +
+                "BEGIN\n" +
+                "  \n" +
+                "  SELECT NVL(max(BATCH_NO),0)\n" +
+                "  INTO v_MAX_BATCH\n" +
+                "  FROM DATA_UPDATE_LOG ;\n" +
+                "  \n" +
+                "  v_MAX_BATCH := v_MAX_BATCH + 1 ;\n" +
+                "   \n" +
+                " --itemmas \n" +
+                "  v_LAST_SYNC_TIME := null;\n" +
+                "  v_log_dt := null;\n" +
+                "  \n" +
+                "  SELECT MAX(last_sync_time) INTO v_LAST_SYNC_TIME FROM DATA_UPDATE_LOG_SYNC where TABLE_NAME ='inv_wri_off_hdr_pos' ;\n" +
+                "  SELECT MAX(LAST_UPD_DT) INTO v_log_dt FROM inv_wri_off_hdr_pos  ;\n" +
+                " \n" +
+                "IF v_LAST_SYNC_TIME <> v_log_dt and v_LAST_SYNC_TIME is not null and v_log_dt > v_LAST_SYNC_TIME then\n" +
+                "  /*INSERT\n" +
+                "  INTO DATA_UPDATE_LOG\n" +
+                "    (\n" +
+                "      ENTITY_NAME,\n" +
+                "      ENTITY_KEY,\n" +
+                "      ENTITY_UPD_DT,\n" +
+                "      LOG_DT,\n" +
+                "      BATCH_NO,\n" +
+                "      IS_COMP,\n" +
+                "      REMARK\n" +
+                "    )\n" +
+                "  SELECT 'inv_wri_off_hdr_pos' ,\n" +
+                "    entity_key ,\n" +
+                "    v_log_dt ,\n" +
+                "    systimestamp ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    0 ,\n" +
+                "    NULL\n" +
+                "  FROM inv_wri_off_hdr_pos\n" +
+                "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME;*/\n" +
+                "   \n" +
+                "  INSERT\n" +
+                "  INTO DATA_UPDATE_LOG\n" +
+                "    (\n" +
+                "      ENTITY_NAME,\n" +
+                "      ENTITY_KEY,\n" +
+                "      ENTITY_UPD_DT,\n" +
+                "      LOG_DT,\n" +
+                "      BATCH_NO,\n" +
+                "      IS_COMP,\n" +
+                "      REMARK\n" +
+                "    )\n" +
+                "  SELECT  'v_goa_write_off' ,\n" +
+                "    a.company_cde || a.loc_cde || b.sku,\n" +
+                "    v_log_dt ,\n" +
+                "    systimestamp ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    0 ,\n" +
+                "    NULL\n" +
+                "  FROM inv_wri_off_dtl_pos b ,inv_wri_off_hdr_pos a\n" +
+                "  WHERE a.last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
+                "  and a.last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "  and a.instit_cde = b.instit_cde\n" +
+                "  AND a.wri_off_id = b.wri_off_id\n" +
+                "  AND a.STATUS IN ('DRF','APP');\n" +
+                "\n" +
+                "  INSERT INTO DATA_UPDATE_LOG_SYNC\n" +
+                "    (Table_name , LAST_SYNC_TIME\n" +
+                "    )\n" +
+                "  SELECT 'inv_wri_off_hdr_pos', v_log_dt FROM dual;\n" +
+                " end if ;\n" +
+                " \n" +
+                "    --itemmas \n" +
+                "  v_LAST_SYNC_TIME := null;\n" +
+                "  v_log_dt := null;\n" +
+                "  \n" +
+                "  SELECT MAX(last_sync_time) INTO v_LAST_SYNC_TIME FROM DATA_UPDATE_LOG_SYNC where TABLE_NAME ='inv_wri_off_dtl_pos' ;\n" +
+                "  SELECT MAX(LAST_UPD_DT) INTO v_log_dt FROM inv_wri_off_dtl_pos  ;\n" +
+                " \n" +
+                "IF v_LAST_SYNC_TIME <> v_log_dt and v_LAST_SYNC_TIME is not null and v_log_dt > v_LAST_SYNC_TIME then\n" +
+                " /* INSERT\n" +
+                "  INTO DATA_UPDATE_LOG\n" +
+                "    (\n" +
+                "      ENTITY_NAME,\n" +
+                "      ENTITY_KEY,\n" +
+                "      ENTITY_UPD_DT,\n" +
+                "      LOG_DT,\n" +
+                "      BATCH_NO,\n" +
+                "      IS_COMP,\n" +
+                "      REMARK\n" +
+                "    )\n" +
+                "  SELECT 'inv_wri_off_dtl_pos' ,\n" +
+                "    entity_key ,\n" +
+                "    v_log_dt ,\n" +
+                "    systimestamp ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    0 ,\n" +
+                "    NULL\n" +
+                "  FROM inv_wri_off_dtl_pos\n" +
+                "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME;*/\n" +
+                "   \n" +
+                "  INSERT\n" +
+                "  INTO DATA_UPDATE_LOG\n" +
+                "    (\n" +
+                "      ENTITY_NAME,\n" +
+                "      ENTITY_KEY,\n" +
+                "      ENTITY_UPD_DT,\n" +
+                "      LOG_DT,\n" +
+                "      BATCH_NO,\n" +
+                "      IS_COMP,\n" +
+                "      REMARK\n" +
+                "    )\n" +
+                "  SELECT  'v_goa_write_off' ,\n" +
+                "    a.company_cde || a.loc_cde || b.sku,\n" +
+                "    v_log_dt ,\n" +
+                "    systimestamp ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    0 ,\n" +
+                "    NULL\n" +
+                "  FROM inv_wri_off_dtl_pos b ,inv_wri_off_hdr_pos a\n" +
+                "  WHERE b.last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
+                "  and b.last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "  and a.instit_cde = b.instit_cde\n" +
+                "  AND a.wri_off_id = b.wri_off_id\n" +
+                "  AND a.STATUS IN ('DRF','APP');\n" +
+                "\n" +
+                "  INSERT INTO DATA_UPDATE_LOG_SYNC\n" +
+                "    (Table_name , LAST_SYNC_TIME\n" +
+                "    )\n" +
+                "  SELECT 'inv_wri_off_dtl_pos', v_log_dt FROM dual;\n" +
+                " end if ;\n" +
+                " \n" +
+                "  --itemmas \n" +
+                "  v_LAST_SYNC_TIME := null;\n" +
+                "  v_log_dt := null;\n" +
+                "  \n" +
+                "  SELECT MAX(last_sync_time) INTO v_LAST_SYNC_TIME FROM DATA_UPDATE_LOG_SYNC where TABLE_NAME ='sx_box_pos' ;\n" +
+                "  SELECT MAX(LAST_UPD_DT) INTO v_log_dt FROM sx_box_pos  ;\n" +
+                " \n" +
+                "IF v_LAST_SYNC_TIME <> v_log_dt and v_LAST_SYNC_TIME is not null and v_log_dt > v_LAST_SYNC_TIME then\n" +
+                "  /*INSERT\n" +
+                "  INTO DATA_UPDATE_LOG\n" +
+                "    (\n" +
+                "      ENTITY_NAME,\n" +
+                "      ENTITY_KEY,\n" +
+                "      ENTITY_UPD_DT,\n" +
+                "      LOG_DT,\n" +
+                "      BATCH_NO,\n" +
+                "      IS_COMP,\n" +
+                "      REMARK\n" +
+                "    )\n" +
+                "  SELECT 'sx_box_pos' ,\n" +
+                "    entity_key ,\n" +
+                "    v_log_dt ,\n" +
+                "    systimestamp ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    0 ,\n" +
+                "    NULL\n" +
+                "  FROM sx_box_pos\n" +
+                "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME;*/\n" +
+                "   \n" +
+                "  INSERT\n" +
+                "  INTO DATA_UPDATE_LOG\n" +
+                "    (\n" +
+                "      ENTITY_NAME,\n" +
+                "      ENTITY_KEY,\n" +
+                "      ENTITY_UPD_DT,\n" +
+                "      LOG_DT,\n" +
+                "      BATCH_NO,\n" +
+                "      IS_COMP,\n" +
+                "      REMARK\n" +
+                "    )\n" +
+                "  SELECT 'v_in_transit' ,\n" +
+                "    a.company_cde ||b.p_recvr || a.sku ,\n" +
+                "    v_log_dt ,\n" +
+                "    systimestamp ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    0 ,\n" +
+                "    NULL\n" +
+                "  FROM sx_item_pos a \t,sx_box_pos b\n" +
+                "  WHERE b.last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
+                "  and b.last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "  and a.boxno = b.boxno\n" +
+                "\tAND b.sen_status = 'C'\n" +
+                "\tAND NVL(b.rec_status, 'X') NOT IN ('C','W');\n" +
+                "   \n" +
+                "  INSERT INTO DATA_UPDATE_LOG_SYNC\n" +
+                "    (Table_name , LAST_SYNC_TIME\n" +
+                "    )\n" +
+                "  SELECT 'sx_box_pos', v_log_dt FROM dual;\n" +
+                " end if ;\n" +
+                " \n" +
+                "      --itemmas \n" +
+                "  v_LAST_SYNC_TIME := null;\n" +
+                "  v_log_dt := null;\n" +
+                "  \n" +
+                "  SELECT MAX(last_sync_time) INTO v_LAST_SYNC_TIME FROM DATA_UPDATE_LOG_SYNC where TABLE_NAME ='sx_item_pos' ;\n" +
+                "  SELECT MAX(LAST_UPD_DT) INTO v_log_dt FROM sx_item_pos  ;\n" +
+                " \n" +
+                "IF v_LAST_SYNC_TIME <> v_log_dt and v_LAST_SYNC_TIME is not null and v_log_dt > v_LAST_SYNC_TIME then\n" +
+                "  /*INSERT\n" +
+                "  INTO DATA_UPDATE_LOG\n" +
+                "    (\n" +
+                "      ENTITY_NAME,\n" +
+                "      ENTITY_KEY,\n" +
+                "      ENTITY_UPD_DT,\n" +
+                "      LOG_DT,\n" +
+                "      BATCH_NO,\n" +
+                "      IS_COMP,\n" +
+                "      REMARK\n" +
+                "    )\n" +
+                "  SELECT 'sx_item_pos' ,\n" +
+                "    entity_key ,\n" +
+                "    v_log_dt ,\n" +
+                "    systimestamp ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    0 ,\n" +
+                "    NULL\n" +
+                "  FROM sx_item_pos\n" +
+                "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME;*/\n" +
+                "  \n" +
+                "  INSERT\n" +
+                "  INTO DATA_UPDATE_LOG\n" +
+                "    (\n" +
+                "      ENTITY_NAME,\n" +
+                "      ENTITY_KEY,\n" +
+                "      ENTITY_UPD_DT,\n" +
+                "      LOG_DT,\n" +
+                "      BATCH_NO,\n" +
+                "      IS_COMP,\n" +
+                "      REMARK\n" +
+                "    )\n" +
+                "  SELECT 'v_in_transit' ,\n" +
+                "    a.company_cde ||b.p_recvr || a.sku ,\n" +
+                "    v_log_dt ,\n" +
+                "    systimestamp ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    0 ,\n" +
+                "    NULL\n" +
+                "  FROM sx_item_pos a \t,sx_box_pos b\n" +
+                "  WHERE a.last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
+                "  and a.last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "  and a.boxno = b.boxno\n" +
+                "\tAND b.sen_status = 'C'\n" +
+                "\tAND NVL(b.rec_status, 'X') NOT IN ('C','W');\n" +
+                "\n" +
+                "  INSERT INTO DATA_UPDATE_LOG_SYNC\n" +
+                "    (Table_name , LAST_SYNC_TIME\n" +
+                "    )\n" +
+                "  SELECT 'sx_item_pos', v_log_dt FROM dual;\n" +
+                " end if ;\n" +
+                " \n" +
+                "    --itemmas \n" +
+                "  v_LAST_SYNC_TIME := null;\n" +
+                "  v_log_dt := null;\n" +
+                "  \n" +
+                "  SELECT MAX(last_sync_time) INTO v_LAST_SYNC_TIME FROM DATA_UPDATE_LOG_SYNC where TABLE_NAME ='sxs_req_hdr_pos' ;\n" +
+                "  SELECT MAX(LAST_UPD_DT) INTO v_log_dt FROM sxs_req_hdr_pos  ;\n" +
+                " \n" +
+                "IF v_LAST_SYNC_TIME <> v_log_dt and v_LAST_SYNC_TIME is not null and v_log_dt > v_LAST_SYNC_TIME then\n" +
+                "  /*INSERT\n" +
+                "  INTO DATA_UPDATE_LOG\n" +
+                "    (\n" +
+                "      ENTITY_NAME,\n" +
+                "      ENTITY_KEY,\n" +
+                "      ENTITY_UPD_DT,\n" +
+                "      LOG_DT,\n" +
+                "      BATCH_NO,\n" +
+                "      IS_COMP,\n" +
+                "      REMARK\n" +
+                "    )\n" +
+                "  SELECT 'sxs_req_hdr_pos' ,\n" +
+                "    entity_key ,\n" +
+                "    v_log_dt ,\n" +
+                "    systimestamp ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    0 ,\n" +
+                "    NULL\n" +
+                "  FROM sxs_req_hdr_pos\n" +
+                "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME;*/\n" +
+                "   \n" +
+                "  INSERT\n" +
+                "  INTO DATA_UPDATE_LOG\n" +
+                "    (\n" +
+                "      ENTITY_NAME,\n" +
+                "      ENTITY_KEY,\n" +
+                "      ENTITY_UPD_DT,\n" +
+                "      LOG_DT,\n" +
+                "      BATCH_NO,\n" +
+                "      IS_COMP,\n" +
+                "      REMARK\n" +
+                "    )\n" +
+                "  SELECT 'v_in_transit' ,\n" +
+                "    a.company_cde || a.rec_loc || b.sku ,\n" +
+                "    v_log_dt ,\n" +
+                "    systimestamp ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    0 ,\n" +
+                "    NULL\n" +
+                "  FROM sxs_req_hdr_pos a \t,sxs_req_dtl_pos b\n" +
+                "  WHERE a.last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
+                "   and a.last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "   and  a.req_id = b.req_id\n" +
+                "\tAND b.STATUS IN (\n" +
+                "\t\t'TRN'\n" +
+                "\t\t,'BOX');\n" +
+                "\n" +
+                "  INSERT INTO DATA_UPDATE_LOG_SYNC\n" +
+                "    (Table_name , LAST_SYNC_TIME\n" +
+                "    )\n" +
+                "  SELECT 'sxs_req_hdr_pos', v_log_dt FROM dual;\n" +
+                " end if ;\n" +
+                " \n" +
+                "  --itemmas \n" +
+                "  v_LAST_SYNC_TIME := null;\n" +
+                "  v_log_dt := null;\n" +
+                "  \n" +
+                "  SELECT MAX(last_sync_time) INTO v_LAST_SYNC_TIME FROM DATA_UPDATE_LOG_SYNC where TABLE_NAME ='sxs_req_dtl_pos' ;\n" +
+                "  SELECT MAX(LAST_UPD_DT) INTO v_log_dt FROM sxs_req_dtl_pos  ;\n" +
+                " \n" +
+                "IF v_LAST_SYNC_TIME <> v_log_dt and v_LAST_SYNC_TIME is not null and v_log_dt > v_LAST_SYNC_TIME then\n" +
+                "  /*INSERT\n" +
+                "  INTO DATA_UPDATE_LOG\n" +
+                "    (\n" +
+                "      ENTITY_NAME,\n" +
+                "      ENTITY_KEY,\n" +
+                "      ENTITY_UPD_DT,\n" +
+                "      LOG_DT,\n" +
+                "      BATCH_NO,\n" +
+                "      IS_COMP,\n" +
+                "      REMARK\n" +
+                "    )\n" +
+                "  SELECT 'sxs_req_dtl_pos' ,\n" +
+                "    entity_key ,\n" +
+                "    v_log_dt ,\n" +
+                "    systimestamp ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    0 ,\n" +
+                "    NULL\n" +
+                "  FROM sxs_req_dtl_pos\n" +
+                "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME;*/\n" +
+                "   \n" +
+                "  INSERT\n" +
+                "  INTO DATA_UPDATE_LOG\n" +
+                "    (\n" +
+                "      ENTITY_NAME,\n" +
+                "      ENTITY_KEY,\n" +
+                "      ENTITY_UPD_DT,\n" +
+                "      LOG_DT,\n" +
+                "      BATCH_NO,\n" +
+                "      IS_COMP,\n" +
+                "      REMARK\n" +
+                "    )\n" +
+                "  SELECT 'v_in_transit' ,\n" +
+                "    a.company_cde || a.rec_loc || b.sku ,\n" +
+                "    v_log_dt ,\n" +
+                "    systimestamp ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    0 ,\n" +
+                "    NULL\n" +
+                "  FROM sxs_req_hdr_pos a \t,sxs_req_dtl_pos b\n" +
+                "  WHERE b.last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
+                "   and b.last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "   and  a.req_id = b.req_id\n" +
+                "\tAND b.STATUS IN (\n" +
+                "\t\t'TRN'\n" +
+                "\t\t,'BOX');\n" +
+                "\n" +
+                "  INSERT INTO DATA_UPDATE_LOG_SYNC\n" +
+                "    (Table_name , LAST_SYNC_TIME\n" +
+                "    )\n" +
+                "  SELECT 'sxs_req_dtl_pos', v_log_dt FROM dual;\n" +
+                " end if ;\n" +
+                " \n" +
+                "   --itemmas \n" +
+                "  v_LAST_SYNC_TIME := null;\n" +
+                "  v_log_dt := null;\n" +
+                "  \n" +
+                "  SELECT MAX(last_sync_time) INTO v_LAST_SYNC_TIME FROM DATA_UPDATE_LOG_SYNC where TABLE_NAME ='stock_reservation_pos' ;\n" +
+                "  SELECT MAX(LAST_UPD_DT) INTO v_log_dt FROM stock_reservation_pos  ;\n" +
+                " \n" +
+                "IF v_LAST_SYNC_TIME <> v_log_dt and v_LAST_SYNC_TIME is not null and v_log_dt > v_LAST_SYNC_TIME then\n" +
+                "  /*INSERT\n" +
+                "  INTO DATA_UPDATE_LOG\n" +
+                "    (\n" +
+                "      ENTITY_NAME,\n" +
+                "      ENTITY_KEY,\n" +
+                "      ENTITY_UPD_DT,\n" +
+                "      LOG_DT,\n" +
+                "      BATCH_NO,\n" +
+                "      IS_COMP,\n" +
+                "      REMARK\n" +
+                "    )\n" +
+                "  SELECT 'stock_reservation_pos' ,\n" +
+                "    entity_key ,\n" +
+                "    v_log_dt ,\n" +
+                "    systimestamp ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    0 ,\n" +
+                "    NULL\n" +
+                "  FROM stock_reservation_pos\n" +
+                "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt  \n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME;*/\n" +
+                "   \n" +
+                "  INSERT\n" +
+                "  INTO DATA_UPDATE_LOG\n" +
+                "    (\n" +
+                "      ENTITY_NAME,\n" +
+                "      ENTITY_KEY,\n" +
+                "      ENTITY_UPD_DT,\n" +
+                "      LOG_DT,\n" +
+                "      BATCH_NO,\n" +
+                "      IS_COMP,\n" +
+                "      REMARK\n" +
+                "    )\n" +
+                "  SELECT 'v_goa_write_off' ,\n" +
+                "    company_cde || loc_cde || sku ,\n" +
+                "    v_log_dt ,\n" +
+                "    systimestamp ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    0 ,\n" +
+                "    NULL\n" +
+                "  FROM stock_reservation_pos\n" +
+                "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt  \n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "\n" +
+                "  INSERT INTO DATA_UPDATE_LOG_SYNC\n" +
+                "    (Table_name , LAST_SYNC_TIME\n" +
+                "    )\n" +
+                "  SELECT 'stock_reservation_pos', v_log_dt FROM dual;\n" +
+                " end if ;\n" +
+                " \n" +
+                " \n" +
+                "   COMMIT WORK;\n" +
                 "END;";
     }
 }

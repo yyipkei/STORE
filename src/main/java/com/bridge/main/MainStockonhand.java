@@ -1,6 +1,7 @@
 package com.bridge.main;
 
 import com.bridge.SQL.MSSQL;
+import com.bridge.SQL.ORACLE;
 import com.bridge.projo.Dataupdatelog;
 import org.apache.log4j.Logger;
 import org.quartz.DisallowConcurrentExecution;
@@ -48,10 +49,8 @@ public class MainStockonhand implements Job {
             runStoredProcedure("RMS");
             selectRecordsFromTable("RMS");
             //for (Dataupdatelog dataupdatelog : dataupdatelogs) logger.info(dataupdatelog);
-
             processLog("RMS");
-
-          //  runlogStoredProcedure("Oracle");
+            runlogStoredProcedure("Oracle");
 
             logger.info("Finished RMS -> Oracle");
 
@@ -78,7 +77,7 @@ public class MainStockonhand implements Job {
         PreparedStatement preparedStatement = null;
 
         String selectSQL = "SELECT DATA_UPDATE_LOG_ID ,ENTITY_NAME, ENTITY_KEY,ENTITY_UPD_DT,"
-                + " LOG_DT,BATCH_NO,IS_COMP,REMARK FROM DATA_UPDATE_LOG_POS where IS_COMP ='P' and REMARK ='Onhand'";
+                + " LOG_DT,BATCH_NO,IS_COMP,REMARK FROM DATA_UPDATE_LOG_POS where IS_COMP ='P' and REMARK ='Onhand' and entity_key is not null";
 
         try {
             if (Objects.equals(database, "Oracle")) {
@@ -154,9 +153,9 @@ public class MainStockonhand implements Job {
 
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
-        logger.info("Starting USP_DATA_UPDATE_LOG_POS_SOH");
+        logger.info("Starting StockOnHandUpdate");
         //String spSQL = "{call USP_DATA_UPDATE_LOG_POS_SOH}";
-        String spSQL =null;
+        String spSQL = null;
         try {
 
             if (Objects.equals(database, "Oracle")) {
@@ -191,18 +190,20 @@ public class MainStockonhand implements Job {
 
     }
 
-    /*private static void runlogStoredProcedure(String database) throws SQLException {
+    private static void runlogStoredProcedure(String database) throws SQLException {
 
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
-        logger.info("Starting ");
-        String spSQL = "{call USP_DATA_UPDATE_LOG_SOH}";
+        logger.info("Starting StockOnHandToView");
+        //String spSQL = "{call USP_DATA_UPDATE_LOG_SOH}";
+        String spSQL = null;
         try {
 
             if (Objects.equals(database, "Oracle")) {
                 HikariQracleTo OrcaleTopool = HikariQracleTo.getInstance();
                 dbConnection = OrcaleTopool.getConnection();
                 //dbConnection = OracleFrom.getDBConnection();
+                spSQL = ORACLE.StockOnHandToView;
             } else {
                 HikariRms Rmspool = HikariRms.getInstance();
                 dbConnection = Rmspool.getConnection();
@@ -228,9 +229,9 @@ public class MainStockonhand implements Job {
 
         }
 
-    }*/
+    }
 
-   //@Override
+    //@Override
     public void execute(JobExecutionContext arg0) throws JobExecutionException {
         bridgeStart();
     }

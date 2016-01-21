@@ -95,9 +95,7 @@ public class MSSQL {
                 "\tFROM dbo.sahdr(NOLOCK)\n" +
                 "\tWHERE last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
                 "\t\t\tAND @log_dt\n" +
-                "\t\tAND last_upd_dt > @LAST_SYNC_TIME\n" +
-                "\t\tAND reg_no NOT BETWEEN '500'\n" +
-                "\t\t\tAND '950';\n" +
+                "\t\tAND last_upd_dt > @LAST_SYNC_TIME;\n" +
                 "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS_SYNC (\n" +
                 "\t\tremark\n" +
@@ -1982,6 +1980,46 @@ public class MSSQL {
                 "\t\tFROM DATA_UPDATE_LOG_POS_location\n" +
                 "\t\t)\n" +
                 "\n" +
+                "UNION\n" +
+                "\n" +
+                "SELECT b.tx_date\n" +
+                "\t,b.loc_code\n" +
+                "\t,b.reg_no\n" +
+                "\t,b.tx_no\n" +
+                "FROM dpdet a\n" +
+                "\t,dphdr b\n" +
+                "WHERE a.tx_date BETWEEN convert(VARCHAR(8), getdate() - 20, 112)\n" +
+                "\t\tAND convert(VARCHAR(8), getdate(), 112)\n" +
+                "\tAND a.loc_code IN (\n" +
+                "\t\tSELECT DISTINCT loc_code\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_LOCATION\n" +
+                "\t\t)\n" +
+                "\tAND a.issue_loc_code NOT IN (\n" +
+                "\t\tSELECT DISTINCT loc_code\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_LOCATION\n" +
+                "\t\t)\n" +
+                "\tAND a.issue_loc_code = b.issue_loc_code\n" +
+                "\tAND a.dp_no = b.dp_no\n" +
+                "\n" +
+                "UNION\n" +
+                "\n" +
+                "SELECT a.org_tx_date\n" +
+                "\t,a.org_loc_code\n" +
+                "\t,a.org_reg_no\n" +
+                "\t,a.org_tx_no\n" +
+                "FROM gr_org_det a\n" +
+                "WHERE a.tx_date BETWEEN convert(VARCHAR(8), getdate() - 20, 112)\n" +
+                "\t\tAND convert(VARCHAR(8), getdate(), 112)\n" +
+                "\tAND a.loc_code IN (\n" +
+                "\t\tSELECT DISTINCT loc_code\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_LOCATION\n" +
+                "\t\t)\n" +
+                "\tAND a.org_loc_code NOT IN (\n" +
+                "\t\tSELECT DISTINCT loc_code\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_LOCATION\n" +
+                "\t\t)\n" +
+                "\tAND org_tx_date <> ''\n" +
+                "\n" +
                 "OPEN priceCursor\n" +
                 "\n" +
                 "FETCH NEXT\n" +
@@ -3786,12 +3824,12 @@ public class MSSQL {
                 "SET @remark = 'Merge'\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(nolock)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'cafe_coupon_det'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM cafe_coupon_det (nolock)\n" +
+                "\t\tFROM cafe_coupon_det(NOLOCK)\n" +
                 "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
@@ -3809,7 +3847,11 @@ public class MSSQL {
                 "\tFROM dbo.cafe_coupon_det(NOLOCK)\n" +
                 "\tWHERE last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
                 "\t\t\tAND @log_dt\n" +
-                "\t\tAND last_upd_dt > @LAST_SYNC_TIME;\n" +
+                "\t\tAND last_upd_dt > @LAST_SYNC_TIME\n" +
+                "\t\tAND loc_code IN (\n" +
+                "\t\t\tSELECT DISTINCT loc_code\n" +
+                "\t\t\tFROM DATA_UPDATE_LOG_POS_location\n" +
+                "\t\t\t);\n" +
                 "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS_SYNC (\n" +
                 "\t\tremark\n" +
@@ -3821,12 +3863,12 @@ public class MSSQL {
                 "\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (nolock)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'cafe_coupon_hdr'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM cafe_coupon_hdr (nolock)\n" +
+                "\t\tFROM cafe_coupon_hdr(NOLOCK)\n" +
                 "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
@@ -3844,7 +3886,11 @@ public class MSSQL {
                 "\tFROM dbo.cafe_coupon_hdr(NOLOCK)\n" +
                 "\tWHERE last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
                 "\t\t\tAND @log_dt\n" +
-                "\t\tAND last_upd_dt > @LAST_SYNC_TIME;\n" +
+                "\t\tAND last_upd_dt > @LAST_SYNC_TIME\n" +
+                "\t\tAND loc_code IN (\n" +
+                "\t\t\tSELECT DISTINCT loc_code\n" +
+                "\t\t\tFROM DATA_UPDATE_LOG_POS_location\n" +
+                "\t\t\t);\n" +
                 "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS_SYNC (\n" +
                 "\t\tremark\n" +
@@ -3854,7 +3900,7 @@ public class MSSQL {
                 "\t\t,@log_dt\n" +
                 "END\n" +
                 "\n" +
-                "SET @LAST_SYNC_TIME = (\n" +
+                "/*SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
                 "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (nolock)\n" +
                 "\t\tWHERE remark = 'cos_egc_det'\n" +
@@ -3888,7 +3934,8 @@ public class MSSQL {
                 "\tSELECT 'cos_egc_det'\n" +
                 "\t\t,@log_dt\n" +
                 "END\n" +
-                "\n" +
+                "*/\n" +
+                "/*\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
                 "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (nolock)\n" +
@@ -3923,8 +3970,8 @@ public class MSSQL {
                 "\tSELECT 'cos_egc_hdr'\n" +
                 "\t\t,@log_dt\n" +
                 "END\n" +
-                "\n" +
-                "SET @LAST_SYNC_TIME = (\n" +
+                "*/\n" +
+                "/*SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
                 "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (nolock)\n" +
                 "\t\tWHERE remark = 'xrate_override_user'\n" +
@@ -3957,16 +4004,15 @@ public class MSSQL {
                 "\t\t)\n" +
                 "\tSELECT 'xrate_override_user'\n" +
                 "\t\t,@log_dt\n" +
-                "END\n" +
-                "\n" +
+                "END*/\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (nolock)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'xratemas'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM xratemas (nolock)\n" +
+                "\t\tFROM xratemas(NOLOCK)\n" +
                 "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
@@ -3996,12 +4042,12 @@ public class MSSQL {
                 "\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (nolock)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'park_pmt'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM park_pmt (nolock)\n" +
+                "\t\tFROM park_pmt(NOLOCK)\n" +
                 "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
@@ -4031,12 +4077,12 @@ public class MSSQL {
                 "\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (nolock)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'vwp_dtl'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM vwp_dtl (nolock)\n" +
+                "\t\tFROM vwp_dtl(NOLOCK)\n" +
                 "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
@@ -4064,7 +4110,7 @@ public class MSSQL {
                 "\t\t,@log_dt\n" +
                 "END\n" +
                 "\n" +
-                "SET @LAST_SYNC_TIME = (\n" +
+                "/*SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
                 "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (nolock)\n" +
                 "\t\tWHERE remark = 'pos_user'\n" +
@@ -4097,9 +4143,8 @@ public class MSSQL {
                 "\t\t)\n" +
                 "\tSELECT 'pos_user'\n" +
                 "\t\t,@log_dt\n" +
-                "END\n" +
-                "\n" +
-                "SET @LAST_SYNC_TIME = (\n" +
+                "END*/\n" +
+                "/*SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
                 "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (nolock)\n" +
                 "\t\tWHERE remark = 'reason'\n" +
@@ -4132,16 +4177,15 @@ public class MSSQL {
                 "\t\t)\n" +
                 "\tSELECT 'reason'\n" +
                 "\t\t,@log_dt\n" +
-                "END\n" +
-                "\n" +
+                "END*/\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (nolock)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'sastafftxn'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM sastafftxn (nolock)\n" +
+                "\t\tFROM sastafftxn(NOLOCK)\n" +
                 "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
@@ -4171,12 +4215,12 @@ public class MSSQL {
                 "\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (nolock)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'sagoa_txn'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM sagoa_txn (nolock)\n" +
+                "\t\tFROM sagoa_txn(NOLOCK)\n" +
                 "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
@@ -4204,7 +4248,7 @@ public class MSSQL {
                 "\t\t,@log_dt\n" +
                 "END";
 
-        CafeLastUpdDate = "BEGIN TRAN\n" +
+        CafeLastUpdDate ="BEGIN TRAN\n" +
                 "\n" +
                 "DECLARE @last_upd_dt DATETIME\n" +
                 "\n" +
@@ -4217,10 +4261,14 @@ public class MSSQL {
                 "FOR\n" +
                 "SELECT DISTINCT id\n" +
                 "\t,loc_code\n" +
-                "FROM cafe_coupon_hdr(nolock)\n" +
+                "FROM cafe_coupon_hdr(NOLOCK)\n" +
                 "WHERE tx_date BETWEEN convert(VARCHAR(8), getdate() - 1, 112)\n" +
                 "\t\tAND convert(VARCHAR(8), getdate(), 112)\n" +
                 "\tAND last_upd_dt IS NULL\n" +
+                "\tAND loc_code IN (\n" +
+                "\t\tSELECT DISTINCT loc_code\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_location\n" +
+                "\t\t);\n" +
                 "\n" +
                 "OPEN priceCursor\n" +
                 "\n" +
@@ -4485,12 +4533,12 @@ public class MSSQL {
                 "SET @remark = 'Stock'\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (NOLOCK)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'stock_res'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM stock_res (NOLOCK)\n" +
+                "\t\tFROM stock_res(NOLOCK)\n" +
                 "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
@@ -4508,7 +4556,11 @@ public class MSSQL {
                 "\tFROM dbo.stock_res(NOLOCK)\n" +
                 "\tWHERE last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
                 "\t\t\tAND @log_dt\n" +
-                "\t\tAND last_upd_dt > @LAST_SYNC_TIME;\n" +
+                "\t\tAND last_upd_dt > @LAST_SYNC_TIME\n" +
+                "\t\tAND loc_code IN (\n" +
+                "\t\t\tSELECT DISTINCT loc_code\n" +
+                "\t\t\tFROM DATA_UPDATE_LOG_POS_location\n" +
+                "\t\t\t);\n" +
                 "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS_SYNC (\n" +
                 "\t\tremark\n" +
@@ -4520,12 +4572,12 @@ public class MSSQL {
                 "\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (NOLOCK)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'stockres_det'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM stockres_det (NOLOCK)\n" +
+                "\t\tFROM stockres_det(NOLOCK)\n" +
                 "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
@@ -4543,7 +4595,11 @@ public class MSSQL {
                 "\tFROM dbo.stockres_det(NOLOCK)\n" +
                 "\tWHERE last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
                 "\t\t\tAND @log_dt\n" +
-                "\t\tAND last_upd_dt > @LAST_SYNC_TIME;\n" +
+                "\t\tAND last_upd_dt > @LAST_SYNC_TIME\n" +
+                "\t\tAND loc_code IN (\n" +
+                "\t\t\tSELECT DISTINCT loc_code\n" +
+                "\t\t\tFROM DATA_UPDATE_LOG_POS_location\n" +
+                "\t\t\t);\n" +
                 "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS_SYNC (\n" +
                 "\t\tremark\n" +
@@ -4565,10 +4621,14 @@ public class MSSQL {
                 "FOR\n" +
                 "SELECT DISTINCT loc_code\n" +
                 "\t,res_no\n" +
-                "FROM stock_res (NOLOCK)\n" +
+                "FROM stock_res(NOLOCK)\n" +
                 "WHERE res_date BETWEEN convert(VARCHAR(8), getdate() - 100, 112)\n" +
                 "\t\tAND convert(VARCHAR(8), getdate(), 112)\n" +
                 "\tAND last_upd_dt IS NULL\n" +
+                "\tAND loc_code IN (\n" +
+                "\t\tSELECT DISTINCT loc_code\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_location\n" +
+                "\t\t)\n" +
                 "\n" +
                 "OPEN priceCursor\n" +
                 "\n" +
@@ -4603,10 +4663,14 @@ public class MSSQL {
                 "FOR\n" +
                 "SELECT DISTINCT loc_code\n" +
                 "\t,res_no\n" +
-                "FROM stockres_det (NOLOCK)\n" +
+                "FROM stockres_det(NOLOCK)\n" +
                 "WHERE last_upd_dt IS NOT NULL\n" +
                 "\tAND unres_date >= CONVERT(VARCHAR(8), last_upd_dt, 112)\n" +
                 "\tAND unres_time > replace(CONVERT(VARCHAR(8), last_upd_dt, 108), ':', '')\n" +
+                "\tAND loc_code IN (\n" +
+                "\t\tSELECT DISTINCT loc_code\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_location\n" +
+                "\t\t)\n" +
                 "\n" +
                 "OPEN priceCursor\n" +
                 "\n" +
@@ -4754,7 +4818,7 @@ public class MSSQL {
                 "\t\t,@log_dt\n" +
                 "END\n" +
                 "\n" +
-                "SET @LAST_SYNC_TIME = (\n" +
+                "/*SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
                 "\t\tFROM DATA_UPDATE_LOG_POS_SYNC\n" +
                 "\t\tWHERE remark = 'presell_dp_vip'\n" +
@@ -4788,7 +4852,8 @@ public class MSSQL {
                 "\tSELECT 'presell_dp_vip'\n" +
                 "\t\t,@log_dt\n" +
                 "END\n" +
-                "\n" +
+                "*/\n" +
+                "/*\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
                 "\t\tFROM DATA_UPDATE_LOG_POS_SYNC\n" +
@@ -5032,7 +5097,8 @@ public class MSSQL {
                 "\t\t)\n" +
                 "\tSELECT 'brdp_hdr'\n" +
                 "\t\t,@log_dt\n" +
-                "END";
+                "END\n" +
+                "*/";
 
         ItemUpdate = "DECLARE @log_dt DATETIME\n" +
                 "\t,@LAST_SYNC_TIME DATETIME\n" +
@@ -5838,18 +5904,25 @@ public class MSSQL {
                 "SET @remark = 'Onhand'\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (NOLOCK)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'stk_ledger_by_day_pos'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM rmsadmin.stk_ledger_by_day_pos (NOLOCK)\n" +
+                "\t\tFROM rmsadmin.stk_ledger_by_day_pos(NOLOCK)\n" +
                 "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
                 "\tAND @LAST_SYNC_TIME IS NOT NULL\n" +
                 "\tAND @log_dt > @LAST_SYNC_TIME\n" +
                 "BEGIN\n" +
+                "\tUPDATE rmsadmin.stk_ledger_by_day_pos\n" +
+                "\tSET entity_key = newid()\n" +
+                "\tWHERE last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
+                "\t\t\tAND @log_dt\n" +
+                "\t\tAND last_upd_dt > @LAST_SYNC_TIME\n" +
+                "\t\tAND entity_key IS NULL\n" +
+                "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS\n" +
                 "\tSELECT 'stk_ledger_by_day_pos'\n" +
                 "\t\t,cast(entity_key AS VARCHAR(100))\n" +
@@ -5873,18 +5946,25 @@ public class MSSQL {
                 "\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (NOLOCK)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'inv_wri_off_hdr_pos'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM rmsadmin.inv_wri_off_hdr_pos (NOLOCK)\n" +
+                "\t\tFROM rmsadmin.inv_wri_off_hdr_pos(NOLOCK)\n" +
                 "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
                 "\tAND @LAST_SYNC_TIME IS NOT NULL\n" +
                 "\tAND @log_dt > @LAST_SYNC_TIME\n" +
                 "BEGIN\n" +
+                "\tUPDATE rmsadmin.inv_wri_off_hdr_pos\n" +
+                "\tSET ENTITY_KEY = NEWID()\n" +
+                "\tWHERE last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
+                "\t\t\tAND @log_dt\n" +
+                "\t\tAND last_upd_dt > @LAST_SYNC_TIME\n" +
+                "\t\tAND ENTITY_KEY IS NULL;\n" +
+                "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS\n" +
                 "\tSELECT 'inv_wri_off_hdr_pos'\n" +
                 "\t\t,cast(entity_key AS VARCHAR(100))\n" +
@@ -5908,18 +5988,25 @@ public class MSSQL {
                 "\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (NOLOCK)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'inv_wri_off_hdr_pos'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM rmsadmin.inv_wri_off_hdr_pos (NOLOCK)\n" +
+                "\t\tFROM rmsadmin.inv_wri_off_hdr_pos(NOLOCK)\n" +
                 "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
                 "\tAND @LAST_SYNC_TIME IS NOT NULL\n" +
                 "\tAND @log_dt > @LAST_SYNC_TIME\n" +
                 "BEGIN\n" +
+                "\tUPDATE rmsadmin.inv_wri_off_hdr_pos\n" +
+                "\tSET ENTITY_KEY = newid()\n" +
+                "\tWHERE last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
+                "\t\t\tAND @log_dt\n" +
+                "\t\tAND last_upd_dt > @LAST_SYNC_TIME\n" +
+                "\t\tAND ENTITY_KEY IS NULL;\n" +
+                "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS\n" +
                 "\tSELECT 'inv_wri_off_hdr_pos'\n" +
                 "\t\t,cast(entity_key AS VARCHAR(100))\n" +
@@ -5943,18 +6030,25 @@ public class MSSQL {
                 "\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (NOLOCK)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'inv_wri_off_dtl_pos'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM rmsadmin.inv_wri_off_dtl_pos (NOLOCK)\n" +
+                "\t\tFROM rmsadmin.inv_wri_off_dtl_pos(NOLOCK)\n" +
                 "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
                 "\tAND @LAST_SYNC_TIME IS NOT NULL\n" +
                 "\tAND @log_dt > @LAST_SYNC_TIME\n" +
                 "BEGIN\n" +
+                "\tUPDATE rmsadmin.inv_wri_off_dtl_pos\n" +
+                "\tSET ENTITY_KEY = newid()\n" +
+                "\tWHERE last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
+                "\t\t\tAND @log_dt\n" +
+                "\t\tAND last_upd_dt > @LAST_SYNC_TIME\n" +
+                "\t\tAND ENTITY_KEY IS NULL;\n" +
+                "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS\n" +
                 "\tSELECT 'inv_wri_off_dtl_pos'\n" +
                 "\t\t,cast(entity_key AS VARCHAR(100))\n" +
@@ -5978,18 +6072,25 @@ public class MSSQL {
                 "\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (NOLOCK)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'sx_box_pos'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM rmsadmin.sx_box_pos (NOLOCK)\n" +
+                "\t\tFROM rmsadmin.sx_box_pos(NOLOCK)\n" +
                 "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
                 "\tAND @LAST_SYNC_TIME IS NOT NULL\n" +
                 "\tAND @log_dt > @LAST_SYNC_TIME\n" +
                 "BEGIN\n" +
+                "\tUPDATE rmsadmin.sx_box_pos\n" +
+                "\tSET ENTITY_KEY = newid()\n" +
+                "\tWHERE last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
+                "\t\t\tAND @log_dt\n" +
+                "\t\tAND last_upd_dt > @LAST_SYNC_TIME\n" +
+                "\t\tAND ENTITY_KEY IS NULL;\n" +
+                "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS\n" +
                 "\tSELECT 'sx_box_pos'\n" +
                 "\t\t,cast(entity_key AS VARCHAR(100))\n" +
@@ -6013,18 +6114,25 @@ public class MSSQL {
                 "\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (NOLOCK)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'sx_item_pos'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM rmsadmin.sx_item_pos (NOLOCK)\n" +
+                "\t\tFROM rmsadmin.sx_item_pos(NOLOCK)\n" +
                 "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
                 "\tAND @LAST_SYNC_TIME IS NOT NULL\n" +
                 "\tAND @log_dt > @LAST_SYNC_TIME\n" +
                 "BEGIN\n" +
+                "\tUPDATE rmsadmin.sx_item_pos\n" +
+                "\tSET ENTITY_KEY = newid()\n" +
+                "\tWHERE last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
+                "\t\t\tAND @log_dt\n" +
+                "\t\tAND last_upd_dt > @LAST_SYNC_TIME\n" +
+                "\t\tAND ENTITY_KEY IS NULL;\n" +
+                "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS\n" +
                 "\tSELECT 'sx_item_pos'\n" +
                 "\t\t,cast(entity_key AS VARCHAR(100))\n" +
@@ -6048,18 +6156,25 @@ public class MSSQL {
                 "\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (NOLOCK)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'sxs_req_hdr_pos'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM rmsadmin.sxs_req_hdr_pos (NOLOCK)\n" +
+                "\t\tFROM rmsadmin.sxs_req_hdr_pos(NOLOCK)\n" +
                 "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
                 "\tAND @LAST_SYNC_TIME IS NOT NULL\n" +
                 "\tAND @log_dt > @LAST_SYNC_TIME\n" +
                 "BEGIN\n" +
+                "\tUPDATE rmsadmin.sxs_req_hdr_pos\n" +
+                "\tSET ENTITY_KEY = newid()\n" +
+                "\tWHERE last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
+                "\t\t\tAND @log_dt\n" +
+                "\t\tAND last_upd_dt > @LAST_SYNC_TIME\n" +
+                "\t\tAND ENTITY_KEY IS NULL;\n" +
+                "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS\n" +
                 "\tSELECT 'sxs_req_hdr_pos'\n" +
                 "\t\t,cast(entity_key AS VARCHAR(100))\n" +
@@ -6083,18 +6198,25 @@ public class MSSQL {
                 "\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (NOLOCK)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'sxs_req_dtl_pos'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM rmsadmin.sxs_req_dtl_pos (NOLOCK)\n" +
+                "\t\tFROM rmsadmin.sxs_req_dtl_pos(NOLOCK)\n" +
                 "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
                 "\tAND @LAST_SYNC_TIME IS NOT NULL\n" +
                 "\tAND @log_dt > @LAST_SYNC_TIME\n" +
                 "BEGIN\n" +
+                "\tUPDATE rmsadmin.sxs_req_dtl_pos\n" +
+                "\tSET ENTITY_KEY = NEWID()\n" +
+                "\tWHERE last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
+                "\t\t\tAND @log_dt\n" +
+                "\t\tAND last_upd_dt > @LAST_SYNC_TIME\n" +
+                "\t\tAND ENTITY_KEY IS NULL;\n" +
+                "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS\n" +
                 "\tSELECT 'sxs_req_dtl_pos'\n" +
                 "\t\t,cast(entity_key AS VARCHAR(100))\n" +
@@ -6118,18 +6240,26 @@ public class MSSQL {
                 "\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (NOLOCK)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'stk_ledger_trn_pos'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM rmsadmin.stk_ledger_trn_pos (NOLOCK)\n" +
-                "\t\t) \n" +
+                "\t\tFROM rmsadmin.stk_ledger_trn_pos(NOLOCK)\n" +
+                "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
                 "\tAND @LAST_SYNC_TIME IS NOT NULL\n" +
                 "\tAND @log_dt > @LAST_SYNC_TIME\n" +
                 "BEGIN\n" +
+                "\tUPDATE rmsadmin.stk_ledger_trn_pos\n" +
+                "\tSET entity_key = newid()\n" +
+                "\tWHERE trn_type <> 'COS' --non sales trn\n" +
+                "\t\tAND last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
+                "\t\t\tAND @log_dt\n" +
+                "\t\tAND last_upd_dt > @LAST_SYNC_TIME\n" +
+                "\t\tAND entity_key IS NULL;\n" +
+                "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS\n" +
                 "\tSELECT 'stk_ledger_trn_pos'\n" +
                 "\t\t,cast(entity_key AS VARCHAR(100))\n" +
@@ -6139,7 +6269,8 @@ public class MSSQL {
                 "\t\t,'P'\n" +
                 "\t\t,@remark\n" +
                 "\tFROM rmsadmin.stk_ledger_trn_pos(NOLOCK)\n" +
-                "\tWHERE last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
+                "\tWHERE trn_type <> 'COS' --non sales trn\n" +
+                "\t\tAND last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
                 "\t\t\tAND @log_dt\n" +
                 "\t\tAND last_upd_dt > @LAST_SYNC_TIME;\n" +
                 "\n" +
@@ -6153,18 +6284,25 @@ public class MSSQL {
                 "\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (NOLOCK)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'stock_reservation_pos'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM rmsadmin.stock_reservation_pos (NOLOCK)\n" +
+                "\t\tFROM rmsadmin.stock_reservation_pos(NOLOCK)\n" +
                 "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
                 "\tAND @LAST_SYNC_TIME IS NOT NULL\n" +
                 "\tAND @log_dt > @LAST_SYNC_TIME\n" +
                 "BEGIN\n" +
+                "\tUPDATE rmsadmin.stock_reservation_pos\n" +
+                "\tSET entity_key = NEWID()\n" +
+                "\tWHERE last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
+                "\t\t\tAND @log_dt\n" +
+                "\t\tAND last_upd_dt > @LAST_SYNC_TIME\n" +
+                "\t\tAND entity_key IS NULL;\n" +
+                "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS\n" +
                 "\tSELECT 'stock_reservation_pos'\n" +
                 "\t\t,cast(entity_key AS VARCHAR(100))\n" +
@@ -6188,18 +6326,25 @@ public class MSSQL {
                 "\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (NOLOCK)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'stk_holding_trn'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM rmsadmin.stk_holding_trn (NOLOCK)\n" +
+                "\t\tFROM rmsadmin.stk_holding_trn(NOLOCK)\n" +
                 "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
                 "\tAND @LAST_SYNC_TIME IS NOT NULL\n" +
                 "\tAND @log_dt > @LAST_SYNC_TIME\n" +
                 "BEGIN\n" +
+                "\tUPDATE rmsadmin.stk_holding_trn\n" +
+                "\tSET entity_key = NEWID()\n" +
+                "\tWHERE last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
+                "\t\t\tAND @log_dt\n" +
+                "\t\tAND last_upd_dt > @LAST_SYNC_TIME\n" +
+                "\t\tAND entity_key IS NULL;\n" +
+                "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS\n" +
                 "\tSELECT 'stk_holding_trn'\n" +
                 "\t\t,cast(entity_key AS VARCHAR(100))\n" +
@@ -6223,18 +6368,25 @@ public class MSSQL {
                 "\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (NOLOCK)\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
                 "\t\tWHERE remark = 'stk_ledger_pos_summary_pos'\n" +
                 "\t\t)\n" +
                 "SET @log_dt = (\n" +
                 "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM rmsadmin.stk_ledger_pos_summary_pos (NOLOCK)\n" +
+                "\t\tFROM rmsadmin.stk_ledger_pos_summary_pos(NOLOCK)\n" +
                 "\t\t)\n" +
                 "\n" +
                 "IF @LAST_SYNC_TIME <> @log_dt\n" +
                 "\tAND @LAST_SYNC_TIME IS NOT NULL\n" +
                 "\tAND @log_dt > @LAST_SYNC_TIME\n" +
                 "BEGIN\n" +
+                "\tUPDATE rmsadmin.stk_ledger_pos_summary_pos\n" +
+                "\tSET entity_key = NEWID()\n" +
+                "\tWHERE last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
+                "\t\t\tAND @log_dt\n" +
+                "\t\tAND last_upd_dt > @LAST_SYNC_TIME\n" +
+                "\t\tAND entity_key IS NULL;\n" +
+                "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS\n" +
                 "\tSELECT 'stk_ledger_pos_summary_pos'\n" +
                 "\t\t,cast(entity_key AS VARCHAR(100))\n" +

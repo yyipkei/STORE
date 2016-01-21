@@ -164,7 +164,7 @@
                 </configuration>
             </plugin>
         </plugins>
-<!--
+
              <resources>
                  <resource>
                      <directory>src/main/resources</directory>
@@ -180,6 +180,6 @@
                      <targetPath>${project.build.directory}/resources</targetPath>
                  </resource>
              </resources>
--->
+
     </build>
 </project>
