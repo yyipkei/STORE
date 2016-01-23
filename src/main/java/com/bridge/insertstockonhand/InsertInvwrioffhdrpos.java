@@ -122,7 +122,8 @@ public class InsertInvwrioffhdrpos {
                 + ", INSURANCE_CLAIM  = ? "
                 + ", GOODS_INSPECTION = ? "
                 + ", COMPANY_CDE      = ? "
-                + "WHERE  ENTITY_KEY       = ? ";
+                + "WHERE  INSTIT_CDE       = ? "
+                + "AND  WRI_OFF_ID       = ? ";
 
         try {
 
@@ -161,7 +162,8 @@ public class InsertInvwrioffhdrpos {
             preparedStatement.setString(19, rsinsuranceclaim);
             preparedStatement.setString(20, rsgoodsinspection);
             preparedStatement.setString(21, rscompanycde);
-            preparedStatement.setString(22, rsentitykey);
+            preparedStatement.setString(22, rsinstitcde);
+            preparedStatement.setString(23, rswrioffid);
 
             preparedStatement.executeUpdate();
 
@@ -197,6 +199,11 @@ public class InsertInvwrioffhdrpos {
 		 * String loccode = parts[1]; String regno = parts[2]; String txno =
 		 * parts[3]; String seqno = parts[4];
 		 */
+
+        String[] parts = entitykey.split(",");
+        String institcde = parts[0];
+        String wrioffid = parts[1];
+
         boolean result = false;
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
@@ -216,7 +223,8 @@ public class InsertInvwrioffhdrpos {
             }
 
             String selectSQL = "SELECT INSTIT_CDE " + "FROM INV_WRI_OFF_HDR_POS "
-                    + "where ENTITY_KEY ='" + entitykey + "'";
+                    + "where INSTIT_CDE ='" + institcde + "'"
+                    + "and WRI_OFF_ID ='" + wrioffid + "'";
 
             // logger.info(selectSQL);
 

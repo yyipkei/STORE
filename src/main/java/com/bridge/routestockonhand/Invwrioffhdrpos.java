@@ -24,6 +24,11 @@ public class Invwrioffhdrpos {
 		 * String loccode = parts[1]; String regno = parts[2]; String txno =
 		 * parts[3]; String seqno = parts[4];
 		 */
+
+        String[] parts = entitykey.split(",");
+        String institcde = parts[0];
+        String wrioffid = parts[1];
+
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
         String selectSQL;
@@ -31,8 +36,10 @@ public class Invwrioffhdrpos {
         selectSQL = "SELECT INSTIT_CDE,WRI_OFF_ID,WRI_OFF_NO,STATUS,EFF_DT,REASON_TYPE,REASON_CODE,LOC_CDE," +
                 "REMARK,TOT_COST,APP_BY,APP_DT,LAST_UPD_DT,LAST_UPD_USR,LAST_UPD_VER,ROWGUID,REV_BY,REV_DT," +
                 "INSURANCE_CLAIM,GOODS_INSPECTION,COMPANY_CDE,ENTITY_KEY "
-                + "FROM RMSADMIN.INV_WRI_OFF_HDR_POS " + "where entity_key ='" + entitykey + "'"
-                +"Order BY LAST_UPD_DT";
+                + "FROM RMSADMIN.INV_WRI_OFF_HDR_POS "
+                + "where INSTIT_CDE ='" + institcde + "'"
+                + "and WRI_OFF_ID ='" + wrioffid + "'"
+                + "Order BY LAST_UPD_DT";
 
         // List<Sahdr> sahdrs = new ArrayList<Sahdr>();
 
@@ -94,7 +101,7 @@ public class Invwrioffhdrpos {
 
                     if (Insertresult) {
                         logger.info("Invwrioffhdrpos: 1 row has been inserted. Key:"
-                                + entitykey);
+                                + rsinstitcde + "," + rswrioffid);
                     } else {
                         logger.info("Insert Error");
                     }
@@ -116,7 +123,7 @@ public class Invwrioffhdrpos {
 
                     if (Insertresult) {
                         logger.info("Invwrioffhdrpos: 1 row has been updated. Key:"
-                                + entitykey);
+                                + rsinstitcde + "," + rswrioffid);
                     } else {
                         logger.info("Update Error");
                     }

@@ -24,12 +24,21 @@ public class Sxitempos {
 		 * String loccode = parts[1]; String regno = parts[2]; String txno =
 		 * parts[3]; String seqno = parts[4];
 		 */
+
+        String[] parts = entitykey.split(",");
+        String boxno = parts[0];
+        String sku = parts[1];
+        String companycde = parts[2];
+
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
         String selectSQL;
 
         selectSQL = "SELECT BOXNO,SKU,SEN_QTY,REC_QTY,S_BAR_TYPE,R_BAR_TYPE,SEN_COST,REC_COST,FLAG1,DT1,LAST_UPD_USR,LAST_UPD_DT,LAST_UPD_VER,ROWGUID,COMPANY_CDE,ENTITY_KEY "
-                + "FROM RMSADMIN.SX_ITEM_POS " + "where entity_key ='" + entitykey + "'"
+                + "FROM RMSADMIN.SX_ITEM_POS "
+                + "where BOXNO ='" + boxno + "'"
+                + "and SKU ='" + sku + "'"
+                + "and COMPANY_CDE ='" + companycde + "'"
                 +"Order BY LAST_UPD_DT";
 
         // List<Sahdr> sahdrs = new ArrayList<Sahdr>();
@@ -83,7 +92,7 @@ public class Sxitempos {
 
                     if (Insertresult) {
                         logger.info("Sxitempos: 1 row has been inserted. Key:"
-                                + entitykey);
+                                + rsboxno + "," + rssku + "," + rscompanycde);
                     } else {
                         logger.info("Insert Error");
                     }
@@ -103,7 +112,7 @@ public class Sxitempos {
 
                     if (Insertresult) {
                         logger.info("Sxitempos: 1 row has been updated. Key:"
-                                + entitykey);
+                                + rsboxno + "," + rssku + "," + rscompanycde);
                     } else {
                         logger.info("Update Error");
                     }

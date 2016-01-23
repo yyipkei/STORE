@@ -111,7 +111,9 @@ public class InsertSxitempos {
                 + ", LAST_UPD_VER = ? "
                 + ", ROWGUID      = ? "
                 + ", COMPANY_CDE  = ? "
-                + "WHERE  ENTITY_KEY   = ? ";
+                + "WHERE  BOXNO   = ? "
+                + "and  SKU   = ? "
+                + "and  COMPANY_CDE   = ? ";
 
         try {
 
@@ -144,7 +146,9 @@ public class InsertSxitempos {
             preparedStatement.setString(13, rslastupdver);
             preparedStatement.setString(14, rsrowguid);
             preparedStatement.setString(15, rscompanycde);
-            preparedStatement.setString(16, rsentitykey);
+            preparedStatement.setString(16, rsboxno);
+            preparedStatement.setString(17, rssku);
+            preparedStatement.setString(18, rscompanycde);
 
             preparedStatement.executeUpdate();
 
@@ -180,6 +184,12 @@ public class InsertSxitempos {
 		 * String loccode = parts[1]; String regno = parts[2]; String txno =
 		 * parts[3]; String seqno = parts[4];
 		 */
+
+        String[] parts = entitykey.split(",");
+        String boxno = parts[0];
+        String sku = parts[1];
+        String companycde = parts[2];
+
         boolean result = false;
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
@@ -199,7 +209,9 @@ public class InsertSxitempos {
             }
 
             String selectSQL = "SELECT BOXNO " + "FROM SX_ITEM_POS "
-                    + "where ENTITY_KEY ='" + entitykey + "'";
+                    + "where BOXNO ='" + boxno + "'"
+                    + "and SKU ='" + sku + "'"
+                    + "and COMPANY_CDE ='" + companycde + "'";
 
             // logger.info(selectSQL);
 

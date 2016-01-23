@@ -14,9 +14,9 @@ public class InsertInvwrioffdtlpos {
     private static final Logger logger = Logger.getLogger(InsertInvwrioffdtlpos.class);
 
     public static boolean Invwrioffdtlposinsert(String rsinstitcde, String rswrioffid, String rsseqno, String rssku, String rsunitcost, String rsqty, String rscost,
-                                                  String rsamount, Timestamp rslastupddt, String rslastupdusr, String rslastupdver, String rsrowguid, String rsvendorupc,
-                                                  String rscompanycde, String rsentitykey,
-                                                  String frdatabase) throws SQLException {
+                                                String rsamount, Timestamp rslastupddt, String rslastupdusr, String rslastupdver, String rsrowguid, String rsvendorupc,
+                                                String rscompanycde, String rsentitykey,
+                                                String frdatabase) throws SQLException {
 
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
@@ -81,30 +81,32 @@ public class InsertInvwrioffdtlpos {
     }
 
     public static boolean Invwrioffdtlposupdate(String rsinstitcde, String rswrioffid, String rsseqno, String rssku, String rsunitcost, String rsqty, String rscost,
-                                                  String rsamount, Timestamp rslastupddt, String rslastupdusr, String rslastupdver, String rsrowguid, String rsvendorupc,
-                                                  String rscompanycde, String rsentitykey,
-                                                  String frdatabase) throws SQLException {
+                                                String rsamount, Timestamp rslastupddt, String rslastupdusr, String rslastupdver, String rsrowguid, String rsvendorupc,
+                                                String rscompanycde, String rsentitykey,
+                                                String frdatabase) throws SQLException {
         boolean result = true;
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
         String updateSQL;
 
         updateSQL = "UPDATE INV_WRI_OFF_DTL_POS "
-                +"SET INSTIT_CDE = ? "
-                +", WRI_OFF_ID   = ? "
-                +", SEQ_NO       = ? "
-                +", SKU          = ? "
-                +", UNIT_COST    = ? "
-                +", QTY          = ? "
-                +", COST         = ? "
-                +", AMOUNT       = ? "
-                +", LAST_UPD_DT  = ? "
-                +", LAST_UPD_USR = ? "
-                +", LAST_UPD_VER = ? "
-                +", ROWGUID      = ? "
-                +", VENDOR_UPC   = ? "
-                +", COMPANY_CDE  = ? "
-                +"WHERE  ENTITY_KEY   = ? ";
+                + "SET INSTIT_CDE = ? "
+                + ", WRI_OFF_ID   = ? "
+                + ", SEQ_NO       = ? "
+                + ", SKU          = ? "
+                + ", UNIT_COST    = ? "
+                + ", QTY          = ? "
+                + ", COST         = ? "
+                + ", AMOUNT       = ? "
+                + ", LAST_UPD_DT  = ? "
+                + ", LAST_UPD_USR = ? "
+                + ", LAST_UPD_VER = ? "
+                + ", ROWGUID      = ? "
+                + ", VENDOR_UPC   = ? "
+                + ", COMPANY_CDE  = ? "
+                + "WHERE  INSTIT_CDE   = ? "
+                + "AND  WRI_OFF_ID   = ? "
+                + "AND  SEQ_NO   = ? ";
 
         try {
 
@@ -136,7 +138,9 @@ public class InsertInvwrioffdtlpos {
             preparedStatement.setString(12, rsrowguid);
             preparedStatement.setString(13, rsvendorupc);
             preparedStatement.setString(14, rscompanycde);
-            preparedStatement.setString(15, rsentitykey);
+            preparedStatement.setString(15, rsinstitcde);
+            preparedStatement.setString(16, rswrioffid);
+            preparedStatement.setString(17, rsseqno);
 
             preparedStatement.executeUpdate();
 
@@ -172,6 +176,12 @@ public class InsertInvwrioffdtlpos {
 		 * String loccode = parts[1]; String regno = parts[2]; String txno =
 		 * parts[3]; String seqno = parts[4];
 		 */
+
+        String[] parts = entitykey.split(",");
+        String INSTITCDE = parts[0];
+        String WRIOFFID = parts[1];
+        String SEQNO = parts[2];
+
         boolean result = false;
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
@@ -191,7 +201,9 @@ public class InsertInvwrioffdtlpos {
             }
 
             String selectSQL = "SELECT INSTIT_CDE " + "FROM INV_WRI_OFF_DTL_POS "
-                    + "where ENTITY_KEY ='" + entitykey + "'";
+                    + "where INSTIT_CDE ='" + INSTITCDE + "'"
+                    + "and WRI_OFF_ID ='" + WRIOFFID + "'"
+                    + "and SEQ_NO ='" + SEQNO + "'";
 
             // logger.info(selectSQL);
 

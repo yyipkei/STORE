@@ -970,6 +970,10 @@ public class MSSQL {
                 "\t\tSELECT DISTINCT loc_code\n" +
                 "\t\tFROM DATA_UPDATE_LOG_POS_location(NOLOCK)\n" +
                 "\t\t)\n" +
+                "\tAND loc_code + reg_no NOT IN (\n" +
+                "\t\tSELECT DISTINCT loc_code + reg_no\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_NEW_POS_TERMINAL\n" +
+                "\t\t)\n" +
                 "\n" +
                 "OPEN priceCursor\n" +
                 "\n" +
@@ -1454,6 +1458,10 @@ public class MSSQL {
                 "\tAND loc_code IN (\n" +
                 "\t\tSELECT DISTINCT loc_code\n" +
                 "\t\tFROM DATA_UPDATE_LOG_POS_location\n" +
+                "\t\t)\n" +
+                "\tAND loc_code + reg_no NOT IN (\n" +
+                "\t\tSELECT DISTINCT loc_code + reg_no\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_NEW_POS_TERMINAL\n" +
                 "\t\t)\n" +
                 "\n" +
                 "OPEN priceCursor\n" +
@@ -1949,6 +1957,10 @@ public class MSSQL {
                 "\t\tSELECT DISTINCT loc_code\n" +
                 "\t\tFROM DATA_UPDATE_LOG_POS_location\n" +
                 "\t\t)\n" +
+                "\tAND loc_code + reg_no NOT IN (\n" +
+                "\t\tSELECT DISTINCT loc_code + reg_no\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_NEW_POS_TERMINAL\n" +
+                "\t\t)\n" +
                 "\n" +
                 "UNION\n" +
                 "\n" +
@@ -1964,6 +1976,10 @@ public class MSSQL {
                 "\t\tSELECT DISTINCT loc_code\n" +
                 "\t\tFROM DATA_UPDATE_LOG_POS_location\n" +
                 "\t\t)\n" +
+                "\tAND loc_code + reg_no NOT IN (\n" +
+                "\t\tSELECT DISTINCT loc_code + reg_no\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_NEW_POS_TERMINAL\n" +
+                "\t\t)\n" +
                 "\n" +
                 "UNION\n" +
                 "\n" +
@@ -1978,6 +1994,10 @@ public class MSSQL {
                 "\tAND loc_code IN (\n" +
                 "\t\tSELECT DISTINCT loc_code\n" +
                 "\t\tFROM DATA_UPDATE_LOG_POS_location\n" +
+                "\t\t)\n" +
+                "\tAND loc_code + reg_no NOT IN (\n" +
+                "\t\tSELECT DISTINCT loc_code + reg_no\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_NEW_POS_TERMINAL\n" +
                 "\t\t)\n" +
                 "\n" +
                 "UNION\n" +
@@ -2000,6 +2020,7 @@ public class MSSQL {
                 "\t\t)\n" +
                 "\tAND a.issue_loc_code = b.issue_loc_code\n" +
                 "\tAND a.dp_no = b.dp_no\n" +
+                "\tand b.last_upd_dt is null \n" +
                 "\n" +
                 "UNION\n" +
                 "\n" +
@@ -2019,6 +2040,7 @@ public class MSSQL {
                 "\t\tFROM DATA_UPDATE_LOG_POS_LOCATION\n" +
                 "\t\t)\n" +
                 "\tAND org_tx_date <> ''\n" +
+                "\tand a.last_upd_dt is null \n" +
                 "\n" +
                 "OPEN priceCursor\n" +
                 "\n" +
@@ -2506,6 +2528,10 @@ public class MSSQL {
                 "\tAND loc_code IN (\n" +
                 "\t\tSELECT DISTINCT loc_code\n" +
                 "\t\tFROM DATA_UPDATE_LOG_POS_location\n" +
+                "\t\t)\n" +
+                "\tAND loc_code + reg_no NOT IN (\n" +
+                "\t\tSELECT DISTINCT loc_code + reg_no\n" +
+                "\t\tFROM DATA_UPDATE_LOG_POS_NEW_POS_TERMINAL\n" +
                 "\t\t)\n" +
                 "\n" +
                 "OPEN priceCursor\n" +
@@ -5892,7 +5918,7 @@ public class MSSQL {
                 "\t\t,@log_dt\n" +
                 "END";
 
-        StockOnHandUpdate = "DECLARE @log_dt DATETIME\n" +
+        StockOnHandUpdate ="DECLARE @log_dt DATETIME\n" +
                 "\t,@LAST_SYNC_TIME DATETIME\n" +
                 "\t,@MAX_BATCH VARCHAR(100)\n" +
                 "\t,@remark VARCHAR(100)\n" +
@@ -5967,7 +5993,7 @@ public class MSSQL {
                 "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS\n" +
                 "\tSELECT 'inv_wri_off_hdr_pos'\n" +
-                "\t\t,cast(entity_key AS VARCHAR(100))\n" +
+                "\t\t,cast(INSTIT_CDE AS VARCHAR(100)) + ',' + cast(WRI_OFF_ID AS VARCHAR(100))\n" +
                 "\t\t,@log_dt\n" +
                 "\t\t,NULL\n" +
                 "\t\t,@MAX_BATCH\n" +
@@ -5986,47 +6012,6 @@ public class MSSQL {
                 "\t\t,@log_dt\n" +
                 "END\n" +
                 "\n" +
-                "SET @LAST_SYNC_TIME = (\n" +
-                "\t\tSELECT MAX(last_sync_time)\n" +
-                "\t\tFROM DATA_UPDATE_LOG_POS_SYNC(NOLOCK)\n" +
-                "\t\tWHERE remark = 'inv_wri_off_hdr_pos'\n" +
-                "\t\t)\n" +
-                "SET @log_dt = (\n" +
-                "\t\tSELECT MAX(LAST_UPD_DT)\n" +
-                "\t\tFROM rmsadmin.inv_wri_off_hdr_pos(NOLOCK)\n" +
-                "\t\t)\n" +
-                "\n" +
-                "IF @LAST_SYNC_TIME <> @log_dt\n" +
-                "\tAND @LAST_SYNC_TIME IS NOT NULL\n" +
-                "\tAND @log_dt > @LAST_SYNC_TIME\n" +
-                "BEGIN\n" +
-                "\tUPDATE rmsadmin.inv_wri_off_hdr_pos\n" +
-                "\tSET ENTITY_KEY = newid()\n" +
-                "\tWHERE last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
-                "\t\t\tAND @log_dt\n" +
-                "\t\tAND last_upd_dt > @LAST_SYNC_TIME\n" +
-                "\t\tAND ENTITY_KEY IS NULL;\n" +
-                "\n" +
-                "\tINSERT INTO DATA_UPDATE_LOG_POS\n" +
-                "\tSELECT 'inv_wri_off_hdr_pos'\n" +
-                "\t\t,cast(entity_key AS VARCHAR(100))\n" +
-                "\t\t,@log_dt\n" +
-                "\t\t,NULL\n" +
-                "\t\t,@MAX_BATCH\n" +
-                "\t\t,'P'\n" +
-                "\t\t,@remark\n" +
-                "\tFROM rmsadmin.inv_wri_off_hdr_pos(NOLOCK)\n" +
-                "\tWHERE last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
-                "\t\t\tAND @log_dt\n" +
-                "\t\tAND last_upd_dt > @LAST_SYNC_TIME;\n" +
-                "\n" +
-                "\tINSERT INTO DATA_UPDATE_LOG_POS_SYNC (\n" +
-                "\t\tremark\n" +
-                "\t\t,LAST_SYNC_TIME\n" +
-                "\t\t)\n" +
-                "\tSELECT 'inv_wri_off_hdr_pos'\n" +
-                "\t\t,@log_dt\n" +
-                "END\n" +
                 "\n" +
                 "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
@@ -6051,7 +6036,7 @@ public class MSSQL {
                 "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS\n" +
                 "\tSELECT 'inv_wri_off_dtl_pos'\n" +
-                "\t\t,cast(entity_key AS VARCHAR(100))\n" +
+                "\t\t,cast(INSTIT_CDE AS VARCHAR(100)) + ',' + cast(WRI_OFF_ID AS VARCHAR(100)) + ',' + cast(SEQ_NO AS VARCHAR(100))\n" +
                 "\t\t,@log_dt\n" +
                 "\t\t,NULL\n" +
                 "\t\t,@MAX_BATCH\n" +
@@ -6135,7 +6120,7 @@ public class MSSQL {
                 "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS\n" +
                 "\tSELECT 'sx_item_pos'\n" +
-                "\t\t,cast(entity_key AS VARCHAR(100))\n" +
+                "\t\t,cast(BOXNO AS VARCHAR(100)) + ',' + cast(SKU AS VARCHAR(100)) + ',' + cast(company_cde AS VARCHAR(100))\n" +
                 "\t\t,@log_dt\n" +
                 "\t\t,NULL\n" +
                 "\t\t,@MAX_BATCH\n" +
