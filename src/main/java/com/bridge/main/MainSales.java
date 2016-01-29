@@ -27,46 +27,51 @@ public class MainSales implements Job {
 
     public static void bridgeStart() {
         // BasicConfigurator.configure();
-        try {
 
-            runStoredProcedure("Oracle");
-            selectRecordsFromTable("Oracle");
+        if (Integer.parseInt(Quartz.RouteSalesOracletoMSSQL) == 1) {
+            try {
+
+                runStoredProcedure("Oracle");
+                selectRecordsFromTable("Oracle");
             /*for (Dataupdatelog dataupdatelog : dataupdatelogs)
                 logger.info(dataupdatelog);*/
 
-            processLogmssql("Oracle");
+                processLogmssql("Oracle");
 
-            logger.info("Finished Oracle -> MSSQL");
+                logger.info("Finished Oracle -> MSSQL");
 
-        } catch (SQLException e) {
+            } catch (SQLException e) {
 
-            logger.info(e.getMessage());
+                logger.info(e.getMessage());
 
+            }
+
+            dataupdatelogs.clear();
         }
 
-        dataupdatelogs.clear();
-
-        try {
-            runGoodsReturnDepositPatch("MSSQL");
-            runStoredProceduregoalastupddt("MSSQL");
-            runStoredProcedurelastupddt("MSSQL");
-            runStoredProcedure("MSSQL");
-            selectRecordsFromTable("MSSQL");
+        if (Integer.parseInt(Quartz.RouteSalesMSSQLtoOracle) == 1) {
+            try {
+                runGoodsReturnDepositPatch("MSSQL");
+                runStoredProceduregoalastupddt("MSSQL");
+                runStoredProcedurelastupddt("MSSQL");
+                runStoredProcedure("MSSQL");
+                selectRecordsFromTable("MSSQL");
             /*for (Dataupdatelog dataupdatelog : dataupdatelogs)
                 logger.info(dataupdatelog);*/
 
-            processLog("MSSQL");
-            runlogStoredProcedure("Oracle");
-            runpstxcountStoredProcedure("Oracle");
-            rungoapstxcountStoredProcedure("Oracle");
-            logger.info("Finished MSSQL -> Oracle");
+                processLog("MSSQL");
+                runlogStoredProcedure("Oracle");
+                runpstxcountStoredProcedure("Oracle");
+                rungoapstxcountStoredProcedure("Oracle");
+                logger.info("Finished MSSQL -> Oracle");
 
-        } catch (SQLException e) {
+            } catch (SQLException e) {
 
-            logger.info(e.getMessage());
+                logger.info(e.getMessage());
 
+            }
+            dataupdatelogs.clear();
         }
-        dataupdatelogs.clear();
 
     }
 

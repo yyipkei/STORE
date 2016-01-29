@@ -1,7 +1,6 @@
 package com.bridge.routeitem;
 
 import com.bridge.insertitem.InsertTendmas;
-import com.bridge.main.HikariMssql;
 import com.bridge.main.HikariQracleFrom;
 import com.bridge.main.HikariRms;
 import com.bridge.result.Insertdataupdatelog;

@@ -57,7 +57,7 @@ public class Dataupdatelog {
 	}
 
 	public void setBatchno(String batchno) {
-		this.batchno = batchno;
+		Dataupdatelog.batchno = batchno;
 	}
 
 	public String getIscomp() {

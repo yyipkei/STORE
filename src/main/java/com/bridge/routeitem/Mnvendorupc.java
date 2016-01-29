@@ -12,7 +12,6 @@ import com.bridge.result.Insertdataupdatelog;
 import org.apache.log4j.Logger;
 
 import com.bridge.insertitem.InsertMnvendorupc;
-import com.bridge.main.HikariMssql;
 import com.bridge.main.HikariQracleFrom;
 import com.bridge.result.Logupdateresult;
 
@@ -33,7 +32,7 @@ public class Mnvendorupc {
 		PreparedStatement preparedStatement = null;
 		String selectSQL;
 
-        if (vendorupc.indexOf("'") != -1) {
+        if (vendorupc.contains("'")) {
             vendorupc = vendorupc.replaceAll("'", "''");
         }
 

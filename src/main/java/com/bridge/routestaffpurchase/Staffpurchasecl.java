@@ -12,7 +12,6 @@ import com.bridge.result.Insertdataupdatelog;
 import org.apache.log4j.Logger;
 
 import com.bridge.insertstaffpurchase.InsertStaffpurchasecl;
-import com.bridge.main.HikariMssql;
 import com.bridge.main.HikariQracleFrom;
 import com.bridge.result.Logupdateresult;
 

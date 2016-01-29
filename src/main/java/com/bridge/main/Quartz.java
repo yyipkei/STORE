@@ -12,7 +12,6 @@ import org.quartz.SchedulerException;
 import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -77,6 +76,9 @@ public class Quartz {
     public static String RouteTimeStockonhand;
     public static String RouteTimeVip;
     public static String RouteTimePatch;
+
+    public static String RouteSalesOracletoMSSQL;
+    public static String RouteSalesMSSQLtoOracle;
 
     public static String RouteDepositOracletoMerge;
     public static String RouteDepositMergetoOracle;
@@ -167,6 +169,9 @@ public class Quartz {
                 RouteTimeStockonhand = prop.getProperty("RouteTimeStockonhand");
                 RouteTimeVip = prop.getProperty("RouteTimeVip");
                 RouteTimePatch = prop.getProperty("RouteTimePatch");
+
+                RouteSalesOracletoMSSQL = prop.getProperty("RouteSalesOracletoMSSQL");
+                RouteSalesMSSQLtoOracle = prop.getProperty("RouteSalesMSSQLtoOracle");
 
                 RouteDepositOracletoMerge = prop.getProperty("RouteDepositOracletoMerge");
                 RouteDepositMergetoOracle = prop.getProperty("RouteDepositMergetoOracle");

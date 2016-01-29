@@ -3,7 +3,6 @@ package com.bridge.routestockonhand;
 import com.bridge.insertstockonhand.InsertSxitempos;
 import com.bridge.main.HikariQracleFrom;
 import com.bridge.main.HikariRms;
-import com.bridge.result.Insertdataupdatelog;
 import com.bridge.result.Logupdateresult;
 import org.apache.log4j.Logger;
 
@@ -99,9 +98,9 @@ public class Sxitempos {
                     Logupdateresult.Updatelogresult(dataupdatelog, entityname,
                             Insertresult, database);
 
-                    if ((!"Oracle".equals(database)) && (Insertresult)) {
+                   /* if ((!"Oracle".equals(database)) && (Insertresult)) {
                         Insertdataupdatelog.Updatelogresult(entityname, rsentitykey);
-                    }
+                    }*/
 
                 } else {
 
@@ -119,9 +118,9 @@ public class Sxitempos {
                     Logupdateresult.Updatelogresult(dataupdatelog, entityname,
                             Insertresult, database);
 
-                    if ((!"Oracle".equals(database)) && (Insertresult)) {
+                   /* if ((!"Oracle".equals(database)) && (Insertresult)) {
                         Insertdataupdatelog.Updatelogresult(entityname, rsentitykey);
-                    }
+                    }*/
                 }
             }
         } catch (SQLException e) {

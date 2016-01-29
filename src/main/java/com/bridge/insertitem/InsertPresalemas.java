@@ -10,7 +10,6 @@ import java.util.Objects;
 import com.bridge.main.HikariRms;
 import org.apache.log4j.Logger;
 
-import com.bridge.main.HikariMssql;
 import com.bridge.main.HikariQracleTo;
 
 public class InsertPresalemas {

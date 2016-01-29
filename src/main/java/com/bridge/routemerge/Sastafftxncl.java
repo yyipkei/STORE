@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Objects;
 
-import com.bridge.result.Insertdataupdatelog;
 import org.apache.log4j.Logger;
 
 import com.bridge.insertmerge.InsertSastafftxncl;

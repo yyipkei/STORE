@@ -118,9 +118,9 @@ public class Sxsreqdtlpos {
                     Logupdateresult.Updatelogresult(dataupdatelog, entityname,
                             Insertresult, database);
 
-                    if ((!"Oracle".equals(database)) && (Insertresult)) {
+                   /* if ((!"Oracle".equals(database)) && (Insertresult)) {
                         Insertdataupdatelog.Updatelogresult(entityname, rsentitykey);
-                    }
+                    }*/
 
                 } else {
 
@@ -141,9 +141,9 @@ public class Sxsreqdtlpos {
                     Logupdateresult.Updatelogresult(dataupdatelog, entityname,
                             Insertresult, database);
 
-                    if ((!"Oracle".equals(database)) && (Insertresult)) {
+                    /*if ((!"Oracle".equals(database)) && (Insertresult)) {
                         Insertdataupdatelog.Updatelogresult(entityname, rsentitykey);
-                    }
+                    }*/
                 }
             }
         } catch (SQLException e) {

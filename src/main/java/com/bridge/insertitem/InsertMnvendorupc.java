@@ -10,7 +10,6 @@ import java.util.Objects;
 import com.bridge.main.HikariRms;
 import org.apache.log4j.Logger;
 
-import com.bridge.main.HikariMssql;
 import com.bridge.main.HikariQracleTo;
 
 public class InsertMnvendorupc {
@@ -155,7 +154,7 @@ public class InsertMnvendorupc {
         String sku = parts[1];
         String loccde = parts[2];
 
-        if (vendorupc.indexOf("'") != -1) {
+        if (vendorupc.contains("'")) {
             vendorupc = vendorupc.replaceAll("'", "''");
         }
 

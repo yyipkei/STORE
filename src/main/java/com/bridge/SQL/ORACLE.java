@@ -5,19 +5,19 @@ package com.bridge.SQL;
  */
 public class ORACLE {
 
-    public static String SalesUpdate;
-    public static String SalesPsTxCount;
-    public static String GoaPsTxCount;
-    public static String InsertSalesDataLog;
-    public static String ReturnUpdate;
-    public static String MergeUpdate;
-    public static String InsertMergeDataLog;
-    public static String CouponPsTxCount;
-    public static String StockResUpdDate;
-    public static String InsertStockResDataLog;
-    public static String StockResPsTxCount;
-    public static String DepositUpdate;
-    public static String StockOnHandToView;
+    public static final String SalesUpdate;
+    public static final String SalesPsTxCount;
+    public static final String GoaPsTxCount;
+    public static final String InsertSalesDataLog;
+    public static final String ReturnUpdate;
+    public static final String MergeUpdate;
+    public static final String InsertMergeDataLog;
+    public static final String CouponPsTxCount;
+    public static final String StockResUpdDate;
+    public static final String InsertStockResDataLog;
+    public static final String StockResPsTxCount;
+    public static final String DepositUpdate;
+    public static final String StockOnHandToView;
 
 
     static {

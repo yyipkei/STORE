@@ -3,7 +3,6 @@ package com.bridge.routestockres;
 import com.bridge.insertstockres.InsertStockresdet;
 import com.bridge.main.HikariMerge;
 import com.bridge.main.HikariQracleFrom;
-import com.bridge.result.Insertdataupdatelog;
 import com.bridge.result.Logupdateresult;
 import org.apache.log4j.Logger;
 

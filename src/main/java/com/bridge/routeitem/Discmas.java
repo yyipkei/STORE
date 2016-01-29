@@ -1,7 +1,6 @@
 package com.bridge.routeitem;
 
 import com.bridge.insertitem.InsertDiscmas;
-import com.bridge.main.HikariMssql;
 import com.bridge.main.HikariQracleFrom;
 import com.bridge.main.HikariRms;
 import com.bridge.result.Insertdataupdatelog;
@@ -109,9 +108,9 @@ public class Discmas {
                     Logupdateresult.Updatelogresult(dataupdatelog, entityname,
                             Insertresult, database);
 
-                    if ((!"Oracle".equals(database)) && (Insertresult)) {
+                    /*if ((!"Oracle".equals(database)) && (Insertresult)) {
                         Insertdataupdatelog.Updatelogresult(entityname, rsentitykey);
-                    }
+                    }*/
 
                 } else {
 
@@ -131,9 +130,9 @@ public class Discmas {
                     Logupdateresult.Updatelogresult(dataupdatelog, entityname,
                             Insertresult, database);
 
-                    if ((!"Oracle".equals(database)) && (Insertresult)) {
+                   /* if ((!"Oracle".equals(database)) && (Insertresult)) {
                         Insertdataupdatelog.Updatelogresult(entityname, rsentitykey);
-                    }
+                    }*/
                 }
             }
         } catch (SQLException e) {

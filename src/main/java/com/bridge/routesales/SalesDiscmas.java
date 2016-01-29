@@ -1,10 +1,8 @@
 package com.bridge.routesales;
 
-import com.bridge.insertitem.InsertDiscmas;
 import com.bridge.insertsales.InsertSalesDiscmas;
 import com.bridge.main.HikariMssql;
 import com.bridge.main.HikariQracleFrom;
-import com.bridge.main.HikariRms;
 import com.bridge.result.Insertdataupdatelog;
 import com.bridge.result.Logupdateresult;
 import org.apache.log4j.Logger;
@@ -110,9 +108,9 @@ public class SalesDiscmas {
                     Logupdateresult.Updatelogresult(dataupdatelog, entityname,
                             Insertresult, database);
 
-                    if ((!"Oracle".equals(database)) && (Insertresult)) {
+                  /* if ((!"Oracle".equals(database)) && (Insertresult)) {
                         Insertdataupdatelog.Updatelogresult(entityname, rsentitykey);
-                    }
+                    }*/
 
                 } else {
 
@@ -132,9 +130,9 @@ public class SalesDiscmas {
                     Logupdateresult.Updatelogresult(dataupdatelog, entityname,
                             Insertresult, database);
 
-                    if ((!"Oracle".equals(database)) && (Insertresult)) {
+                   /* if ((!"Oracle".equals(database)) && (Insertresult)) {
                         Insertdataupdatelog.Updatelogresult(entityname, rsentitykey);
-                    }
+                    }*/
                 }
             }
         } catch (SQLException e) {

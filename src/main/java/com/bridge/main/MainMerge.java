@@ -37,6 +37,7 @@ public class MainMerge implements Job {
                 selectRecordsFromTable("Oracle");
                 //for (Dataupdatelog dataupdatelog : dataupdatelogs) logger.info(dataupdatelog);
                 processLog("Oracle");
+                runInsertCafeCoupon("MSSQL");
                 logger.info("Finished Oracle -> Merge");
             } catch (SQLException e) {
                 logger.info(e.getMessage());
@@ -285,6 +286,47 @@ public class MainMerge implements Job {
         logger.info("Starting usp_merge_txn_last_upd_dt_batch");
         //String spSQL = "{call usp_merge_txn_last_upd_dt_batch}";
         String spSQL = MSSQL.CafeLastUpdDate;
+        try {
+
+            if (Objects.equals(database, "Oracle")) {
+                HikariQracleFrom OrcaleFrompool = HikariQracleFrom
+                        .getInstance();
+                dbConnection = OrcaleFrompool.getConnection();
+                // dbConnection = OracleFrom.getDBConnection();
+            } else {
+                HikariMssql Mssqlpool = HikariMssql.getInstance();
+                dbConnection = Mssqlpool.getConnection();
+                // dbConnection = Mssql.getDBConnection();
+            }
+
+            preparedStatement = dbConnection.prepareStatement(spSQL);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+
+            logger.info(e.getMessage());
+
+        } finally {
+
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        }
+
+    }
+
+    private static void runInsertCafeCoupon(String database) throws SQLException {
+
+        Connection dbConnection = null;
+        PreparedStatement preparedStatement = null;
+        logger.info("Starting insertCafeCoupon");
+        //String spSQL = "{call usp_merge_txn_last_upd_dt_batch}";
+        String spSQL = MSSQL.insertCafeCoupon;
         try {
 
             if (Objects.equals(database, "Oracle")) {
