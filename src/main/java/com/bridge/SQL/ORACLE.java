@@ -69,7 +69,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM sadet\n" +
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "   and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -110,7 +111,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM satender\n" +
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -150,7 +152,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM sahdr\n" +
                 "    WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -190,7 +193,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM saitdisc\n" +
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -230,7 +234,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM satxdisc\n" +
                 "    WHERE LAST_UPD_DATE BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and LAST_UPD_DATE >  v_LAST_SYNC_TIME;\n" +
+                "   and LAST_UPD_DATE >  v_LAST_SYNC_TIME\n" +
+                "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -271,7 +276,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM sastaff\n" +
                 "    WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -314,7 +320,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM sastaffitem\n" +
                 "    WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -354,7 +361,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM sareason\n" +
                 " WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -394,7 +402,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM sagwp\n" +
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -473,7 +482,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM sacard\n" +
                 "    WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -513,7 +523,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM savwp\n" +
                 "    WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -554,7 +565,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM saserial\n" +
                 "    WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -631,7 +643,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM sa_delivery\n" +
                 " WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -671,7 +684,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM sa_mr_item\n" +
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -711,7 +725,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM sadisc_ref\n" +
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -751,7 +766,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM sagoa_action\n" +
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -792,7 +808,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM sagoa_det\n" +
                 "   WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -831,7 +848,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM sagoa_hdr\n" +
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -871,7 +889,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM sagoa_staff\n" +
                 " WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -988,7 +1007,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM dphdr_desc\n" +
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -1065,7 +1085,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM edc_settlement\n" +
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -2256,7 +2277,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM gr_org_det\n" +
                 "     WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "    and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -2296,7 +2318,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM gr_org_tender\n" +
                 "     WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "    and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -2558,7 +2581,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM park_pmt\n" +
                 "   WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "         and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -2660,7 +2684,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM sastafftxn\n" +
                 "    WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "         and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -2693,7 +2718,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM sastafftxn_cl\n" +
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "         and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -2726,7 +2752,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM sagoa_txn\n" +
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "        and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -3198,7 +3225,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM stock_res\n" +
                 "   WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "        and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -3234,7 +3262,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM stockres_det\n" +
                 "   WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "        and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -3399,7 +3428,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM dphdr\n" +
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "   and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -3441,7 +3471,8 @@ public class ORACLE {
                 "    v_remark\n" +
                 "  FROM dpdet\n" +
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
-                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "   and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -3481,7 +3512,8 @@ public class ORACLE {
                 "    'P' ,\n" +
                 "    v_remark\n" +
                 "  FROM dppayment\n" +
-                "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt ;\n" +
+                "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
+                "  and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
                 "  \n" +
                 "   INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +

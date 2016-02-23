@@ -25,6 +25,7 @@ public class InsertSatxdisc {
         boolean result = true;
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
+        String insertTableSQL;
 
         try {
 
@@ -33,16 +34,19 @@ public class InsertSatxdisc {
 
                 HikariMssql Mssqlpool = HikariMssql.getInstance();
                 dbConnection = Mssqlpool.getConnection();
+                insertTableSQL = "INSERT INTO SATXDISC (TX_DATE,LOC_CODE,REG_NO,TX_NO, SEQ_NO, TX_TYPE, VOID,"
+                        + " DISC_AMT,ORG_DISC_AMT, DISC_PER,  ORG_DISC_PER,  DISC_OVER_ID,DISC_ID, DISC_REF, LAST_UPD_DT, soa_polling_status) "
+                        + "VALUES ( ?,  ?,  ?,  ?,  ?, ?,  ?,  ?,  ?, ?,  ?,  ?,  ?, ?,  ? , 9)";
             } else {
                 // dbConnection = OracleTo.getDBConnection();
 
                 HikariQracleTo OrcaleFromTo = HikariQracleTo.getInstance();
                 dbConnection = OrcaleFromTo.getConnection();
+                insertTableSQL = "INSERT INTO SATXDISC (TX_DATE,LOC_CODE,REG_NO,TX_NO, SEQ_NO, TX_TYPE, VOID,"
+                        + " DISC_AMT,ORG_DISC_AMT, DISC_PER,  ORG_DISC_PER,  DISC_OVER_ID,DISC_ID, DISC_REF, LAST_UPD_DATE, soa_polling_status) "
+                        + "VALUES ( ?,  ?,  ?,  ?,  ?, ?,  ?,  ?,  ?, ?,  ?,  ?,  ?, ?,  ? , 9)";
             }
 
-            String insertTableSQL = "INSERT INTO SATXDISC (TX_DATE,LOC_CODE,REG_NO,TX_NO, SEQ_NO, TX_TYPE, VOID,"
-                    + " DISC_AMT,ORG_DISC_AMT, DISC_PER,  ORG_DISC_PER,  DISC_OVER_ID,DISC_ID, DISC_REF, LAST_UPD_DATE, soa_polling_status) "
-                    + "VALUES ( ?,  ?,  ?,  ?,  ?, ?,  ?,  ?,  ?, ?,  ?,  ?,  ?, ?,  ? , 9)";
 
             preparedStatement = dbConnection.prepareStatement(insertTableSQL);
 
@@ -94,6 +98,7 @@ public class InsertSatxdisc {
         boolean result = true;
         Connection dbConnection = null;
         PreparedStatement preparedStatement = null;
+        String updateSQL;
 
         try {
 
@@ -102,21 +107,26 @@ public class InsertSatxdisc {
 
                 HikariMssql Mssqlpool = HikariMssql.getInstance();
                 dbConnection = Mssqlpool.getConnection();
+                updateSQL = "UPDATE SATXDISC SET  TX_TYPE                  = ? , VOID                     = ? , DISC_AMT                 = ? ,"
+                        + " ORG_DISC_AMT             = ? , DISC_PER                 = ? , ORG_DISC_PER             = ? , DISC_OVER_ID             = ? ,"
+                        + " DISC_ID                  = ? , DISC_REF                 = ? , LAST_UPD_DT            = ?"
+                        + "WHERE TX_DATE                = ? AND LOC_CODE                 = ? AND REG_NO                   = ? "
+                        + "AND TX_NO                    = ? AND SEQ_NO                   = ?";
+
             } else {
                 // dbConnection = OracleTo.getDBConnection();
 
                 HikariQracleTo OrcaleFromTo = HikariQracleTo.getInstance();
                 dbConnection = OrcaleFromTo.getConnection();
+                updateSQL = "UPDATE SATXDISC SET  TX_TYPE                  = ? , VOID                     = ? , DISC_AMT                 = ? ,"
+                        + " ORG_DISC_AMT             = ? , DISC_PER                 = ? , ORG_DISC_PER             = ? , DISC_OVER_ID             = ? ,"
+                        + " DISC_ID                  = ? , DISC_REF                 = ? , LAST_UPD_DATE            = ?"
+                        + "WHERE TX_DATE                = ? AND LOC_CODE                 = ? AND REG_NO                   = ? "
+                        + "AND TX_NO                    = ? AND SEQ_NO                   = ?";
+
             }
 
-            String updateSQL = "UPDATE SATXDISC SET  TX_TYPE                  = ? , VOID                     = ? , DISC_AMT                 = ? ,"
-                    + " ORG_DISC_AMT             = ? , DISC_PER                 = ? , ORG_DISC_PER             = ? , DISC_OVER_ID             = ? ,"
-                    + " DISC_ID                  = ? , DISC_REF                 = ? , LAST_UPD_DATE            = ?"
-                    + "WHERE TX_DATE                = ? AND LOC_CODE                 = ? AND REG_NO                   = ? "
-                    + "AND TX_NO                    = ? AND SEQ_NO                   = ?";
-
             preparedStatement = dbConnection.prepareStatement(updateSQL);
-
 
             preparedStatement.setString(1, rstxtype);
             preparedStatement.setString(2, rsvoid);

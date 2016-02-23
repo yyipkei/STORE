@@ -4137,7 +4137,7 @@ public class MSSQL {
                 "\t\t,@log_dt\n" +
                 "END\n" +
                 "\n" +
-                "/*SET @LAST_SYNC_TIME = (\n" +
+                "SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
                 "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (nolock)\n" +
                 "\t\tWHERE remark = 'pos_user'\n" +
@@ -4170,7 +4170,8 @@ public class MSSQL {
                 "\t\t)\n" +
                 "\tSELECT 'pos_user'\n" +
                 "\t\t,@log_dt\n" +
-                "END*/\n" +
+                "END\n" +
+                "\n" +
                 "/*SET @LAST_SYNC_TIME = (\n" +
                 "\t\tSELECT MAX(last_sync_time)\n" +
                 "\t\tFROM DATA_UPDATE_LOG_POS_SYNC (nolock)\n" +
