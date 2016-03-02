@@ -23,6 +23,7 @@ public class MSSQL {
     public static final String retryMSSQLFailRecord;
     public static final String patchGoodsRetunDeposit;
     public static final String insertCafeCoupon;
+    public static final String patchSareason;
 
     static {
         SalesUpdate = "DECLARE @log_dt DATETIME\n" +
@@ -6684,6 +6685,17 @@ public class MSSQL {
                 "\n" +
                 "DEALLOCATE priceCursor;";
 
+        patchSareason = "insert into sareason\n" +
+                "select distinct a.tx_date,a.loc_code,a.reg_no,a.tx_no,'1000',a.tx_type,a.void,'02','01',GETDATE()\n" +
+                "from sadet a\n" +
+                "where a.tx_date = convert(varchar(8),getdate(),112)\n" +
+                "and a.tx_type in ('01','02')\n" +
+                "and not exists (select 1 from sareason b\n" +
+                "where a.tx_date = b.tx_date\n" +
+                "and a.loc_code = b.loc_code \n" +
+                "and a.reg_no = b.reg_no\n" +
+                "and a.tx_no = b.tx_no)\n" +
+                "\n";
     }
 
 }

@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import com.bridge.SQL.MSSQL;
 import org.apache.log4j.Logger;
@@ -70,12 +72,38 @@ public class MainItem implements Job {
 
 	}
 
-	public static void processLog(String database) {
-		for (Dataupdatelog d : MainItem.dataupdatelogs) {
+	public static void processLog(final String database) {
+		/*for (Dataupdatelog d : MainItem.dataupdatelogs) {
 			RouteItem.Routeing(d.getDatalogid(), d.getEntityname(),
 					d.getEntitykey(), database);
+		}*/
+
+		ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+		try {
+			Set<Future<Object>> dataUpdateLogTask = new HashSet<Future<Object>>();
+			for (final Dataupdatelog d : MainItem.dataupdatelogs) {
+				dataUpdateLogTask.add(executor.submit(new Callable<Object>() {
+					public Object call() throws Exception {
+
+						// logger.info("Start"+ d.getDatalogid()+d.getEntityname()+ d.getEntitykey()+ database);
+						RouteItem.Routeing(d.getDatalogid(), d.getEntityname(), d.getEntitykey(), database);
+						return "OK";
+					}
+				}));
+			}
+			for (Future<Object> future : dataUpdateLogTask) {
+				System.out.print(future.get());
+
+			}
+		} catch (Exception e) {
+			Thread.currentThread().interrupt();
+		} finally {
+			if (executor != null) {
+				executor.shutdownNow();
+			}
 		}
 	}
+
 
 	public static final List<Dataupdatelog> dataupdatelogs = new ArrayList<Dataupdatelog>();
 

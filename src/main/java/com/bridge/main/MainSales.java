@@ -37,6 +37,7 @@ public class MainSales implements Job {
                 logger.info(dataupdatelog);*/
 
                 processLogmssql("Oracle");
+                runSaresonPatch("MSSQL");
 
                 logger.info("Finished Oracle -> MSSQL");
 
@@ -514,6 +515,46 @@ public class MainSales implements Job {
         logger.info("Starting runGoodsReturnDepositPatch");
         //String spSQL = "{call usp_goa_txn_last_upd_dt_batch}";
         String spSQL = MSSQL.patchGoodsRetunDeposit;
+        try {
+
+            if (Objects.equals(database, "Oracle")) {
+                HikariQracleFrom OrcaleFrompool = HikariQracleFrom
+                        .getInstance();
+                dbConnection = OrcaleFrompool.getConnection();
+                // dbConnection = OracleFrom.getDBConnection();
+            } else {
+                HikariMssql Mssqlpool = HikariMssql.getInstance();
+                dbConnection = Mssqlpool.getConnection();
+                // dbConnection = Mssql.getDBConnection();
+            }
+
+            preparedStatement = dbConnection.prepareStatement(spSQL);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+
+            logger.info(e.getMessage());
+
+        } finally {
+
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+
+        }
+
+    }
+
+    private static void runSaresonPatch(String database) throws SQLException {
+
+        Connection dbConnection = null;
+        PreparedStatement preparedStatement = null;
+        logger.info("Starting runSaresonPatch");
+        String spSQL = MSSQL.patchSareason;
         try {
 
             if (Objects.equals(database, "Oracle")) {

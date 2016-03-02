@@ -13,9 +13,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.concurrent.*;
 
 @DisallowConcurrentExecution
 public class MainStockonhand implements Job {
@@ -48,7 +47,7 @@ public class MainStockonhand implements Job {
 
             runStoredProcedure("RMS");
             selectRecordsFromTable("RMS");
-            //for (Dataupdatelog dataupdatelog : dataupdatelogs) logger.info(dataupdatelog);
+            // for (Dataupdatelog dataupdatelog : dataupdatelogs) logger.info(dataupdatelog);
             processLog("RMS");
             runlogStoredProcedure("Oracle");
 
@@ -63,10 +62,37 @@ public class MainStockonhand implements Job {
 
     }
 
-    public static void processLog(String database) {
+    public static void processLog(final String database) {
+
+        /*
         for (Dataupdatelog d : MainStockonhand.dataupdatelogs) {
             RouteStockonhand.Routeing(d.getDatalogid(), d.getEntityname(),
                     d.getEntitykey(), database);
+        }*/
+
+        ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+        try {
+            Set<Future<Object>> dataUpdateLogTask = new HashSet<Future<Object>>();
+            for (final Dataupdatelog d : MainStockonhand.dataupdatelogs) {
+                dataUpdateLogTask.add(executor.submit(new Callable<Object>() {
+                    public Object call() throws Exception {
+
+                        // logger.info("Start"+ d.getDatalogid()+d.getEntityname()+ d.getEntitykey()+ database);
+                        RouteStockonhand.Routeing(d.getDatalogid(), d.getEntityname(), d.getEntitykey(), database);
+                        return "OK";
+                    }
+                }));
+            }
+            for (Future<Object> future : dataUpdateLogTask) {
+                System.out.print(future.get());
+
+            }
+        } catch (Exception e) {
+            Thread.currentThread().interrupt();
+        } finally {
+            if (executor != null) {
+                executor.shutdownNow();
+            }
         }
     }
 
