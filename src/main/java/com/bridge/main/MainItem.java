@@ -78,7 +78,8 @@ public class MainItem implements Job {
 					d.getEntitykey(), database);
 		}*/
 
-		ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+		//ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+		ExecutorService executor = Executors.newFixedThreadPool(6);
 		try {
 			Set<Future<Object>> dataUpdateLogTask = new HashSet<Future<Object>>();
 			for (final Dataupdatelog d : MainItem.dataupdatelogs) {

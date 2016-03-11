@@ -71,7 +71,39 @@ public class ORACLE {
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "   and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
-                "   and reg_no not between '990' and '999';\n" +
+                "   and reg_no not between '990' and '999'\n" +
+                "   union \n" +
+                "    SELECT 'sadet' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no\n" +
+                "    || ','\n" +
+                "    || seq_no ,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "   FROM sadet a\n" +
+                " LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on a.tx_date\n" +
+                "  || ','\n" +
+                "  || a.loc_code\n" +
+                "  || ','\n" +
+                "  || a.reg_no\n" +
+                "  || ','\n" +
+                "  || a.tx_no\n" +
+                "  || ','\n" +
+                "  || a.seq_no = b.entity_key\n" +
+                "  and b.entity_name ='sadet'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -114,14 +146,45 @@ public class ORACLE {
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
-                "    and reg_no not between '990' and '999';\n" +
+                "    and reg_no not between '990' and '999'\n" +
+                "    union\n" +
+                "     SELECT 'satender' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no\n" +
+                "    || ','\n" +
+                "    || seq_no ,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "FROM satender a\n" +
+                " LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on a.tx_date\n" +
+                "  || ','\n" +
+                "  || a.loc_code\n" +
+                "  || ','\n" +
+                "  || a.reg_no\n" +
+                "  || ','\n" +
+                "  || a.tx_no\n" +
+                "  || ','\n" +
+                "  || a.seq_no = b.entity_key\n" +
+                "  and b.entity_name ='satender'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
                 "    )\n" +
                 "  SELECT 'satender', v_log_dt FROM dual;\n" +
                 " end if ;\n" +
-                "  \n" +
                 "  \n" +
                 "  \n" +
                 "  SELECT MAX(last_sync_time) INTO v_LAST_SYNC_TIME FROM DATA_UPDATE_LOG_POS_SYNC where remark ='sahdr' ;\n" +
@@ -156,7 +219,35 @@ public class ORACLE {
                 "    WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
-                "       and reg_no not between '990' and '999';\n" +
+                "       and reg_no not between '990' and '999'\n" +
+                "    union \n" +
+                "  SELECT 'sahdr' ,\n" +
+                "    a.tx_date\n" +
+                "    || ','\n" +
+                "    || a.loc_code\n" +
+                "    || ','\n" +
+                "    || a.reg_no\n" +
+                "    || ','\n" +
+                "    || a.tx_no ,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "  FROM sahdr a\n" +
+                "  LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on a.tx_date\n" +
+                "  || ','\n" +
+                "  || a.loc_code\n" +
+                "  || ','\n" +
+                "  || a.reg_no\n" +
+                "  || ','\n" +
+                "  || a.tx_no = b.entity_key\n" +
+                "  and b.entity_name ='sahdr'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -198,7 +289,39 @@ public class ORACLE {
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
-                "    and reg_no not between '990' and '999';\n" +
+                "    and reg_no not between '990' and '999'\n" +
+                "  union \n" +
+                "   SELECT 'saitdisc' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no\n" +
+                "    || ','\n" +
+                "    || seq_no ,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "  FROM saitdisc a\n" +
+                "    LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on    a.tx_date\n" +
+                "    || ','\n" +
+                "    || a.loc_code\n" +
+                "    || ','\n" +
+                "    || a.reg_no\n" +
+                "    || ','\n" +
+                "    || a.tx_no\n" +
+                "    || ','\n" +
+                "    || a.seq_no = b.entity_key\n" +
+                "    and b.entity_name ='saitdisc'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -240,7 +363,39 @@ public class ORACLE {
                 "    WHERE LAST_UPD_DATE BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and LAST_UPD_DATE >  v_LAST_SYNC_TIME\n" +
                 "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
-                "       and reg_no not between '990' and '999';\n" +
+                "       and reg_no not between '990' and '999'\n" +
+                "       union\n" +
+                "       SELECT 'satxdisc' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ',' \n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no\n" +
+                "    || ','\n" +
+                "    || seq_no ,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "  FROM satxdisc a\n" +
+                "    LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on  a.tx_date\n" +
+                "    || ','\n" +
+                "    || a.loc_code\n" +
+                "    || ',' \n" +
+                "    || a.reg_no\n" +
+                "    || ','\n" +
+                "    || a.tx_no\n" +
+                "    || ','\n" +
+                "    || a.seq_no  = b.entity_key\n" +
+                "    and b.entity_name ='satxdisc'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -283,7 +438,39 @@ public class ORACLE {
                 "    WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
-                "       and reg_no not between '990' and '999';\n" +
+                "       and reg_no not between '990' and '999'\n" +
+                "    union  \n" +
+                "    SELECT 'sastaff' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no\n" +
+                "    || ','\n" +
+                "    || seq_no ,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "  FROM sastaff a   \n" +
+                "  LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on a.tx_date\n" +
+                "    || ','\n" +
+                "    || a.loc_code\n" +
+                "    || ','\n" +
+                "    || a.reg_no\n" +
+                "    || ','\n" +
+                "    || a.tx_no\n" +
+                "    || ','\n" +
+                "    || a.seq_no  = b.entity_key\n" +
+                "    and b.entity_name ='sastaff'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -328,7 +515,43 @@ public class ORACLE {
                 "    WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
-                "      and reg_no not between '990' and '999';\n" +
+                "      and reg_no not between '990' and '999'\n" +
+                "      union  \n" +
+                "      SELECT 'sastaffitem' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no\n" +
+                "    || ','\n" +
+                "    || seq_no\n" +
+                "    || ','\n" +
+                "    || staff_id,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "  FROM sastaffitem a\n" +
+                "    LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on  a.tx_date\n" +
+                "    || ','\n" +
+                "    || a.loc_code\n" +
+                "    || ','\n" +
+                "    || a.reg_no\n" +
+                "    || ','\n" +
+                "    || a.tx_no\n" +
+                "    || ','\n" +
+                "    || a.seq_no\n" +
+                "    || ','\n" +
+                "    || a.staff_id = b.entity_key\n" +
+                "    and b.entity_name ='sastaffitem'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -370,7 +593,39 @@ public class ORACLE {
                 " WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
-                "      and reg_no not between '990' and '999';\n" +
+                "      and reg_no not between '990' and '999'\n" +
+                "    union\n" +
+                "     SELECT 'sareason' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no\n" +
+                "    || ','\n" +
+                "    || seq_no,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "      FROM sareason a\n" +
+                " LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on  a.tx_date\n" +
+                "    || ','\n" +
+                "    || a.loc_code\n" +
+                "    || ','\n" +
+                "    || a.reg_no\n" +
+                "    || ','\n" +
+                "    || a.tx_no\n" +
+                "    || ','\n" +
+                "    || a.seq_no = b.entity_key\n" +
+                "    and b.entity_name ='sareason'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -412,7 +667,39 @@ public class ORACLE {
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
-                "      and reg_no not between '990' and '999';\n" +
+                "      and reg_no not between '990' and '999'\n" +
+                "      union\n" +
+                "      SELECT 'sagwp' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no\n" +
+                "    || ','\n" +
+                "    || seq_no,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "  FROM sagwp a\n" +
+                "  LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on a.tx_date\n" +
+                "    || ','\n" +
+                "    || a.loc_code\n" +
+                "    || ','\n" +
+                "    || a.reg_no\n" +
+                "    || ','\n" +
+                "    || a.tx_no\n" +
+                "    || ','\n" +
+                "    || a.seq_no = b.entity_key\n" +
+                "    and b.entity_name ='sagwp'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -453,7 +740,39 @@ public class ORACLE {
                 "  FROM sadesc\n" +
                 "    WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
-                "   and reg_no not between '990' and '999';\n" +
+                "   and reg_no not between '990' and '999'\n" +
+                "   union\n" +
+                "    SELECT 'sadesc' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no\n" +
+                "    || ','\n" +
+                "    || seq_no,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "  FROM sadesc a \n" +
+                "   LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on  a.tx_date\n" +
+                "    || ','\n" +
+                "    || a.loc_code\n" +
+                "    || ','\n" +
+                "    || a.reg_no\n" +
+                "    || ','\n" +
+                "    || a.tx_no\n" +
+                "    || ','\n" +
+                "    || a.seq_no = b.entity_key\n" +
+                "    and b.entity_name ='sadesc'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -494,7 +813,39 @@ public class ORACLE {
                 "    WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
-                "      and reg_no not between '990' and '999';\n" +
+                "      and reg_no not between '990' and '999'\n" +
+                "      union\n" +
+                "        SELECT 'sacard' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no\n" +
+                "    || ','\n" +
+                "    || seq_no,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "  FROM sacard a \n" +
+                "  LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on  a.tx_date\n" +
+                "    || ','\n" +
+                "    || a.loc_code\n" +
+                "    || ','\n" +
+                "    || a.reg_no\n" +
+                "    || ','\n" +
+                "    || a.tx_no\n" +
+                "    || ','\n" +
+                "    || a.seq_no = b.entity_key\n" +
+                "    and b.entity_name ='sacard'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -536,7 +887,39 @@ public class ORACLE {
                 "    WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
-                "      and reg_no not between '990' and '999';\n" +
+                "      and reg_no not between '990' and '999'\n" +
+                "      union\n" +
+                "        SELECT 'savwp' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no\n" +
+                "    || ','\n" +
+                "    || seq_no,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "  FROM savwp a\n" +
+                "  LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on  a.tx_date\n" +
+                "    || ','\n" +
+                "    || a.loc_code\n" +
+                "    || ','\n" +
+                "    || a.reg_no\n" +
+                "    || ','\n" +
+                "    || a.tx_no\n" +
+                "    || ','\n" +
+                "    || a.seq_no = b.entity_key\n" +
+                "    and b.entity_name ='savwp'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -579,7 +962,39 @@ public class ORACLE {
                 "    WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
-                "      and reg_no not between '990' and '999';\n" +
+                "      and reg_no not between '990' and '999'\n" +
+                "      union \n" +
+                "      SELECT 'saserial' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no\n" +
+                "    || ','\n" +
+                "    || seq_no,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "  FROM saserial a\n" +
+                "  LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on  a.tx_date\n" +
+                "    || ','\n" +
+                "    || a.loc_code\n" +
+                "    || ','\n" +
+                "    || a.reg_no\n" +
+                "    || ','\n" +
+                "    || a.tx_no\n" +
+                "    || ','\n" +
+                "    || a.seq_no = b.entity_key\n" +
+                "    and b.entity_name ='saserial'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -658,7 +1073,35 @@ public class ORACLE {
                 " WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
-                "      and reg_no not between '990' and '999';\n" +
+                "      and reg_no not between '990' and '999'\n" +
+                "      union\n" +
+                "       SELECT 'sa_delivery' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "     FROM sa_delivery a\n" +
+                "      LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on  a.tx_date\n" +
+                "    || ','\n" +
+                "    || a.loc_code\n" +
+                "    || ','\n" +
+                "    || a.reg_no\n" +
+                "    || ','\n" +
+                "    || a.tx_no = b.entity_key\n" +
+                "    and b.entity_name ='sa_delivery'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -696,11 +1139,43 @@ public class ORACLE {
                 "    v_MAX_BATCH ,\n" +
                 "    'P' ,\n" +
                 "    v_remark\n" +
-                "  FROM sa_mr_item\n" +
+                "  FROM sa_mr_item \n" +
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
-                "      and reg_no not between '990' and '999';\n" +
+                "      and reg_no not between '990' and '999' \n" +
+                "      union\n" +
+                "      SELECT 'sa_mr_item' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no\n" +
+                "    || ','\n" +
+                "    || seq_no,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "  FROM sa_mr_item a\n" +
+                "  LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on  a.tx_date\n" +
+                "    || ','\n" +
+                "    || a.loc_code\n" +
+                "    || ','\n" +
+                "    || a.reg_no\n" +
+                "    || ','\n" +
+                "    || a.tx_no\n" +
+                "    || ','\n" +
+                "    || a.seq_no = b.entity_key\n" +
+                "    and b.entity_name ='sa_mr_item'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -742,7 +1217,39 @@ public class ORACLE {
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
-                "      and reg_no not between '990' and '999';\n" +
+                "      and reg_no not between '990' and '999' \n" +
+                "      union\n" +
+                "       SELECT 'sadisc_ref' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no\n" +
+                "    || ','\n" +
+                "    || seq_no,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "  FROM sadisc_ref a\n" +
+                "   LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on  a.tx_date\n" +
+                "    || ','\n" +
+                "    || a.loc_code\n" +
+                "    || ','\n" +
+                "    || a.reg_no\n" +
+                "    || ','\n" +
+                "    || a.tx_no\n" +
+                "    || ','\n" +
+                "    || a.seq_no = b.entity_key\n" +
+                "    and b.entity_name ='sadisc_ref'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -780,11 +1287,43 @@ public class ORACLE {
                 "    v_MAX_BATCH ,\n" +
                 "    'P' ,\n" +
                 "    v_remark\n" +
-                "  FROM sagoa_action\n" +
+                "  FROM sagoa_action \n" +
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
-                "      and reg_no not between '990' and '999';\n" +
+                "      and reg_no not between '990' and '999'\n" +
+                "      union\n" +
+                "      SELECT 'sagoa_action' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no\n" +
+                "    || ','\n" +
+                "    || seq_no,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "  FROM sagoa_action a\n" +
+                "   LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on  a.tx_date\n" +
+                "    || ','\n" +
+                "    || a.loc_code\n" +
+                "    || ','\n" +
+                "    || a.reg_no\n" +
+                "    || ','\n" +
+                "    || a.tx_no\n" +
+                "    || ','\n" +
+                "    || a.seq_no = b.entity_key\n" +
+                "    and b.entity_name ='sagoa_action'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -827,7 +1366,39 @@ public class ORACLE {
                 "   WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
-                "      and reg_no not between '990' and '999';\n" +
+                "      and reg_no not between '990' and '999'\n" +
+                "      union\n" +
+                "       SELECT 'sagoa_det' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no\n" +
+                "    || ','\n" +
+                "    || seq_no,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "  FROM sagoa_det a\n" +
+                "   LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on  a.tx_date\n" +
+                "    || ','\n" +
+                "    || a.loc_code\n" +
+                "    || ','\n" +
+                "    || a.reg_no\n" +
+                "    || ','\n" +
+                "    || a.tx_no\n" +
+                "    || ','\n" +
+                "    || a.seq_no = b.entity_key\n" +
+                "    and b.entity_name ='sagoa_det'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -868,7 +1439,35 @@ public class ORACLE {
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
-                "      and reg_no not between '990' and '999';\n" +
+                "      and reg_no not between '990' and '999'\n" +
+                "      union\n" +
+                "       SELECT 'sagoa_hdr' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "  FROM sagoa_hdr a\n" +
+                "  LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on  a.tx_date\n" +
+                "    || ','\n" +
+                "    || a.loc_code\n" +
+                "    || ','\n" +
+                "    || a.reg_no\n" +
+                "    || ','\n" +
+                "    || a.tx_no = b.entity_key\n" +
+                "    and b.entity_name ='sagoa_hdr'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -910,7 +1509,39 @@ public class ORACLE {
                 " WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
-                "      and reg_no not between '990' and '999';\n" +
+                "      and reg_no not between '990' and '999'\n" +
+                "      union\n" +
+                "      SELECT 'sagoa_staff' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no\n" +
+                "    || ','\n" +
+                "    || seq_no,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "  FROM sagoa_staff a\n" +
+                "   LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on  a.tx_date\n" +
+                "    || ','\n" +
+                "    || a.loc_code\n" +
+                "    || ','\n" +
+                "    || a.reg_no\n" +
+                "    || ','\n" +
+                "    || a.tx_no\n" +
+                "    || ','\n" +
+                "    || a.seq_no = b.entity_key\n" +
+                "    and b.entity_name ='sagoa_staff'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -1107,7 +1738,47 @@ public class ORACLE {
                 "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "      and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
-                "      and reg_no not between '990' and '999';\n" +
+                "      and reg_no not between '990' and '999'\n" +
+                "      union \n" +
+                "        SELECT 'edc_settlement' ,\n" +
+                "     tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no \n" +
+                "    || ','\n" +
+                "    || tx_amount\n" +
+                "    || ','\n" +
+                "    || bank_host\n" +
+                "    || ','\n" +
+                "    || status,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "  FROM edc_settlement a\n" +
+                "   LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on    a.tx_date\n" +
+                "    || ','\n" +
+                "    || a.loc_code\n" +
+                "    || ','\n" +
+                "    || a.reg_no\n" +
+                "    || ','\n" +
+                "    || a.tx_no \n" +
+                "    || ','\n" +
+                "    || a.tx_amount\n" +
+                "    || ','\n" +
+                "    || a.bank_host\n" +
+                "    || ','\n" +
+                "    || a.status = b.entity_key\n" +
+                "    and b.entity_name ='edc_settlement'\n" +
+                "WHERE to_char(a.tx_date,'YYYYMMDD') = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -2299,7 +2970,39 @@ public class ORACLE {
                 "  FROM gr_org_det\n" +
                 "     WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
-                "    and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
+                "    and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "    union \n" +
+                "     SELECT 'gr_org_det' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no\n" +
+                "    || ','\n" +
+                "    || seq_no ,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "  FROM gr_org_det a\n" +
+                "   LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on a.tx_date\n" +
+                "  || ','\n" +
+                "  || a.loc_code\n" +
+                "  || ','\n" +
+                "  || a.reg_no\n" +
+                "  || ','\n" +
+                "  || a.tx_no\n" +
+                "  || ','\n" +
+                "  || a.seq_no = b.entity_key\n" +
+                "  and b.entity_name ='gr_org_det'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +
@@ -2340,7 +3043,39 @@ public class ORACLE {
                 "  FROM gr_org_tender\n" +
                 "     WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
-                "    and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION);\n" +
+                "    and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "    union\n" +
+                "     SELECT 'gr_org_tender' ,\n" +
+                "    tx_date\n" +
+                "    || ','\n" +
+                "    || loc_code\n" +
+                "    || ','\n" +
+                "    || reg_no\n" +
+                "    || ','\n" +
+                "    || tx_no\n" +
+                "    || ','\n" +
+                "    || seq_no ,\n" +
+                "    v_log_dt ,\n" +
+                "    NULL ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    'P' ,\n" +
+                "    v_remark\n" +
+                "  FROM gr_org_tender a\n" +
+                "   LEFT OUTER JOIN data_update_log_pos b\n" +
+                " on a.tx_date\n" +
+                "  || ','\n" +
+                "  || a.loc_code\n" +
+                "  || ','\n" +
+                "  || a.reg_no\n" +
+                "  || ','\n" +
+                "  || a.tx_no\n" +
+                "  || ','\n" +
+                "  || a.seq_no = b.entity_key\n" +
+                "  and b.entity_name ='gr_org_det'\n" +
+                "WHERE a.tx_date = to_char(systimestamp,'YYYYMMDD')\n" +
+                "and b.is_comp is null\n" +
+                "and a.loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
+                "and a.reg_no not between '990' and '999';\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_POS_SYNC\n" +
                 "    (remark , LAST_SYNC_TIME\n" +

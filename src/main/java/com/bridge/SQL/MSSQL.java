@@ -5963,7 +5963,8 @@ public class MSSQL {
                 "\tFROM rmsadmin.stk_ledger_by_day_pos\n" +
                 "\tWHERE last_upd_dt BETWEEN @LAST_SYNC_TIME\n" +
                 "\t\t\tAND @log_dt\n" +
-                "\t\tAND last_upd_dt > @LAST_SYNC_TIME;\n" +
+                "\t\tAND last_upd_dt > @LAST_SYNC_TIME\n" +
+                "\t\tand date > getdate() -2;\n" +
                 "\n" +
                 "\tINSERT INTO DATA_UPDATE_LOG_POS_SYNC (\n" +
                 "\t\tremark\n" +

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="498947556">
+  <component name="DataSourceManagerImpl" format="xml" hash="3406364676">
     <data-source source="LOCAL" name="QA - Oracle - BRIDFEFR" uuid="bfcb1cab-427b-45f3-9fc5-e15fa1f120ec">
       <driver-ref>oracle</driver-ref>
       <synchronize>true</synchronize>
@@ -20,6 +20,12 @@
       <synchronize>true</synchronize>
       <jdbc-driver>net.sourceforge.jtds.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:jtds:sqlserver://HKCT5L:1433/posdb</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Oracle - HQ - BRIDGE @10.1.7.60" uuid="549f1369-9bc2-4785-b774-47d88323b860">
+      <driver-ref>oracle</driver-ref>
+      <auto-commit>false</auto-commit>
+      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@//10.1.7.60:1521/stsmprd</jdbc-url>
     </data-source>
   </component>
 </project>

@@ -122,20 +122,21 @@ public class InsertSaserial {
 
 			preparedStatement = dbConnection.prepareStatement(updateSQL);
 
-			preparedStatement.setString(1, rsvoid);
-			preparedStatement.setString(2, rsserialno);
-			preparedStatement.setString(3, rsproductinfoflag);
-			preparedStatement.setString(4, rscustfirstname);
-			preparedStatement.setString(5, rscustlastname);
-			preparedStatement.setString(6, rscustemailaddr);
-			preparedStatement.setString(7, rscustphoneno);
-			preparedStatement.setTimestamp(8, rslastupddt);
-			preparedStatement.setString(9, rstxdate);
-			preparedStatement.setString(10, rsloccode);
-			preparedStatement.setString(11, rsregno);
-			preparedStatement.setString(12, rstxno);
-			preparedStatement.setString(13, rsseqno);
-			preparedStatement.setString(14, rstxtype);
+			preparedStatement.setString(1, rstxtype);
+			preparedStatement.setString(2, rsvoid);
+			preparedStatement.setString(3, rsserialno);
+			preparedStatement.setString(4, rsproductinfoflag);
+			preparedStatement.setString(5, rscustfirstname);
+			preparedStatement.setString(6, rscustlastname);
+			preparedStatement.setString(7, rscustemailaddr);
+			preparedStatement.setString(8, rscustphoneno);
+			preparedStatement.setTimestamp(9, rslastupddt);
+			preparedStatement.setString(10, rstxdate);
+			preparedStatement.setString(11, rsloccode);
+			preparedStatement.setString(12, rsregno);
+			preparedStatement.setString(13, rstxno);
+			preparedStatement.setString(14, rsseqno);
+
 
 			// logger.info(updateSQL);
 

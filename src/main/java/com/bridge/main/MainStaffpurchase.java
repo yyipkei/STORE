@@ -70,12 +70,12 @@ public class MainStaffpurchase implements Job {
 	}
 
 	public static void processLog(final String database) {
-		/*for (Dataupdatelog d : MainStaffpurchase.dataupdatelogs) {
+		for (Dataupdatelog d : MainStaffpurchase.dataupdatelogs) {
 			RouteStaffpurchase.Routeing(d.getDatalogid(), d.getEntityname(),
 					d.getEntitykey(), database);
-		}*/
+		}
 
-		ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+		/*ExecutorService executor = Executors.newFixedThreadPool(1);
 		try {
 			Set<Future<Object>> dataUpdateLogTask = new HashSet<Future<Object>>();
 			for (final Dataupdatelog d : MainStaffpurchase.dataupdatelogs) {
@@ -98,7 +98,7 @@ public class MainStaffpurchase implements Job {
 			if (executor != null) {
 				executor.shutdownNow();
 			}
-		}
+		}*/
 
 
 
