@@ -740,6 +740,7 @@ public class ORACLE {
                 "  FROM sadesc\n" +
                 "    WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and last_upd_dt >  v_LAST_SYNC_TIME\n" +
+                "   and loc_code in(select distinct loc_code from DATA_UPDATE_LOG_POS_LOCATION)\n" +
                 "   and reg_no not between '990' and '999'\n" +
                 "   union\n" +
                 "    SELECT 'sadesc' ,\n" +
