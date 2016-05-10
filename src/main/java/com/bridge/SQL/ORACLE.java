@@ -2919,6 +2919,43 @@ public class ORACLE {
                 "  SELECT 'sagoa_hdr', v_log_dt FROM dual;\n" +
                 " end if ;\n" +
                 " \n" +
+                " \n" +
+                " \n" +
+                " v_LAST_SYNC_TIME := null;\n" +
+                "  v_log_dt := null;\n" +
+                "  \n" +
+                "  SELECT MAX(last_sync_time) INTO v_LAST_SYNC_TIME FROM DATA_UPDATE_LOG_SYNC where TABLE_NAME ='saonlineshop' ;\n" +
+                "  SELECT MAX(LAST_UPD_DT) INTO v_log_dt FROM saonlineshop  ;\n" +
+                " \n" +
+                "IF v_LAST_SYNC_TIME <> v_log_dt and v_LAST_SYNC_TIME is not null and v_log_dt > v_LAST_SYNC_TIME then\n" +
+                "  INSERT\n" +
+                "  INTO DATA_UPDATE_LOG\n" +
+                "    (\n" +
+                "      ENTITY_NAME,\n" +
+                "      ENTITY_KEY,\n" +
+                "      ENTITY_UPD_DT,\n" +
+                "      LOG_DT,\n" +
+                "      BATCH_NO,\n" +
+                "      IS_COMP,\n" +
+                "      REMARK\n" +
+                "    )\n" +
+                "  SELECT 'saonlineshop' ,\n" +
+                "    entity_key ,\n" +
+                "    v_log_dt ,\n" +
+                "    systimestamp ,\n" +
+                "    v_MAX_BATCH ,\n" +
+                "    '0' ,\n" +
+                "    NULL\n" +
+                "  FROM saonlineshop\n" +
+                "  WHERE last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
+                "   and last_upd_dt >  v_LAST_SYNC_TIME;\n" +
+                "\n" +
+                "  INSERT INTO DATA_UPDATE_LOG_SYNC\n" +
+                "    (Table_name , LAST_SYNC_TIME\n" +
+                "    )\n" +
+                "  SELECT 'saonlineshop', v_log_dt FROM dual;\n" +
+                " end if ;\n" +
+                " \n" +
                 "  COMMIT WORK;\n" +
                 "END;";
 
@@ -4563,7 +4600,7 @@ public class ORACLE {
                 "      COMMIT WORK;\n" +
                 "END;";
 
-        StockOnHandToView="Declare\n" +
+        StockOnHandToView= "Declare\n" +
                 "  v_log_dt         TIMESTAMP(3);\n" +
                 "  v_LAST_SYNC_TIME TIMESTAMP(3);\n" +
                 "  v_MAX_BATCH      VARCHAR2(100);\n" +
@@ -4616,7 +4653,7 @@ public class ORACLE {
                 "      IS_COMP,\n" +
                 "      REMARK\n" +
                 "    )\n" +
-                "  SELECT  'v_goa_write_off' ,\n" +
+                "  SELECT distinct 'v_goa_write_off' ,\n" +
                 "    a.company_cde || a.loc_cde || b.sku,\n" +
                 "    v_log_dt ,\n" +
                 "    systimestamp ,\n" +
@@ -4628,7 +4665,7 @@ public class ORACLE {
                 "  and a.last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "  and a.instit_cde = b.instit_cde\n" +
                 "  AND a.wri_off_id = b.wri_off_id\n" +
-                "  AND a.STATUS IN ('DRF','APP');\n" +
+                "  /*AND a.STATUS IN ('DRF','APP')*/;\n" +
                 "\n" +
                 "  INSERT INTO DATA_UPDATE_LOG_SYNC\n" +
                 "    (Table_name , LAST_SYNC_TIME\n" +
@@ -4677,7 +4714,7 @@ public class ORACLE {
                 "      IS_COMP,\n" +
                 "      REMARK\n" +
                 "    )\n" +
-                "  SELECT  'v_goa_write_off' ,\n" +
+                "  SELECT distinct 'v_goa_write_off' ,\n" +
                 "    a.company_cde || a.loc_cde || b.sku,\n" +
                 "    v_log_dt ,\n" +
                 "    systimestamp ,\n" +
@@ -4689,7 +4726,7 @@ public class ORACLE {
                 "  and b.last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "  and a.instit_cde = b.instit_cde\n" +
                 "  AND a.wri_off_id = b.wri_off_id\n" +
-                "  AND a.STATUS IN ('DRF','APP');\n" +
+                " /* AND a.STATUS IN ('DRF','APP')*/;\n" +
                 "\n" +
                 "  INSERT INTO DATA_UPDATE_LOG_SYNC\n" +
                 "    (Table_name , LAST_SYNC_TIME\n" +
@@ -4738,7 +4775,7 @@ public class ORACLE {
                 "      IS_COMP,\n" +
                 "      REMARK\n" +
                 "    )\n" +
-                "  SELECT 'v_in_transit' ,\n" +
+                "  SELECT distinct 'v_in_transit' ,\n" +
                 "    a.company_cde ||b.p_recvr || a.sku ,\n" +
                 "    v_log_dt ,\n" +
                 "    systimestamp ,\n" +
@@ -4749,8 +4786,8 @@ public class ORACLE {
                 "  WHERE b.last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "  and b.last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "  and a.boxno = b.boxno\n" +
-                "\tAND b.sen_status = 'C'\n" +
-                "\tAND NVL(b.rec_status, 'X') NOT IN ('C','W');\n" +
+                "\t/*AND b.sen_status = 'C'\n" +
+                "\tAND NVL(b.rec_status, 'X') NOT IN ('C','W')*/;\n" +
                 "   \n" +
                 "  INSERT INTO DATA_UPDATE_LOG_SYNC\n" +
                 "    (Table_name , LAST_SYNC_TIME\n" +
@@ -4799,7 +4836,7 @@ public class ORACLE {
                 "      IS_COMP,\n" +
                 "      REMARK\n" +
                 "    )\n" +
-                "  SELECT 'v_in_transit' ,\n" +
+                "  SELECT distinct 'v_in_transit' ,\n" +
                 "    a.company_cde ||b.p_recvr || a.sku ,\n" +
                 "    v_log_dt ,\n" +
                 "    systimestamp ,\n" +
@@ -4810,8 +4847,8 @@ public class ORACLE {
                 "  WHERE a.last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "  and a.last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "  and a.boxno = b.boxno\n" +
-                "\tAND b.sen_status = 'C'\n" +
-                "\tAND NVL(b.rec_status, 'X') NOT IN ('C','W');\n" +
+                "\t/*AND b.sen_status = 'C'\n" +
+                "\tAND NVL(b.rec_status, 'X') NOT IN ('C','W')*/;\n" +
                 "\n" +
                 "  INSERT INTO DATA_UPDATE_LOG_SYNC\n" +
                 "    (Table_name , LAST_SYNC_TIME\n" +
@@ -4860,7 +4897,7 @@ public class ORACLE {
                 "      IS_COMP,\n" +
                 "      REMARK\n" +
                 "    )\n" +
-                "  SELECT 'v_in_transit' ,\n" +
+                "  SELECT distinct 'v_in_transit' ,\n" +
                 "    a.company_cde || a.rec_loc || b.sku ,\n" +
                 "    v_log_dt ,\n" +
                 "    systimestamp ,\n" +
@@ -4871,9 +4908,9 @@ public class ORACLE {
                 "  WHERE a.last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and a.last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "   and  a.req_id = b.req_id\n" +
-                "\tAND b.STATUS IN (\n" +
+                "\t/*AND b.STATUS IN (\n" +
                 "\t\t'TRN'\n" +
-                "\t\t,'BOX');\n" +
+                "\t\t,'BOX')*/;\n" +
                 "\n" +
                 "  INSERT INTO DATA_UPDATE_LOG_SYNC\n" +
                 "    (Table_name , LAST_SYNC_TIME\n" +
@@ -4922,7 +4959,7 @@ public class ORACLE {
                 "      IS_COMP,\n" +
                 "      REMARK\n" +
                 "    )\n" +
-                "  SELECT 'v_in_transit' ,\n" +
+                "  SELECT distinct 'v_in_transit' ,\n" +
                 "    a.company_cde || a.rec_loc || b.sku ,\n" +
                 "    v_log_dt ,\n" +
                 "    systimestamp ,\n" +
@@ -4933,9 +4970,9 @@ public class ORACLE {
                 "  WHERE b.last_upd_dt BETWEEN v_LAST_SYNC_TIME AND v_log_dt \n" +
                 "   and b.last_upd_dt >  v_LAST_SYNC_TIME\n" +
                 "   and  a.req_id = b.req_id\n" +
-                "\tAND b.STATUS IN (\n" +
+                "\t/*AND b.STATUS IN (\n" +
                 "\t\t'TRN'\n" +
-                "\t\t,'BOX');\n" +
+                "\t\t,'BOX')*/;\n" +
                 "\n" +
                 "  INSERT INTO DATA_UPDATE_LOG_SYNC\n" +
                 "    (Table_name , LAST_SYNC_TIME\n" +
