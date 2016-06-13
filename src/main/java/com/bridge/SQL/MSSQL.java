@@ -2044,6 +2044,17 @@ public class MSSQL {
                 "\tAND org_tx_date <> ''\n" +
                 "\tand a.last_upd_dt is null \n" +
                 "\n" +
+                "UNION\n" +
+                "\n" +
+                "SELECT tx_date\n" +
+                "\t,loc_code\n" +
+                "\t,reg_no\n" +
+                "\t,tx_no\n" +
+                "FROM saonlineshop a\n" +
+                "WHERE a.tx_date BETWEEN convert(VARCHAR(8), getdate() - 20, 112)\n" +
+                "\t\tAND convert(VARCHAR(8), getdate(), 112)\n" +
+                "\tand a.last_upd_dt is null \n" +
+                "\n" +
                 "OPEN priceCursor\n" +
                 "\n" +
                 "FETCH NEXT\n" +
